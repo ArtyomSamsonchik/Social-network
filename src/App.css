@@ -1,0 +1,46 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.app {
+    display: grid;
+    grid-template-rows: [header-start] 50px [header-end] 1fr [footer] 50px [footer-end];
+    grid-template-columns: minmax(50px, 1fr) 200px minmax(auto, 800px) minmax(50px, 1fr);
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    grid-column: 1 / -1;
+    grid-row: header;
+    /*grid-row: 1;*/
+    background-color: limegreen;
+}
+
+.navbar {
+    grid-column: 2;
+    grid-row: 2;
+    background-color: goldenrod;
+}
+
+.main-content {
+    grid-column: 3;
+    grid-row: 2;
+    background-color: aquamarine;
+}
+
+.footer {
+    grid-column: 1 / -1;
+    grid-row: footer;
+    background-color: limegreen;
+}
+
+
+
