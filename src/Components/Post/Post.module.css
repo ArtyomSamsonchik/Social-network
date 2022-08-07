@@ -1,0 +1,16 @@
+.post_body {
+    display: flex;
+}
+
+
+.image_container {
+    height: 50px;
+    width: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.image-container img {
+    max-width: 100%;
+}
