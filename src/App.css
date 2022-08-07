@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 ul,
 li {
     list-style: none;
@@ -11,10 +15,9 @@ li {
 
 .app {
     display: grid;
-    grid-template-rows: [header-start] 50px [header-end] 1fr [footer] 50px [footer-end];
-    grid-template-columns: minmax(50px, 1fr) 200px minmax(auto, 800px) minmax(50px, 1fr);
-    height: 100vh;
-    width: 100vw;
+    grid-template-rows: [header-start] 50px [header-end] 1fr [footer-start] 50px [footer-end];
+    grid-template-columns: 1fr 200px minmax(auto, 800px) 1fr;
+    min-height: 100vh;
 }
 
 

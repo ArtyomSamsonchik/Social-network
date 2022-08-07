@@ -6,7 +6,7 @@ export const Navbar = () => {
         <aside className={s.navbar}>
             <nav>
                 <ul>
-                    <li>Мой профиль</li>
+                    <li>Моя страница</li>
                     <li>Сообщения</li>
                     <li>Новости</li>
                     <li>Музыка</li>
