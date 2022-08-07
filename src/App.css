@@ -17,30 +17,5 @@ li {
     width: 100vw;
 }
 
-.header {
-    grid-column: 1 / -1;
-    grid-row: header;
-    /*grid-row: 1;*/
-    background-color: limegreen;
-}
-
-.navbar {
-    grid-column: 2;
-    grid-row: 2;
-    background-color: goldenrod;
-}
-
-.main-content {
-    grid-column: 3;
-    grid-row: 2;
-    background-color: aquamarine;
-}
-
-.footer {
-    grid-column: 1 / -1;
-    grid-row: footer;
-    background-color: limegreen;
-}
-
 
 

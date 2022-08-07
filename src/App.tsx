@@ -1,23 +1,17 @@
 import React from 'react';
 import './App.css';
+import {Header} from "./Components/Header/Header";
+import {Navbar} from "./Components/Navbar/Navbar";
+import {MainContent} from "./Components/MainContent/MainContent";
+import {Footer} from "./Components/Footer/Footer";
 
 function App() {
   return (
     <div className="app">
-        <div className={"header"}>Header</div>
-        <aside className={"navbar"}>
-            <nav>
-                <ul>
-                    <li>Мой профиль</li>
-                    <li>Сообщения</li>
-                    <li>Новости</li>
-                    <li>Музыка</li>
-                    <li>Фотографии</li>
-                    <li>Друзья</li>
-                </ul>
-            </nav></aside>
-        <div className={"main-content"}>Main</div>
-        <div className={"footer"}>Footer</div>
+        <Header/>
+        <Navbar/>
+        <MainContent/>
+        <Footer/>
     </div>
   );
 }
