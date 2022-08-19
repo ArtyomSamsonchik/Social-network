@@ -11,12 +11,15 @@
 .image_container {
     border: 2px solid black;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 105px;
+    height: 105px;
+    overflow: hidden;
 }
 
-.image-container img {
-    max-width: 100%;
+.image_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .user_name {

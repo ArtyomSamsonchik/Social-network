@@ -1,5 +1,9 @@
 .navbar {
     grid-column: 2;
     grid-row: 2;
-    background-color: goldenrod;
+    background-color: #fec129;
+}
+
+.navbar ul li {
+    margin-bottom: 5px;
 }

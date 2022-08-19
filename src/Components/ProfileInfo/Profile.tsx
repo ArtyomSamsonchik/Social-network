@@ -1,11 +1,12 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
+import userImage from "../../images/Portrait_Placeholder.png"
 
 export const Profile = () => {
     return (
         <div className={s.profile}>
             <div className={s.image_container}>
-                <img src="" alt="user"/>
+                <img src={userImage} alt="user"/>
             </div>
             <div className={s.user_name}>
                 User name

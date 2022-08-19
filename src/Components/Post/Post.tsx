@@ -5,13 +5,15 @@ type PostPropsType = {
     userName: string
     imageSrc: string
     postText: string
+    likesCount: number
+    date: string
 }
 
 export const Post: React.FC<PostPropsType> = (
     {
-        userName,
-        imageSrc,
-        postText
+        userName, imageSrc,
+        postText, likesCount,
+        date
     }
 ) => {
     return (
@@ -21,7 +23,13 @@ export const Post: React.FC<PostPropsType> = (
                 <div className={s.image_container}>
                     <img src={imageSrc} alt="user"/>
                 </div>
-                <div>{postText}</div>
+                <div >
+                    {postText}
+                <div className={s.post_footer}>
+                    <span>likes: {likesCount}</span>
+                    <span>{date}</span>
+                </div>
+                </div>
             </div>
         </div>
     );
