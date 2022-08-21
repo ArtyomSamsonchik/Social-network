@@ -11,9 +11,8 @@ type PostPropsType = {
 
 export const Post: React.FC<PostPropsType> = (
     {
-        userName, imageSrc,
-        postText, likesCount,
-        date
+        userName, imageSrc, postText,
+        likesCount, date
     }
 ) => {
     return (

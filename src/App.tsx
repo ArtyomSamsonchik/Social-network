@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="app">
         <Header/>
-        <Navbar/>
+        <Navbar selectedPage={"Main page"}/>
         <MainContent/>
         <Footer/>
     </div>

@@ -7,3 +7,9 @@
 .navbar ul li {
     margin-bottom: 5px;
 }
+
+.selected {
+    text-decoration: underline;
+    font-style: italic;
+    color: #7e00a1;
+}
