@@ -1,12 +1,6 @@
 import React from "react";
 import s from "./Navbar.module.css";
-
-export type NavbarPages = "Main page"
-    | "Messages"
-    | "News"
-    | "Music"
-    | "Photos"
-    | "Friends"
+import {NavbarPages} from "../../App";
 
 type NavbarProps = {
     selectedPage: NavbarPages
@@ -21,12 +15,18 @@ export const Navbar: React.FC<NavbarProps> = ({selectedPage}) => {
         <aside className={s.navbar}>
             <nav>
                 <ul>
-                    <li className={getClassName("Main page")}>Main page</li>
-                    <li className={getClassName("Messages")}>Messages</li>
-                    <li className={getClassName("News")}>News</li>
-                    <li className={getClassName("Music")}>Music</li>
-                    <li className={getClassName("Photos")}>Photos</li>
-                    <li className={getClassName("Friends")}>Friends</li>
+                    <li className={getClassName("Main page")}>
+                        <a href="/main_page">Main page</a></li>
+                    <li className={getClassName("Messages")}>
+                        <a href="/messages">Messages</a></li>
+                    <li className={getClassName("Music")}>
+                        <a href="/music">Music</a></li>
+                    <li className={getClassName("Photos")}>
+                        <a href="/photos">Photos</a></li>
+                    <li className={getClassName("Friends")}>
+                        <a href="/friends">Friends</a></li>
+                    <li className={getClassName("Settings")}>
+                        <a href="/settings">Settings</a></li>
                 </ul>
             </nav>
         </aside>

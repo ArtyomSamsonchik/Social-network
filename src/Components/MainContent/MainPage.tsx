@@ -1,11 +1,11 @@
 import React from "react";
-import s from "./MainContent.module.css";
+// import s from "./MainContent.module.css";
 import {Profile} from "../ProfileInfo/Profile";
 import {PostsContainer} from "../PostsContainer/PostsContainer";
 
-export const MainContent = () => {
+export const MainPage = () => {
     return (
-        <div className={s.main_content}>
+        <div>
             Main content
             <Profile/>
             <div>
