@@ -1,12 +1,17 @@
 import React from 'react';
-import s from "./MessagesPage.module.css";
+import s from "./DialogsPage.module.css";
 import {Dialogs} from "../Dialogs/Dialogs";
 import {MessagesArea} from "../MessagesArea/MessagesArea";
+import {User} from "../../App";
 
-export const MessagesPage = () => {
+type DialogsPageProps = {
+    users: User[]
+}
+
+export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
     return (
         <div className={s.dialogs_content}>
-            <Dialogs/>
+            <Dialogs users={props.users}/>
             <MessagesArea/>
         </div>
     );

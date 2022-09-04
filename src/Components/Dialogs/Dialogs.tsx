@@ -1,15 +1,20 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "../DialogItem/DialogItem";
+import {User} from "../../App";
 
-export const Dialogs = () => {
+type DialogsProps = {
+    users: User[]
+}
+
+export const Dialogs: React.FC<DialogsProps> = (props) => {
+    const dialogItems = props.users.map(user => {
+        return <DialogItem userName={user.name} id={user.id}/>;
+    });
+
     return (
         <div className={s.dialogs}>
-            <DialogItem userName={"Sanya"} id={1}/>
-            <DialogItem userName={"Artyom"} id={2}/>
-            <DialogItem userName={"Ilya"} id={3}/>
-            <DialogItem userName={"Anton"} id={4}/>
-            <DialogItem userName={"Leha"} id={5}/>
+            {dialogItems}
         </div>
     );
 };
