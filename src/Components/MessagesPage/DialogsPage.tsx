@@ -2,10 +2,10 @@ import React from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "../Dialogs/Dialogs";
 import {MessagesArea} from "../MessagesArea/MessagesArea";
-import {User} from "../../App";
+import {UserType} from "../../App";
 
 type DialogsPageProps = {
-    users: User[]
+    users: UserType[]
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {

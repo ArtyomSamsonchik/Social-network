@@ -1,10 +1,10 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "../DialogItem/DialogItem";
-import {User} from "../../App";
+import {UserType} from "../../App";
 
 type DialogsProps = {
-    users: User[]
+    users: UserType[]
 }
 
 export const Dialogs: React.FC<DialogsProps> = (props) => {
