@@ -1,7 +1,7 @@
 import React from 'react';
-// import s from "./Music.module.css";
+// import s from "./MusicPage.module.css";
 
-export const Music = () => {
+export const MusicPage = () => {
     return (
         <div>
             Music

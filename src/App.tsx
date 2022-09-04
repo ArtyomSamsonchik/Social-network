@@ -2,14 +2,14 @@ import React from 'react';
 import s from './App.module.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
-import {MainPage} from "./Components/MainContent/MainPage";
+import {MainPage} from "./Components/MainPage/MainPage";
 import {Footer} from "./Components/Footer/Footer";
-import {Messages} from "./Components/Messages/Messages";
+import {MessagesPage} from "./Components/MessagesPage/MessagesPage";
 import {BrowserRouter, Route} from "react-router-dom";
-import {Music} from "./Components/Music/Music";
-import {Photos} from "./Components/Photos/Photos";
-import {Friends} from "./Components/Friends/Friends";
-import {Settings} from "./Components/Settings/Settings";
+import {MusicPage} from "./Components/MusicPage/MusicPage";
+import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
+import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
+import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
 
 function App() {
     return (
@@ -19,14 +19,14 @@ function App() {
                 <Navbar/>
                 <div className={s.main_content}>
                     <Route path={"/main_page"} component={MainPage}/>
-                    <Route path={"/messages"} component={Messages}/>
-                    <Route path={"/music"} component={Music}/>
-                    <Route path={"/photos"} component={Photos}/>
-                    <Route path={"/friends"} component={Friends}/>
-                    <Route path={"/settings"} component={Settings}/>
+                    <Route path={"/messages"} component={MessagesPage}/>
+                    <Route path={"/music"} component={MusicPage}/>
+                    <Route path={"/photos"} component={PhotosPage}/>
+                    <Route path={"/friends"} component={FriendsPage}/>
+                    <Route path={"/settings"} component={SettingsPage}/>
                 </div>
+                <Footer/>
             </div>
-            <Footer/>
         </BrowserRouter>
     )
         ;

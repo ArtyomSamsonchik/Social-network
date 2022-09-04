@@ -1,7 +1,7 @@
 import React from 'react';
-// import s from "Friends.module.css";
+// import s from "FriendsPage.module.css";
 
-export const Friends = () => {
+export const FriendsPage = () => {
     return (
         <div>
             Friends

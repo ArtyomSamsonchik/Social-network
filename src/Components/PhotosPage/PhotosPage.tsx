@@ -1,7 +1,7 @@
 import React from 'react';
-// import s from "Photos.module.css";
+// import s from "PhotosPage.module.css";
 
-export const Photos = () => {
+export const PhotosPage = () => {
     return (
         <div>
             Photos

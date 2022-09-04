@@ -1,7 +1,7 @@
 import React from 'react';
-// import s from "Settings.module.css";
+// import s from "SettingsPage.module.css";
 
-export const Settings = () => {
+export const SettingsPage = () => {
     return (
         <div>
             Settings
