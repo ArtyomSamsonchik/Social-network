@@ -19,7 +19,7 @@ function App() {
                 <Navbar/>
                 <div className={s.main_content}>
                     <Route path={"/main_page"} component={MainPage}/>
-                    <Route path={"/messages"} component={MessagesPage}/>
+                    <Route path={"/dialogs"} component={MessagesPage}/>
                     <Route path={"/music"} component={MusicPage}/>
                     <Route path={"/photos"} component={PhotosPage}/>
                     <Route path={"/friends"} component={FriendsPage}/>

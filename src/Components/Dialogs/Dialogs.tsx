@@ -1,15 +1,15 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
-import {Dialog} from "../Dialog/Dialog";
+import {DialogItem} from "../DialogItem/DialogItem";
 
 export const Dialogs = () => {
     return (
         <div className={s.dialogs}>
-            <Dialog userName={"Sanya"}/>
-            <Dialog userName={"Artyom"}/>
-            <Dialog userName={"Ilya"}/>
-            <Dialog userName={"Anton"}/>
-            <Dialog userName={"Leha"}/>
+            <DialogItem userName={"Sanya"} id={1}/>
+            <DialogItem userName={"Artyom"} id={2}/>
+            <DialogItem userName={"Ilya"} id={3}/>
+            <DialogItem userName={"Anton"} id={4}/>
+            <DialogItem userName={"Leha"} id={5}/>
         </div>
     );
 };

@@ -11,7 +11,7 @@ export const Navbar = () => {
                         <NavLink activeClassName={s.selected} to="/main_page">Main page</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/messages">Messages</NavLink>
+                        <NavLink activeClassName={s.selected} to="/dialogs">Messages</NavLink>
                     </li>
                     <li>
                         <NavLink activeClassName={s.selected} to="/music">Music</NavLink>
