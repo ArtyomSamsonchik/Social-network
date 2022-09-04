@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-import userImage from "../../images/Portrait_Placeholder.png"
+import userImage from "../../images/Portrait_Placeholder.png";
 
-export const Profile = () => {
+export const ProfileInfo = () => {
     return (
         <div className={s.profile}>
             <div className={s.image_container}>

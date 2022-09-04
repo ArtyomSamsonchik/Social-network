@@ -7,7 +7,7 @@ import {AddNewPost} from "../AddNewPost/AddNewPost";
 export const PostsContainer = () => {
     return (
         <div className={s.posts_container}>
-            Posts container:
+            What's new...
             <AddNewPost/>
             <Post userName={"Vasya"} imageSrc={userImage}
                   postText={"Lorem ipsum dolor sit amet"} likesCount={1}

@@ -1,0 +1,10 @@
+.add_post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+}
+
+.button {
+    width: 100px;
+}
