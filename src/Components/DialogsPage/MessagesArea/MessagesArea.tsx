@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./MessagesArea.module.css";
-import {Message} from "../Message/Message";
+import {Message} from "./Message/Message";
 
 export const MessagesArea = () => {
     return (

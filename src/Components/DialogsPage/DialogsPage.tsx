@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./DialogsPage.module.css";
-import {Dialogs} from "../Dialogs/Dialogs";
-import {MessagesArea} from "../MessagesArea/MessagesArea";
+import {Dialogs} from "./Dialogs/Dialogs";
+import {MessagesArea} from "./MessagesArea/MessagesArea";
 import {UserType} from "../../App";
 
 type DialogsPageProps = {

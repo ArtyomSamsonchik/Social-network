@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./PostsContainer.module.css";
-import {Post} from "../Post/Post";
-import {AddNewPost} from "../AddNewPost/AddNewPost";
-import {PostType} from "../../App";
+import {Post} from "./Post/Post";
+import {AddNewPost} from "./AddNewPost/AddNewPost";
+import {PostType} from "../../../App";
 
 type PostsContainerProps = {
     posts: PostType[]

@@ -4,7 +4,7 @@ import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {MainPage} from "./Components/MainPage/MainPage";
 import {Footer} from "./Components/Footer/Footer";
-import {DialogsPage} from "./Components/MessagesPage/DialogsPage";
+import {DialogsPage} from "./Components/DialogsPage/DialogsPage";
 import {BrowserRouter, Route} from "react-router-dom";
 import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
@@ -34,7 +34,6 @@ function App() {
         {id: 4, name: "Anton"},
         {id: 5, name: "Leha"}
     ];
-
     const postsData: PostType[] = [
         {
             userName: "Vasya",
@@ -86,16 +85,12 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className={s.main_content}>
-                    <Route path={"/main_page"}
-                           component={() => <MainPage posts={postsData}/>}
-                    />
-                    <Route path={"/dialogs"}
-                           component={() => <DialogsPage users={usersData}/>}
-                    />
-                    <Route path={"/music"} component={MusicPage}/>
-                    <Route path={"/photos"} component={PhotosPage}/>
-                    <Route path={"/friends"} component={FriendsPage}/>
-                    <Route path={"/settings"} component={SettingsPage}/>
+                    <Route path={"/main_page"} render={() => <MainPage posts={postsData}/>}/>
+                    <Route path={"/dialogs"} render={() => <DialogsPage users={usersData}/>}/>
+                    <Route path={"/music"} render={MusicPage}/>
+                    <Route path={"/photos"} render={PhotosPage}/>
+                    <Route path={"/friends"} render={FriendsPage}/>
+                    <Route path={"/settings"} render={SettingsPage}/>
                 </div>
                 <Footer/>
             </div>
