@@ -1,32 +1,30 @@
 import React from "react";
 import s from "./Navbar.module.css";
-import {NavbarPages} from "../../App";
+import {NavLink} from "react-router-dom";
 
-type NavbarProps = {
-    selectedPage: NavbarPages
-}
-
-export const Navbar: React.FC<NavbarProps> = ({selectedPage}) => {
-    const getClassName = (page: NavbarPages) => {
-        return page === selectedPage ? s.selected : "";
-    }
-
+export const Navbar = () => {
     return (
         <aside className={s.navbar}>
             <nav>
                 <ul>
-                    <li className={getClassName("Main page")}>
-                        <a href="/main_page">Main page</a></li>
-                    <li className={getClassName("Messages")}>
-                        <a href="/messages">Messages</a></li>
-                    <li className={getClassName("Music")}>
-                        <a href="/music">Music</a></li>
-                    <li className={getClassName("Photos")}>
-                        <a href="/photos">Photos</a></li>
-                    <li className={getClassName("Friends")}>
-                        <a href="/friends">Friends</a></li>
-                    <li className={getClassName("Settings")}>
-                        <a href="/settings">Settings</a></li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/main_page">Main page</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/messages">Messages</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/music">Music</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/photos">Photos</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/friends">Friends</NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={s.selected} to="/settings">Settings</NavLink>
+                    </li>
                 </ul>
             </nav>
         </aside>

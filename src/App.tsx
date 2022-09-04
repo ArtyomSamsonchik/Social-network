@@ -11,32 +11,25 @@ import {Photos} from "./Components/Photos/Photos";
 import {Friends} from "./Components/Friends/Friends";
 import {Settings} from "./Components/Settings/Settings";
 
-export type NavbarPages = "Main page"
-    | "Messages"
-    | "Music"
-    | "Photos"
-    | "Friends"
-    | "Settings"
-
 function App() {
-  return (
-      <BrowserRouter>
-          <div className={s.app}>
-              <Header/>
-              <Navbar selectedPage={"Main page"}/>
-              <div className={s.main_content}>
-                  <Route path={"/main_page"} component={MainPage}/>
-                  <Route path={"/messages"} component={Messages}/>
-                  <Route path={"/music"} component={Music}/>
-                  <Route path={"/photos"} component={Photos}/>
-                  <Route path={"/friends"} component={Friends}/>
-                  <Route path={"/settings"} component={Settings}/>
-
-              </div>
-              <Footer/>
-          </div>
-      </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className={s.app}>
+                <Header/>
+                <Navbar/>
+                <div className={s.main_content}>
+                    <Route path={"/main_page"} component={MainPage}/>
+                    <Route path={"/messages"} component={Messages}/>
+                    <Route path={"/music"} component={Music}/>
+                    <Route path={"/photos"} component={Photos}/>
+                    <Route path={"/friends"} component={Friends}/>
+                    <Route path={"/settings"} component={Settings}/>
+                </div>
+            </div>
+            <Footer/>
+        </BrowserRouter>
+    )
+        ;
 }
 
 export default App;
