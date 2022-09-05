@@ -20,9 +20,14 @@ export type UserType = {
 export type PostType = {
     userName: string
     imageSrc: string
-    text: string
+    postText: string
     date: string
     likesCount: number
+}
+
+export type MessageType = {
+    userName: string
+    messageText: string
 }
 
 function App() {
@@ -39,44 +44,50 @@ function App() {
             userName: "Vasya",
             imageSrc: userImageURL,
             date: "01.09.2022 22:30",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 10
         },
         {
             userName: "Sanya",
             imageSrc: userImageURL,
             date: "03.11.2022 00:30",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 1
         },
         {
             userName: "Anton",
             imageSrc: userImageURL,
             date: "05.05.2022 19:50",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 0
         },
         {
             userName: "Atryom",
             imageSrc: userImageURL,
             date: "20.07.2022 05:15",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 2
         },
         {
             userName: "Ilya",
             imageSrc: userImageURL,
             date: "31.12.2022 18:30",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 9
         },
         {
             userName: "Vasya",
             imageSrc: userImageURL,
             date: "15.10.2022 03:00",
-            text: "Lorem ipsum dolor sit amet",
+            postText: "Lorem ipsum dolor sit amet",
             likesCount: 3
         },
+    ];
+    const messages: MessageType[] = [
+        {userName: "Sanya", messageText: "Hello"},
+        {userName: "Sanya", messageText: "What's up?"},
+        {userName: "Sanya", messageText: "How are you?"},
+        {userName: "Sanya", messageText: "When we go to drink?"},
     ]
 
     return (
@@ -86,7 +97,9 @@ function App() {
                 <Navbar/>
                 <div className={s.main_content}>
                     <Route path={"/main_page"} render={() => <MainPage posts={postsData}/>}/>
-                    <Route path={"/dialogs"} render={() => <DialogsPage users={usersData}/>}/>
+                    <Route path={"/dialogs"}
+                           render={() => <DialogsPage users={usersData} messages={messages}/>}
+                    />
                     <Route path={"/music"} render={MusicPage}/>
                     <Route path={"/photos"} render={PhotosPage}/>
                     <Route path={"/friends"} render={FriendsPage}/>

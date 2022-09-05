@@ -13,7 +13,7 @@ export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
         return (
             <Post userName={post.userName}
                   imageSrc={post.imageSrc}
-                  postText={post.text}
+                  postText={post.postText}
                   likesCount={post.likesCount}
                   date={post.date}
             />
