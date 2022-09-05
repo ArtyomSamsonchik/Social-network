@@ -10,7 +10,7 @@ import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
 import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
-import userImageURL from "./images/Portrait_Placeholder.png"
+import userImageURL from "./images/Portrait_Placeholder.png";
 
 export type UserType = {
     id: number,
@@ -30,8 +30,16 @@ export type MessageType = {
     messageText: string
 }
 
-function App() {
+export const PATH = {
+    MAIN_PAGE: "/main-page",
+    DIALOGS: "/dialogs",
+    MUSIC: "/music",
+    PHOTOS: "/photos",
+    FRIENDS: "/friends",
+    SETTINGS: "/settings"
+};
 
+function App() {
     const usersData: UserType[] = [
         {id: 1, name: "Sanya"},
         {id: 2, name: "Artyom"},
@@ -88,7 +96,7 @@ function App() {
         {userName: "Sanya", messageText: "What's up?"},
         {userName: "Sanya", messageText: "How are you?"},
         {userName: "Sanya", messageText: "When we go to drink?"},
-    ]
+    ];
 
     return (
         <BrowserRouter>
@@ -96,20 +104,19 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className={s.main_content}>
-                    <Route path={"/main_page"} render={() => <MainPage posts={postsData}/>}/>
-                    <Route path={"/dialogs"}
+                    <Route path={PATH.MAIN_PAGE} render={() => <MainPage posts={postsData}/>}/>
+                    <Route path={PATH.DIALOGS}
                            render={() => <DialogsPage users={usersData} messages={messages}/>}
                     />
-                    <Route path={"/music"} render={MusicPage}/>
-                    <Route path={"/photos"} render={PhotosPage}/>
-                    <Route path={"/friends"} render={FriendsPage}/>
-                    <Route path={"/settings"} render={SettingsPage}/>
+                    <Route path={PATH.MUSIC} render={MusicPage}/>
+                    <Route path={PATH.PHOTOS} render={PhotosPage}/>
+                    <Route path={PATH.FRIENDS} render={FriendsPage}/>
+                    <Route path={PATH.SETTINGS} render={SettingsPage}/>
                 </div>
                 <Footer/>
             </div>
         </BrowserRouter>
-    )
-        ;
+    );
 }
 
 export default App;

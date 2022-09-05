@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
+import {PATH} from "../../App";
 
 export const Navbar = () => {
     return (
@@ -8,22 +9,22 @@ export const Navbar = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/main_page">Main page</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.MAIN_PAGE}>Main page</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/dialogs">Messages</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.DIALOGS}>Messages</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/music">Music</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.MUSIC}>Music</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/photos">Photos</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.PHOTOS}>Photos</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/friends">Friends</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.FRIENDS}>Friends</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to="/settings">Settings</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.SETTINGS}>Settings</NavLink>
                     </li>
                 </ul>
             </nav>
