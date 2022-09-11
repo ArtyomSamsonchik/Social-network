@@ -1,7 +1,8 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {UserType} from "../../../App";
+import {UserType} from "../../../redux/state";
+
 
 type DialogsProps = {
     users: UserType[]
@@ -9,7 +10,7 @@ type DialogsProps = {
 
 export const Dialogs: React.FC<DialogsProps> = (props) => {
     const dialogItems = props.users.map(user => {
-        return <DialogItem userName={user.name} id={user.id}/>;
+        return <DialogItem key={user.id} userName={user.name} id={user.id}/>;
     });
 
     return (

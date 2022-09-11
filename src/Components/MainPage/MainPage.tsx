@@ -2,10 +2,10 @@ import React from "react";
 // import s from "./MainPage.module.css";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsContainer} from "./PostsContainer/PostsContainer";
-import {PostType} from "../../App";
+import {MainPageType} from "../../redux/state";
 
 type MainPageProps = {
-    posts: PostType[]
+    pageData: MainPageType
 }
 
 export const MainPage: React.FC<MainPageProps> = (props) => {
@@ -13,7 +13,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
         <div>
             Main content
             <ProfileInfo/>
-            <PostsContainer posts={props.posts}/>
+            <PostsContainer posts={props.pageData.posts}/>
         </div>
     );
 };
