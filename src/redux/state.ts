@@ -1,13 +1,29 @@
 import userImageURL from "../images/Portrait_Placeholder.png";
 
+//  Types
 export type UserType = {
     id: number,
     name: string
+    imageSrc: string
+}
+
+export type MessageType = {
+    //add time
+    userName: string
+    messageText: string
+}
+
+export type DialogsType = {
+    [userID: number]: MessageType[]
+}
+
+export type DialogsPageType = {
+    users: UserType[]
+    dialogs: DialogsType
 }
 
 export type PostType = {
-    userName: string
-    imageSrc: string
+    user: UserType
     postText: string
     date: string
     likesCount: number
@@ -17,62 +33,55 @@ export type MainPageType = {
     posts: PostType[]
 }
 
-export type DialogsPageType = {
-    users: UserType[]
-    messages: MessageType[]
-}
-
-export type MessageType = {
-    userName: string
-    messageText: string
-}
-
 export type StateType = {
     mainPageData: MainPageType
     dialogsPageData: DialogsPageType
 }
 
+//  BLL
+const users = [
+    {id: 1, name: "Sanya", imageSrc: userImageURL},
+    {id: 2, name: "Artyom", imageSrc: userImageURL},
+    {id: 3, name: "Ilya", imageSrc: userImageURL},
+    {id: 4, name: "Anton", imageSrc: userImageURL},
+    {id: 5, name: "Vasya", imageSrc: userImageURL}
+];
+
 export const state: StateType = {
     mainPageData: {
         posts: [
             {
-                userName: "Vasya",
-                imageSrc: userImageURL,
+                user: users[4],
                 date: "01.09.2022 22:30",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 10
             },
             {
-                userName: "Sanya",
-                imageSrc: userImageURL,
+                user: users[0],
                 date: "03.11.2022 00:30",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 1
             },
             {
-                userName: "Anton",
-                imageSrc: userImageURL,
+                user: users[3],
                 date: "05.05.2022 19:50",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 0
             },
             {
-                userName: "Atryom",
-                imageSrc: userImageURL,
+                user: users[1],
                 date: "20.07.2022 05:15",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 2
             },
             {
-                userName: "Ilya",
-                imageSrc: userImageURL,
+                user: users[2],
                 date: "31.12.2022 18:30",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 9
             },
             {
-                userName: "Vasya",
-                imageSrc: userImageURL,
+                user: users[4],
                 date: "15.10.2022 03:00",
                 postText: "Lorem ipsum dolor sit amet",
                 likesCount: 3
@@ -80,18 +89,14 @@ export const state: StateType = {
         ]
     },
     dialogsPageData: {
-        users: [
-            {id: 1, name: "Sanya"},
-            {id: 2, name: "Artyom"},
-            {id: 3, name: "Ilya"},
-            {id: 4, name: "Anton"},
-            {id: 5, name: "Leha"}
-        ],
-        messages: [
-            {userName: "Sanya", messageText: "Hello"},
-            {userName: "Sanya", messageText: "What's up?"},
-            {userName: "Sanya", messageText: "How are you?"},
-            {userName: "Sanya", messageText: "When we go to drink?"}
-        ]
+        users,
+        dialogs: {
+           [users[0].id]: [
+               {userName: "Vasya", messageText: "Hello"},
+               {userName: "Vasya", messageText: "What's up?"},
+               {userName: "Vasya", messageText: "How are you?"},
+               {userName: "Vasya", messageText: "When we go to drink?"}
+           ]
+        }
     }
 }

@@ -9,10 +9,11 @@ type DialogsPageProps = {
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
+    const curDialogUser = props.pageData.users[0]
     return (
         <div className={s.dialogs_content}>
             <Dialogs users={props.pageData.users}/>
-            <MessagesArea messages={props.pageData.messages}/>
+            <MessagesArea messages={props.pageData.dialogs[curDialogUser.id]}/>
         </div>
     );
 };
