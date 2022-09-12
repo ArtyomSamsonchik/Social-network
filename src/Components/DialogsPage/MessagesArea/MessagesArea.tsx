@@ -8,9 +8,12 @@ type MessagesAreaProps = {
 }
 
 export const MessagesArea: React.FC<MessagesAreaProps> = (props) => {
-    const messages = props.messages.map(message => {
+    const messages = props.messages.map((message, i) => {
         return (
-            <Message userName={message.userName} messageText={message.messageText}/>
+            <Message key={"message " + i}
+                     userName={message.userName}
+                     messageText={message.messageText}
+            />
         );
     });
 

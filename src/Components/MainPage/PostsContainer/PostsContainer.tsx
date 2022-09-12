@@ -9,9 +9,10 @@ type PostsContainerProps = {
 }
 
 export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
-    const postItems = props.posts.map(post => {
+    const postItems = props.posts.map((post, i) => {
         return (
-            <Post userName={post.user.name}
+            <Post key={"post " + i}
+                  userName={post.user.name}
                   imageSrc={post.user.imageSrc}
                   postText={post.postText}
                   likesCount={post.likesCount}
