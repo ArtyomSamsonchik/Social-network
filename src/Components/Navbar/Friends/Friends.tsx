@@ -9,7 +9,7 @@ type FriendsProps = {
 export const Friends: React.FC<FriendsProps> = (props) => {
     const mappedUsers = props.users.map(user => {
         return (
-            <div key={user.id} className={s.friend}>
+            <div key={user.id} className={s.friendItem}>
                 <div className={s.image_container}>
                     <img src={user.imageSrc} alt="user"/>
                 </div>
