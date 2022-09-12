@@ -27,7 +27,7 @@ a:visited {
             [header-start] 50px [header-end
             main-start] 1fr [main-end
             footer-start] 50px [footer-end];
-    grid-template-columns: minmax(20px, 1fr) 200px minmax(auto, 800px) minmax(20px, 1fr);
+    grid-template-columns: minmax(20px, 1fr) 250px minmax(auto, 800px) minmax(20px, 1fr);
     min-height: 100vh;
 }
 

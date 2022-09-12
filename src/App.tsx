@@ -26,7 +26,7 @@ function App() {
         <BrowserRouter>
             <div className={s.app}>
                 <Header/>
-                <Navbar/>
+                <Navbar users={state.sidebarPageData.users}/>
                 <div className={s.main_content}>
                     <Route path={PATH.MAIN_PAGE} render={() => <MainPage pageData={state.mainPageData}/>}/>
                     <Route path={PATH.DIALOGS}

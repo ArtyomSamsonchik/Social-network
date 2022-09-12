@@ -8,18 +8,13 @@ export type UserType = {
 }
 
 export type MessageType = {
-    //add time
-    userName: string
+    //add time type
+    userName: string    //replace to UserType in future
     messageText: string
 }
 
 export type DialogsType = {
     [userID: number]: MessageType[]
-}
-
-export type DialogsPageType = {
-    users: UserType[]
-    dialogs: DialogsType
 }
 
 export type PostType = {
@@ -29,13 +24,23 @@ export type PostType = {
     likesCount: number
 }
 
+export type DialogsPageType = {
+    users: UserType[]
+    dialogs: DialogsType
+}
+
 export type MainPageType = {
     posts: PostType[]
+}
+
+export type SidebarPageType = {
+    users: UserType[]
 }
 
 export type StateType = {
     mainPageData: MainPageType
     dialogsPageData: DialogsPageType
+    sidebarPageData: SidebarPageType
 }
 
 //  BLL
@@ -98,5 +103,6 @@ export const state: StateType = {
                {userName: "Vasya", messageText: "When we go to drink?"}
            ]
         }
-    }
+    },
+    sidebarPageData: {users}
 }
