@@ -9,7 +9,7 @@ export type UserType = {
 
 export type MessageType = {
     //add time type
-    userName: string    //replace to UserType in future
+    authorName: string    //replace to UserType in future
     messageText: string
 }
 
@@ -97,10 +97,10 @@ export const state: StateType = {
         users,
         dialogs: {
            [users[0].id]: [
-               {userName: "Vasya", messageText: "Hello"},
-               {userName: "Vasya", messageText: "What's up?"},
-               {userName: "Vasya", messageText: "How are you?"},
-               {userName: "Vasya", messageText: "When we go to drink?"}
+               {authorName: "Vasya", messageText: "Hello"},
+               {authorName: "Vasya", messageText: "What's up?"},
+               {authorName: "Vasya", messageText: "How are you?"},
+               {authorName: "Vasya", messageText: "When we go to drink?"}
            ]
         }
     },

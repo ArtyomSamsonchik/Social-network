@@ -10,7 +10,7 @@ type DialogsProps = {
 
 export const Dialogs: React.FC<DialogsProps> = (props) => {
     const dialogItems = props.users.map(user => {
-        return <DialogItem key={user.id} userName={user.name} id={user.id}/>;
+        return <DialogItem key={user.id} authorName={user.name} id={user.id}/>;
     });
 
     return (

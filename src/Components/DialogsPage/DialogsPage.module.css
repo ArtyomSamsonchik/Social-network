@@ -2,3 +2,8 @@
     display: grid;
     grid-template-columns: 250px 1fr;
 }
+
+.add_message {
+    grid-column: 2;
+    padding: 15px;
+}
