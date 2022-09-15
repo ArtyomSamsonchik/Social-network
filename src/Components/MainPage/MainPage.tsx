@@ -6,6 +6,7 @@ import {MainPageType} from "../../redux/state";
 
 type MainPageProps = {
     pageData: MainPageType
+    addPost: (postText: string) => void
 }
 
 export const MainPage: React.FC<MainPageProps> = (props) => {
@@ -13,7 +14,9 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
         <div>
             Main content
             <ProfileInfo/>
-            <PostsContainer posts={props.pageData.posts}/>
+            <PostsContainer posts={props.pageData.posts}
+                            addPost={props.addPost}
+            />
         </div>
     );
 };

@@ -25,7 +25,7 @@ export const Post: React.FC<PostPropsType> = (
                 <div >
                     {postText}
                 <div className={s.post_footer}>
-                    <span>likes: {likesCount}</span>
+                    <span className={s.likes}>likes: {likesCount}</span>
                     <span>{date}</span>
                 </div>
                 </div>

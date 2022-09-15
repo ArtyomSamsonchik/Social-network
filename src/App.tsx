@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './App.module.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
@@ -10,7 +10,7 @@ import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
 import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
-import {state} from "./redux/state";
+import {PostType, state} from "./redux/state";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -22,15 +22,38 @@ export const PATH = {
 };
 
 function App() {
+    const [localState, setLocalState] = useState(state);
+
+    const addPost = (postText: string) => {
+        const user = localState.dialogsPageData.users[1];
+        const date = new Date().toLocaleString("ru-RU")
+        const newPost: PostType = {user, postText, date, likesCount: 0};
+
+        setLocalState({
+            ...localState,
+            mainPageData: {
+                ...localState.mainPageData,
+                posts: [
+                    newPost,
+                    ...localState.mainPageData.posts
+                ]
+            }
+        });
+    };
+
     return (
         <BrowserRouter>
             <div className={s.app}>
                 <Header/>
-                <Navbar users={state.sidebarPageData.users}/>
+                <Navbar users={localState.sidebarPageData.users}/>
                 <div className={s.main_content}>
-                    <Route path={PATH.MAIN_PAGE} render={() => <MainPage pageData={state.mainPageData}/>}/>
+                    <Route path={PATH.MAIN_PAGE} render={() =>
+                        <MainPage pageData={localState.mainPageData}
+                                  addPost={addPost}
+                        />
+                    }/>
                     <Route path={PATH.DIALOGS}
-                           render={() => <DialogsPage pageData={state.dialogsPageData}/>}
+                           render={() => <DialogsPage pageData={localState.dialogsPageData}/>}
                     />
                     <Route path={PATH.MUSIC} render={MusicPage}/>
                     <Route path={PATH.PHOTOS} render={PhotosPage}/>

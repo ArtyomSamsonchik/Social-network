@@ -1,11 +1,12 @@
 import React from "react";
 import s from "./PostsContainer.module.css";
 import {Post} from "./Post/Post";
-import {AddNewPost} from "./AddNewPost/AddNewPost";
+import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
 import {PostType} from "../../../redux/state";
 
 type PostsContainerProps = {
     posts: PostType[]
+    addPost: (postText: string) => void
 }
 
 export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
@@ -23,8 +24,10 @@ export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
 
     return (
         <div className={s.posts_container}>
-            What's new...
-            <AddNewPost/>
+            <div>Add new post:</div>
+            <AddItemArea placeholder={"Add new post..."}
+                addItem={props.addPost}
+            />
             {postItems}
         </div>
     );
