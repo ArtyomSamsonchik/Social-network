@@ -19,8 +19,7 @@ export const MessagesList: React.FC<MessagesAreaProps> = (props) => {
 
     return (
         <div className={s.messages}>
-            {messages}
-
+            {messages.length > 0 ? messages : "Empty message list"}
         </div>
     );
 };

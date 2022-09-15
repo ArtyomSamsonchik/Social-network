@@ -1,8 +1,10 @@
 import userImageURL from "../images/Portrait_Placeholder.png";
 
 //  Types
+export type UserIDType = number
+
 export type UserType = {
-    id: number,
+    id: UserIDType,
     name: string
     imageSrc: string
 }
@@ -13,8 +15,8 @@ export type MessageType = {
     messageText: string
 }
 
-export type DialogsType = {
-    [userID: number]: MessageType[]
+export type DialogType = {
+    [userID: UserIDType]: MessageType[]
 }
 
 export type PostType = {
@@ -26,7 +28,7 @@ export type PostType = {
 
 export type DialogsPageType = {
     users: UserType[]
-    dialogs: DialogsType
+    dialogs: DialogType
 }
 
 export type MainPageType = {
@@ -43,7 +45,7 @@ export type StateType = {
     sidebarPageData: SidebarPageType
 }
 
-//  BLL
+//  DATA
 const users = [
     {id: 1, name: "Sanya", imageSrc: userImageURL},
     {id: 2, name: "Artyom", imageSrc: userImageURL},

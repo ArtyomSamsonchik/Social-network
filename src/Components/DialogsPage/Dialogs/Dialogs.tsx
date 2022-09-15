@@ -6,11 +6,16 @@ import {UserType} from "../../../redux/state";
 
 type DialogsProps = {
     users: UserType[]
+    newDialogKey: (userID: number) => void
 }
 
 export const Dialogs: React.FC<DialogsProps> = (props) => {
     const dialogItems = props.users.map(user => {
-        return <DialogItem key={user.id} authorName={user.name} id={user.id}/>;
+        const openDialogClickHandler = () => {
+            props.newDialogKey(user.id)
+        };
+
+        return <DialogItem key={"user" + user.id} user={user} onClick={openDialogClickHandler}/>;
     });
 
     return (
