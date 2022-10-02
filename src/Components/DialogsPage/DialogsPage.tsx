@@ -11,21 +11,22 @@ type DialogsPageProps = {
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
-    const [dialogKey, setDialogKey] = useState<UserIDType | null>(null);
+    const [activeDialogID, setActiveDialogID] = useState<UserIDType | null>(null);
 
     const addMessageToDialog = (messageText: string) => {
-        if (dialogKey) {
-            props.dispatch(addMessageAC(dialogKey, messageText));
+        if (activeDialogID) {
+            props.dispatch(addMessageAC(activeDialogID, messageText));
         }
     };
 
-    const dialogIsExisting = dialogKey && props.pageData.dialogs[dialogKey];
-    let messages = dialogIsExisting ? props.pageData.dialogs[dialogKey] : []
+    const dialogIsExisting = activeDialogID && props.pageData.dialogs[activeDialogID];
+    let messages = dialogIsExisting ? props.pageData.dialogs[activeDialogID] : []
 
     return (
         <div className={s.dialogs_content}>
             <Dialogs users={props.pageData.users}
-                     openNewDialog={setDialogKey}
+                     activeDialogID={activeDialogID as UserIDType}
+                     openNewDialog={setActiveDialogID}
             />
             <MessagesList messages={messages}/>
             <AddItemArea className={s.add_message}

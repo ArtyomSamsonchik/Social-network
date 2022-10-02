@@ -25,10 +25,11 @@ a:visited {
     display: grid;
     grid-template-rows:
             [header-start] 50px [header-end
-            main-start] 1fr [main-end
+            main-start] minmax(500px, 1fr) [main-end
             footer-start] 50px [footer-end];
     grid-template-columns: minmax(20px, 1fr) 250px minmax(auto, 800px) minmax(20px, 1fr);
-    min-height: 100vh;
+    height: 100vh;
+    overflow: auto;
 }
 
 .main_content {

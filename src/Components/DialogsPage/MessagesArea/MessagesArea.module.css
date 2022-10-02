@@ -1,4 +1,6 @@
 .messages {
     padding: 15px;
     grid-column: 2;
+    min-height: 350px;
+    overflow: auto;
 }

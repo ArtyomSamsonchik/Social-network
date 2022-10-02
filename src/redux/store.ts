@@ -187,12 +187,12 @@ const store: StoreType = {
     }
 }
 
-export const addPostAC = (postText: string) => {
-    return {type: "ADD-POST", postText} as const
-}
+export const addPostAC = (postText: string) => ({
+    type: "ADD-POST", postText
+}) as const
 
-export const addMessageAC = (userID: UserIDType, messageText: string) => {
-    return {type: "ADD-MESSAGE", messageText, userID} as const
-}
+export const addMessageAC = (userID: UserIDType, messageText: string) => ({
+    type: "ADD-MESSAGE", messageText, userID
+}) as const
 
 export default store
