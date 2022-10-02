@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {UserType} from "../../../redux/state";
+import {UserType} from "../../../redux/store";
 
 
 type DialogsProps = {

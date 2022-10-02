@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {UserType} from "../../../../redux/state";
+import {UserType} from "../../../../redux/store";
 
 type DialogProps = {
     user: UserType

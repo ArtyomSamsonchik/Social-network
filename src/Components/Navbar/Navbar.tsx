@@ -3,7 +3,7 @@ import s from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../App";
 import {Friends} from "./Friends/Friends";
-import {UserType} from "../../redux/state";
+import {UserType} from "../../redux/store";
 
 type NavbarProps = {
     users: UserType[]

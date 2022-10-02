@@ -2,7 +2,7 @@ import React from "react";
 // import s from "./MainPage.module.css";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsContainer} from "./PostsContainer/PostsContainer";
-import {MainPageType} from "../../redux/state";
+import {MainPageType} from "../../redux/store";
 
 type MainPageProps = {
     pageData: MainPageType

@@ -2,7 +2,7 @@ import React from "react";
 import s from "./PostsContainer.module.css";
 import {Post} from "./Post/Post";
 import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
-import {PostType} from "../../../redux/state";
+import {PostType} from "../../../redux/store";
 
 type PostsContainerProps = {
     posts: PostType[]

@@ -10,7 +10,7 @@ import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
 import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
-import {PostType, state, UserIDType} from "./redux/state";
+import store from "./redux/store";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -22,42 +22,11 @@ export const PATH = {
 };
 
 function App() {
-    const [localState, setLocalState] = useState(state);
+    const [localState, setLocalState] = useState(store.getState());
 
-    const addPost = (postText: string) => {
-        const user = localState.dialogsPageData.users[1];
-        const date = new Date().toLocaleString("ru-RU")
-        const newPost: PostType = {user, postText, date, likesCount: 0};
-
-        setLocalState({
-            ...localState,
-            mainPageData: {
-                ...localState.mainPageData,
-                posts: [
-                    newPost,
-                    ...localState.mainPageData.posts
-                ]
-            }
-        });
-    };
-
-    const addMessage = (userID: UserIDType, messageText: string) => {
-        const newMessage = {authorName: "JS Developer", messageText};
-
-        setLocalState({
-            ...localState,
-            dialogsPageData: {
-                ...localState.dialogsPageData,
-                dialogs: {
-                    ...localState.dialogsPageData.dialogs,
-                    [userID]: [
-                        ...(localState.dialogsPageData.dialogs[userID] || []),
-                        newMessage
-                    ]
-                }
-            }
-        });
-    };
+    store.subscribe(() => {
+        setLocalState(store.getState())
+    })
 
     return (
         <BrowserRouter>
@@ -67,14 +36,14 @@ function App() {
                 <div className={s.main_content}>
                     <Route path={PATH.MAIN_PAGE}
                            render={() => <MainPage pageData={localState.mainPageData}
-                                                   addPost={addPost}
-                           />
-                           }/>
+                                                   addPost={store.addPost.bind(store)}
+                           />}
+                    />
                     <Route path={PATH.DIALOGS}
                            render={() => <DialogsPage pageData={localState.dialogsPageData}
-                                                      addMessage={addMessage}
-                           />
-                           }/>
+                                                      addMessage={store.addMessage.bind(store)}
+                           />}
+                    />
                     <Route path={PATH.MUSIC} render={MusicPage}/>
                     <Route path={PATH.PHOTOS} render={PhotosPage}/>
                     <Route path={PATH.FRIENDS} render={FriendsPage}/>

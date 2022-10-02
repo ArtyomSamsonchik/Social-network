@@ -1,4 +1,4 @@
-import userImageURL from "../images/Portrait_Placeholder.png";
+import userImageURL from "../images/Portrait_Placeholder.png"
 
 //  Types
 export type UserIDType = number
@@ -45,16 +45,29 @@ export type StateType = {
     sidebarPageData: SidebarPageType
 }
 
+export type SubscriberFunction = () => void
+
+export type StoreType = {
+    _state: StateType
+    _subscriber: SubscriberFunction
+
+    getState: () => StateType
+    subscribe: (newSubscriber: SubscriberFunction) => void
+
+    addPost: (postText: string) => void
+    addMessage: (userID: UserIDType, messageText: string) => void
+}
+
 //  DATA
-const users = [
+const users: UserType[] = [
     {id: 1, name: "Sanya", imageSrc: userImageURL},
     {id: 2, name: "Artyom", imageSrc: userImageURL},
     {id: 3, name: "Ilya", imageSrc: userImageURL},
     {id: 4, name: "Anton", imageSrc: userImageURL},
     {id: 5, name: "Vasya", imageSrc: userImageURL}
-];
+]
 
-export const state: StateType = {
+const state: StateType = {
     mainPageData: {
         posts: [
             {
@@ -108,3 +121,52 @@ export const state: StateType = {
     },
     sidebarPageData: {users}
 }
+
+const store: StoreType = {
+    _state: state,
+    _subscriber() {
+        console.log("No subscriber passed.")
+    },
+    getState() {
+        return this._state
+    },
+    subscribe(newSubscriber) {
+        this._subscriber = newSubscriber
+    },
+    addPost(postText) {
+        const user = this._state.dialogsPageData.users[1];
+        const date = new Date().toLocaleString("ru-RU")
+        const newPost: PostType = {user, postText, date, likesCount: 0}
+
+        this._state = {
+            ...this._state,
+            mainPageData: {
+                ...this._state.mainPageData,
+                posts: [newPost, ...this._state.mainPageData.posts]
+            }
+        }
+
+        this._subscriber()
+    },
+    addMessage(userID, messageText) {
+        const newMessage: MessageType = {authorName: "JS Developer", messageText}
+
+        this._state = {
+            ...this._state,
+            dialogsPageData: {
+                ...this._state.dialogsPageData,
+                dialogs: {
+                    ...this._state.dialogsPageData.dialogs,
+                    [userID]: [
+                        ...(this._state.dialogsPageData.dialogs[userID] || []),
+                        newMessage
+                    ]
+                }
+            }
+        }
+
+        this._subscriber()
+    }
+}
+
+export default store
