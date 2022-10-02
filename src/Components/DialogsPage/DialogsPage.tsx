@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "./Dialogs/Dialogs";
 import {MessagesList} from "./MessagesArea/MessagesList";
-import {DialogsPageType, UserIDType} from "../../redux/store";
+import {ActionsType, addMessageAC, DialogsPageType, UserIDType} from "../../redux/store";
 import {AddItemArea} from "../common/AddItemArea/AddItemArea";
 
 type DialogsPageProps = {
     pageData: DialogsPageType
-    addMessage: (userID: UserIDType, messageText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
@@ -15,7 +15,7 @@ export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
 
     const addMessageToDialog = (messageText: string) => {
         if (dialogKey) {
-            props.addMessage(dialogKey, messageText);
+            props.dispatch(addMessageAC(dialogKey, messageText));
         }
     };
 
@@ -25,7 +25,7 @@ export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
     return (
         <div className={s.dialogs_content}>
             <Dialogs users={props.pageData.users}
-                     newDialogKey={setDialogKey}
+                     openNewDialog={setDialogKey}
             />
             <MessagesList messages={messages}/>
             <AddItemArea className={s.add_message}

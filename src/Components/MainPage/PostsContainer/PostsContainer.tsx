@@ -2,14 +2,18 @@ import React from "react";
 import s from "./PostsContainer.module.css";
 import {Post} from "./Post/Post";
 import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
-import {PostType} from "../../../redux/store";
+import {ActionsType, addPostAC, PostType} from "../../../redux/store";
 
 type PostsContainerProps = {
     posts: PostType[]
-    addPost: (postText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
+    const addPost = (text: string) => {
+        props.dispatch(addPostAC(text))
+    }
+
     const postItems = props.posts.map((post, i) => {
         return (
             <Post key={"post " + i}
@@ -26,7 +30,7 @@ export const PostsContainer: React.FC<PostsContainerProps> = (props) => {
         <div className={s.posts_container}>
             <div>Add new post:</div>
             <AddItemArea placeholder={"Add new post..."}
-                addItem={props.addPost}
+                addItem={addPost}
             />
             {postItems}
         </div>

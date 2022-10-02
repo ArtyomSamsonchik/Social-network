@@ -47,6 +47,11 @@ export type StateType = {
 
 export type SubscriberFunction = () => void
 
+type AddPostAT = ReturnType<typeof addPostAC>
+type AddMessageAT = ReturnType<typeof addMessageAC>
+
+export type ActionsType = AddPostAT | AddMessageAT
+
 export type StoreType = {
     _state: StateType
     _subscriber: SubscriberFunction
@@ -54,8 +59,7 @@ export type StoreType = {
     getState: () => StateType
     subscribe: (newSubscriber: SubscriberFunction) => void
 
-    addPost: (postText: string) => void
-    addMessage: (userID: UserIDType, messageText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 //  DATA
@@ -133,40 +137,62 @@ const store: StoreType = {
     subscribe(newSubscriber) {
         this._subscriber = newSubscriber
     },
-    addPost(postText) {
-        const user = this._state.dialogsPageData.users[1];
-        const date = new Date().toLocaleString("ru-RU")
-        const newPost: PostType = {user, postText, date, likesCount: 0}
+    dispatch(action) {
+        switch (action.type) {
+            case "ADD-POST": {
+                const user = this._state.dialogsPageData.users[1];
+                const date = new Date().toLocaleString("ru-RU")
+                const newPost: PostType = {
+                    user,
+                    postText: action.postText,
+                    date,
+                    likesCount: 0
+                 }
 
-        this._state = {
-            ...this._state,
-            mainPageData: {
-                ...this._state.mainPageData,
-                posts: [newPost, ...this._state.mainPageData.posts]
-            }
-        }
-
-        this._subscriber()
-    },
-    addMessage(userID, messageText) {
-        const newMessage: MessageType = {authorName: "JS Developer", messageText}
-
-        this._state = {
-            ...this._state,
-            dialogsPageData: {
-                ...this._state.dialogsPageData,
-                dialogs: {
-                    ...this._state.dialogsPageData.dialogs,
-                    [userID]: [
-                        ...(this._state.dialogsPageData.dialogs[userID] || []),
-                        newMessage
-                    ]
+                this._state = {
+                    ...this._state,
+                    mainPageData: {
+                        ...this._state.mainPageData,
+                        posts: [newPost, ...this._state.mainPageData.posts]
+                    }
                 }
+
+                this._subscriber()
+                break
+            }
+            case "ADD-MESSAGE": {
+                const newMessage: MessageType = {
+                    authorName: "JS Developer",
+                    messageText: action.messageText
+                }
+
+                this._state = {
+                    ...this._state,
+                    dialogsPageData: {
+                        ...this._state.dialogsPageData,
+                        dialogs: {
+                            ...this._state.dialogsPageData.dialogs,
+                            [action.userID]: [
+                                ...(this._state.dialogsPageData.dialogs[action.userID] || []),
+                                newMessage
+                            ]
+                        }
+                    }
+                }
+
+                this._subscriber()
+                break
             }
         }
-
-        this._subscriber()
     }
+}
+
+export const addPostAC = (postText: string) => {
+    return {type: "ADD-POST", postText} as const
+}
+
+export const addMessageAC = (userID: UserIDType, messageText: string) => {
+    return {type: "ADD-MESSAGE", messageText, userID} as const
 }
 
 export default store
