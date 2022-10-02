@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useState} from 'react';
-import s from "./AddItemArea.module.css";
+import React, {ChangeEvent, useState, KeyboardEvent} from 'react'
+import s from "./AddItemArea.module.css"
 
 type AddItemAreaProps = {
     className?: string
@@ -8,18 +8,25 @@ type AddItemAreaProps = {
 }
 
 export const AddItemArea: React.FC<AddItemAreaProps> = (props) => {
-    const [textValue, setTextValue] = useState("");
+    const [textValue, setTextValue] = useState("")
 
     const onChangeTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setTextValue(e.currentTarget.value);
+        setTextValue(e.currentTarget.value)
     };
 
-    const onAddPostClickHandler = () => {
-        props.addItem(textValue);
-        setTextValue("");
-    };
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            addPost()
+        }
+    }
 
-    const finalClassName = `${s.add_post} ${props.className ? props.className : ""}`;
+    const addPost = () => {
+        props.addItem(textValue)
+        setTextValue("")
+    }
+
+    const finalClassName = `${s.add_post} ${props.className ? props.className : ""}`
 
     return (
         <div className={finalClassName}>
@@ -28,10 +35,11 @@ export const AddItemArea: React.FC<AddItemAreaProps> = (props) => {
                       placeholder={props.placeholder ? props.placeholder : ""}
                       spellCheck={false}
                       onChange={onChangeTextHandler}
+                      onKeyDown={onKeyDownHandler}
             ></textarea>
             <button className={s.button}
-                    onClick={onAddPostClickHandler}
+                    onClick={addPost}
             >Add</button>
         </div>
-    );
-};
+    )
+}
