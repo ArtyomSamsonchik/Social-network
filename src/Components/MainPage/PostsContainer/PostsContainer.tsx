@@ -2,7 +2,8 @@ import React from "react";
 import s from "./PostsContainer.module.css";
 import {Post} from "./Post/Post";
 import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
-import {ActionsType, addPostAC, PostType} from "../../../redux/store";
+import {ActionsType, PostType} from "../../../redux/store";
+import {addPostAC} from "../../../redux/mainPageReducer";
 
 type PostsContainerProps = {
     posts: PostType[]

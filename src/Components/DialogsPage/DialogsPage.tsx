@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "./Dialogs/Dialogs";
 import {MessagesList} from "./MessagesArea/MessagesList";
-import {ActionsType, addMessageAC, DialogsPageType, UserIDType} from "../../redux/store";
+import {ActionsType, DialogsPageType, UserIDType} from "../../redux/store";
 import {AddItemArea} from "../common/AddItemArea/AddItemArea";
+import {addMessageAC} from "../../redux/dialogsPageReducer";
 
 type DialogsPageProps = {
     pageData: DialogsPageType
