@@ -10,7 +10,7 @@ import {MusicPage} from "./Components/MusicPage/MusicPage"
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage"
 import {FriendsPage} from "./Components/FriendsPage/FriendsPage"
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage"
-import store from "./redux/store"
+import store from "./redux/redux-store"
 
 export const PATH = {
     MAIN_PAGE: "/main-page",

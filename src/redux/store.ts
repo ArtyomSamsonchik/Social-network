@@ -63,7 +63,7 @@ export type StoreType = {
 }
 
 //  DATA
-const users: UserType[] = [
+export const users: UserType[] = [
     {id: 1, name: "Sanya", imageSrc: userImageURL},
     {id: 2, name: "Artyom", imageSrc: userImageURL},
     {id: 3, name: "Ilya", imageSrc: userImageURL},

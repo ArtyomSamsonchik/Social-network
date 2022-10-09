@@ -1,10 +1,22 @@
-import {DialogsPageType, MessageType, UserIDType} from "./store";
+import {DialogsPageType, MessageType, UserIDType, users} from "./store";
 
 type AddMessageAT = ReturnType<typeof addMessageAC>
 
 export type DialogsPageActionsType = AddMessageAT
 
-const dialogsPageReducer = (state: DialogsPageType, action: DialogsPageActionsType) => {
+const initialState: DialogsPageType = {
+    users,
+    dialogs: {
+        [users[0].id]: [
+            {authorName: "Vasya", messageText: "Hello"},
+            {authorName: "Vasya", messageText: "What's up?"},
+            {authorName: "Vasya", messageText: "How are you?"},
+            {authorName: "Vasya", messageText: "When we go to drink?"}
+        ]
+    }
+}
+
+const dialogsPageReducer = (state = initialState, action: DialogsPageActionsType) => {
     switch (action.type) {
         case "ADD-MESSAGE": {
             const newMessage: MessageType = {
@@ -12,7 +24,7 @@ const dialogsPageReducer = (state: DialogsPageType, action: DialogsPageActionsTy
                 messageText: action.messageText
             }
 
-            state = {
+            return {
                 ...state,
                 dialogs: {
                     ...state.dialogs,
@@ -22,7 +34,6 @@ const dialogsPageReducer = (state: DialogsPageType, action: DialogsPageActionsTy
                     ]
                 }
             }
-            return state
         }
         default: {
             return state
