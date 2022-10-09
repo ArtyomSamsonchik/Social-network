@@ -21,15 +21,20 @@ a:visited {
     text-decoration: none;
 }
 
+:root {
+    --header-height: 50px;
+    --footer-height: 50px;
+    --add-item-box-height: 150px;
+}
+
 .app {
     display: grid;
     grid-template-rows:
-            [header-start] 50px [header-end
-            main-start] minmax(500px, 1fr) [main-end
-            footer-start] 50px [footer-end];
+            [header-start] var(--header-height) [header-end
+            main-start] minmax(350px, 1fr) [main-end
+            footer-start] var(--footer-height) [footer-end];
     grid-template-columns: minmax(20px, 1fr) 250px minmax(auto, 800px) minmax(20px, 1fr);
-    height: 100vh;
-    overflow: auto;
+    min-height: 100vh;
 }
 
 .main_content {

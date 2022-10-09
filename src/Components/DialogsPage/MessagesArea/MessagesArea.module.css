@@ -1,6 +1,11 @@
 .messages {
     padding: 15px;
     grid-column: 2;
-    min-height: 350px;
+    min-height: 260px;
+    max-height: calc(
+            100vh
+            - var(--header-height)
+            - var(--add-item-box-height)
+    );
     overflow: auto;
 }

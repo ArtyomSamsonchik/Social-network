@@ -9,3 +9,8 @@
 .button {
     width: 100px;
 }
+
+.add_post textarea {
+    height: 85px;
+    border-width: 2px;
+}
