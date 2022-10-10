@@ -18,13 +18,9 @@ export const DialogsPageContainer: React.FC<DialogsPageContainerProps> = (props)
         }
     }
 
-    const dialogIsExisting = activeDialogID && state.dialogsPageData.dialogs[activeDialogID]
-    let messages = dialogIsExisting ? state.dialogsPageData.dialogs[activeDialogID] : []
-
     return (
         <DialogsPage activeDialogID={activeDialogID}
-                     users={state.dialogsPageData.users}
-                     messages={messages}
+                     dialogsPageData={state.dialogsPageData}
                      openNewDialog={setActiveDialogID}
                      addMessageToDialog={addMessageToDialog}
         />
