@@ -1,12 +1,10 @@
 import React from "react";
-// import s from "./MainPage.module.css";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostsContainer} from "./PostsContainer/PostsContainer";
-import {ActionsType, MainPageType} from "../../redux/store";
+import {MyPostsContainer} from "./PostsContainer/MyPostsContainer";
+import {AppStoreType} from "../../redux/redux-store";
 
 type MainPageProps = {
-    pageData: MainPageType
-    dispatch: (action: ActionsType) => void
+    store: AppStoreType
 }
 
 export const MainPage: React.FC<MainPageProps> = (props) => {
@@ -14,9 +12,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
         <div>
             Main content
             <ProfileInfo/>
-            <PostsContainer posts={props.pageData.posts}
-                            dispatch={props.dispatch}
-            />
+            <MyPostsContainer store={props.store}/>
         </div>
     );
 };

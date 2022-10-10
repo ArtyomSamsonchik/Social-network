@@ -36,11 +36,7 @@ function App() {
                 <Navbar users={localState.sidebarPageData.users}/>
                 <div className={s.main_content}>
                     <Route path={PATH.MAIN_PAGE}
-                           render={() =>
-                               <MainPage pageData={localState.mainPageData}
-                                         dispatch={dispatch}
-                               />
-                           }
+                           render={() => <MainPage store={store}/>}
                     />
                     <Route path={PATH.DIALOGS}
                            render={() =>

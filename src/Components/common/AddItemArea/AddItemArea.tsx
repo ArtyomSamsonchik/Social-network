@@ -17,11 +17,11 @@ export const AddItemArea: React.FC<AddItemAreaProps> = (props) => {
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter") {
             e.preventDefault()
-            addPost()
+            addItem()
         }
     }
 
-    const addPost = () => {
+    const addItem = () => {
         props.addItem(textValue)
         setTextValue("")
     }
@@ -38,7 +38,7 @@ export const AddItemArea: React.FC<AddItemAreaProps> = (props) => {
                       onKeyDown={onKeyDownHandler}
             ></textarea>
             <button className={s.button}
-                    onClick={addPost}
+                    onClick={addItem}
             >Add</button>
         </div>
     )
