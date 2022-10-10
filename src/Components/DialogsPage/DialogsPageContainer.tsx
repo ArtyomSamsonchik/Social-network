@@ -1,39 +1,32 @@
 import React, {useState} from 'react';
-import s from "./DialogsPage.module.css";
-import {Dialogs} from "./Dialogs/Dialogs";
-import {MessagesList} from "./MessagesArea/MessagesList";
-import {ActionsType, DialogsPageType, UserIDType} from "../../redux/store";
-import {AddItemArea} from "../common/AddItemArea/AddItemArea";
+import {UserIDType} from "../../redux/store";
 import {addMessageAC} from "../../redux/dialogsPageReducer";
+import {AppStoreType} from "../../redux/redux-store";
+import {DialogsPage} from "./DialogsPage";
 
-type DialogsPageProps = {
-    pageData: DialogsPageType
-    dispatch: (action: ActionsType) => void
+type DialogsPageContainerProps = {
+    store: AppStoreType
 }
 
-export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
+export const DialogsPageContainer: React.FC<DialogsPageContainerProps> = (props) => {
     const [activeDialogID, setActiveDialogID] = useState<UserIDType | null>(null);
+    const state = props.store.getState()
 
     const addMessageToDialog = (messageText: string) => {
         if (activeDialogID) {
-            props.dispatch(addMessageAC(activeDialogID, messageText));
+            props.store.dispatch(addMessageAC(activeDialogID, messageText))
         }
-    };
+    }
 
-    const dialogIsExisting = activeDialogID && props.pageData.dialogs[activeDialogID];
-    let messages = dialogIsExisting ? props.pageData.dialogs[activeDialogID] : []
+    const dialogIsExisting = activeDialogID && state.dialogsPageData.dialogs[activeDialogID]
+    let messages = dialogIsExisting ? state.dialogsPageData.dialogs[activeDialogID] : []
 
     return (
-        <div className={s.dialogs_content}>
-            <Dialogs users={props.pageData.users}
-                     activeDialogID={activeDialogID as UserIDType}
+        <DialogsPage activeDialogID={activeDialogID as UserIDType}
+                     users={state.dialogsPageData.users}
+                     messages={messages}
                      openNewDialog={setActiveDialogID}
-            />
-            <MessagesList messages={messages}/>
-            <AddItemArea className={s.add_message}
-                         placeholder={"Write new message..."}
-                         addItem={addMessageToDialog}
-            />
-        </div>
+                     addMessageToDialog={addMessageToDialog}
+        />
     );
 };

@@ -1,16 +1,16 @@
-import React, {useState} from 'react'
-import s from './App.module.css'
-import {Header} from "./Components/Header/Header"
-import {Navbar} from "./Components/Navbar/Navbar"
-import {MainPage} from "./Components/MainPage/MainPage"
-import {Footer} from "./Components/Footer/Footer"
-import {DialogsPage} from "./Components/DialogsPage/DialogsPage"
-import {BrowserRouter, Route} from "react-router-dom"
-import {MusicPage} from "./Components/MusicPage/MusicPage"
-import {PhotosPage} from "./Components/PhotosPage/PhotosPage"
-import {FriendsPage} from "./Components/FriendsPage/FriendsPage"
-import {SettingsPage} from "./Components/SettingsPage/SettingsPage"
-import store from "./redux/redux-store"
+import React, {useState} from 'react';
+import s from './App.module.css';
+import {Header} from "./Components/Header/Header";
+import {Navbar} from "./Components/Navbar/Navbar";
+import {MainPage} from "./Components/MainPage/MainPage";
+import {Footer} from "./Components/Footer/Footer";
+import {BrowserRouter, Route} from "react-router-dom";
+import {MusicPage} from "./Components/MusicPage/MusicPage";
+import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
+import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
+import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
+import {DialogsPageContainer} from "./Components/DialogsPage/DialogsPageContainer";
+import store from "./redux/redux-store";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -23,7 +23,6 @@ export const PATH = {
 
 function App() {
     const [localState, setLocalState] = useState(store.getState());
-    const dispatch = store.dispatch.bind(store)
 
     store.subscribe(() => {
         setLocalState(store.getState())
@@ -39,11 +38,7 @@ function App() {
                            render={() => <MainPage store={store}/>}
                     />
                     <Route path={PATH.DIALOGS}
-                           render={() =>
-                               <DialogsPage pageData={localState.dialogsPageData}
-                                            dispatch={dispatch}
-                               />
-                           }
+                           render={() =><DialogsPageContainer store={store}/>}
                     />
                     <Route path={PATH.MUSIC} render={MusicPage}/>
                     <Route path={PATH.PHOTOS} render={PhotosPage}/>
