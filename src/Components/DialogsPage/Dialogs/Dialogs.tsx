@@ -5,7 +5,7 @@ import {UserIDType, UserType} from "../../../redux/store";
 
 
 type DialogsProps = {
-    activeDialogID: UserIDType
+    activeDialogID: UserIDType | null
     users: UserType[]
     openNewDialog: (userID: number) => void
 }

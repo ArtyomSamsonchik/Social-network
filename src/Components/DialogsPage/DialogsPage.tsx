@@ -6,7 +6,7 @@ import {MessageType, UserIDType, UserType} from "../../redux/store";
 import {AddItemArea} from "../common/AddItemArea/AddItemArea";
 
 type DialogsPageProps = {
-    activeDialogID: UserIDType
+    activeDialogID: UserIDType | null
     users: UserType[]
     messages: MessageType[]
     openNewDialog:  (userID: number) => void
