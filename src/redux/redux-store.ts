@@ -13,5 +13,4 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer)
 
 export type AppStoreType = typeof store
-
 export default store

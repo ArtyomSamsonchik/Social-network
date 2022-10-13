@@ -11,6 +11,7 @@ type DialogsProps = {
 }
 
 export const Dialogs: React.FC<DialogsProps> = (props) => {
+    console.log("Dialogs")
     const dialogItems = props.users.map(user => {
         const openDialogClickHandler = () => {
             props.openNewDialog(user.id)

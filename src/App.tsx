@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './App.module.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
@@ -22,11 +22,14 @@ export const PATH = {
 };
 
 function App() {
+    console.log("App")
     const [localState, setLocalState] = useState(store.getState());
 
-    store.subscribe(() => {
-        setLocalState(store.getState())
-    })
+    useEffect(() => {
+        return store.subscribe(() => {
+            setLocalState(store.getState())
+        })
+    }, [])
 
     return (
         <BrowserRouter>
@@ -38,7 +41,7 @@ function App() {
                            render={() => <MainPage store={store}/>}
                     />
                     <Route path={PATH.DIALOGS}
-                           render={() =><DialogsPageContainer store={store}/>}
+                           render={() => <DialogsPageContainer store={store}/>}
                     />
                     <Route path={PATH.MUSIC} render={MusicPage}/>
                     <Route path={PATH.PHOTOS} render={PhotosPage}/>

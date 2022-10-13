@@ -13,6 +13,7 @@ type DialogsPageProps = {
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
+    console.log("Dialogs Page")
     const activeDialogID = props.activeDialogID
     const dialogIsExisting = activeDialogID && props.dialogsPageData.dialogs[activeDialogID]
     const messages = dialogIsExisting ? props.dialogsPageData.dialogs[activeDialogID] : []

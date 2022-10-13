@@ -10,6 +10,7 @@ type NavbarProps = {
 }
 
 export const Navbar: React.FC<NavbarProps> = (props) => {
+    console.log("Navbar")
     return (
         <aside className={s.navbar}>
             <nav>
