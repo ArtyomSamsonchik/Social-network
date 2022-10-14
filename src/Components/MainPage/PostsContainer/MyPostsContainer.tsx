@@ -1,20 +1,21 @@
-import React from "react";
+import React, {useContext} from "react";
 import {addPostAC} from "../../../redux/mainPageReducer";
 import {MyPosts} from "./MyPosts";
-import {AppStoreType} from "../../../redux/redux-store";
+import {GlobalStoreDispatchContext} from "../../../context/context";
 
-type PostsContainerProps = {
-    store: AppStoreType
-}
+// type PostsContainerProps = {
+//     store: AppStoreType
+// }
 
-export const MyPostsContainer: React.FC<PostsContainerProps> = (props) => {
-    const state = props.store.getState()
+export const MyPostsContainer = () => {
+    // const state = props.store.getState()
+    const dispatch = useContext(GlobalStoreDispatchContext)
 
     const addPost = (text: string) => {
-        props.store.dispatch(addPostAC(text))
+        dispatch(addPostAC(text))
     }
 
     return (
-        <MyPosts posts={state.mainPageData.posts} addPost={addPost}/>
+        <MyPosts addPost={addPost}/>
     )
 }

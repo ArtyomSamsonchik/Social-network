@@ -5,7 +5,7 @@ const initialtState: SidebarPageType = {
     users
 }
 
-const sidebarPageReducer = (state = initialtState, action: any) => {
+const sidebarPageReducer = (state = initialtState, action: any): SidebarPageType => {
     return state
 }
 

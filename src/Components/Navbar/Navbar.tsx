@@ -3,14 +3,12 @@ import s from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../App";
 import {Friends} from "./Friends/Friends";
-import {UserType} from "../../redux/store";
 
-type NavbarProps = {
-    users: UserType[]
-}
+// type NavbarProps = {
+//     users: UserType[]
+// }
 
-export const Navbar: React.FC<NavbarProps> = (props) => {
-    console.log("Navbar")
+export const Navbar = () => {
     return (
         <aside className={s.navbar}>
             <nav>
@@ -35,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                     </li>
                 </ul>
             </nav>
-            <Friends users={props.users}/>
+            <Friends/>
         </aside>
     );
 };

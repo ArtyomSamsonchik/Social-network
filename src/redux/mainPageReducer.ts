@@ -48,7 +48,7 @@ const initialState: MainPageType = {
     ]
 }
 
-const mainPageReducer = (state = initialState, action: MainPageActionsType) => {
+const mainPageReducer = (state = initialState, action: MainPageActionsType): MainPageType => {
     switch (action.type) {
         case "ADD-POST": {
             const user = {id: 2, name: "Artyom", imageSrc: userImageURL}    //TODO: fix in future

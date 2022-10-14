@@ -1,13 +1,15 @@
-import React from 'react';
-import {UserType} from "../../../redux/store";
+import React, {useContext} from 'react';
 import s from "./Friends.module.css";
+import {GlobalStoreStateContext} from "../../../context/context";
 
-type FriendsProps = {
-    users: UserType[]
-}
+// type FriendsProps = {
+//     users: UserType[]
+// }
 
-export const Friends: React.FC<FriendsProps> = (props) => {
-    const mappedUsers = props.users.map(user => {
+export const Friends = () => {
+    const users = useContext(GlobalStoreStateContext).sidebarPageData.users
+
+    const mappedUsers = users.map(user => {
         return (
             <div key={user.id} className={s.friendItem}>
                 <div className={s.image_container}>
