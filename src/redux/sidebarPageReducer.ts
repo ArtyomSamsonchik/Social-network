@@ -1,5 +1,9 @@
-import {SidebarPageType} from "./store";
-import {users} from "./store";
+import {users} from "./data";
+import {UserType} from "./mainPageReducer";
+
+export type SidebarPageType = {
+    users: UserType[]
+}
 
 const initialtState: SidebarPageType = {
     users

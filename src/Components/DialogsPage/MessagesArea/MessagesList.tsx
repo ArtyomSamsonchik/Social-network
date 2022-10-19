@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./MessagesArea.module.css";
 import {Message} from "./Message/Message";
-import {MessageType} from "../../../redux/store";
+import {MessageType} from "../../../redux/dialogsPageReducer";
 
 type MessagesAreaProps = {
     messages: MessageType[]

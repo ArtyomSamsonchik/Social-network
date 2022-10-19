@@ -1,21 +1,20 @@
-import React, {useContext} from "react";
-import {addPostAC} from "../../../redux/mainPageReducer";
+import {addPostAC, MainPageActionsType} from "../../../redux/mainPageReducer";
 import {MyPosts} from "./MyPosts";
-import {GlobalStoreDispatchContext} from "../../../context/context";
+import {AppStateType} from "../../../redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {MapToPropsType} from "../../../helpers/typeHelpers";
 
-// type PostsContainerProps = {
-//     store: AppStoreType
-// }
+const mapStateToProps = (state: AppStateType): MapToPropsType<typeof MyPosts, "posts"> => ({
+    posts: state.mainPageData.posts
+})
 
-export const MyPostsContainer = () => {
-    // const state = props.store.getState()
-    const dispatch = useContext(GlobalStoreDispatchContext)
-
-    const addPost = (text: string) => {
+const mapDispatchToProps = (dispatch: Dispatch<MainPageActionsType>): MapToPropsType<typeof MyPosts, "addPost"> => ({
+    addPost: (text) => {
         dispatch(addPostAC(text))
     }
+})
 
-    return (
-        <MyPosts addPost={addPost}/>
-    )
-}
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+export default MyPostsContainer

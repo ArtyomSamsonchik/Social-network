@@ -1,8 +1,23 @@
-import {DialogsPageType, MessageType, UserIDType, users} from "./store";
+import {users} from "./data";
+import {UserIDType, UserType} from "./mainPageReducer";
 
 type AddMessageAT = ReturnType<typeof addMessageAC>
+type SetActiveDialogAT = ReturnType<typeof setActiveDialogAC>
+export type DialogsPageActionsType = AddMessageAT | SetActiveDialogAT
 
-export type DialogsPageActionsType = AddMessageAT
+export type MessageType = {
+    //add time type
+    authorName: string    //replace to UserType in future
+    messageText: string
+}
+export type DialogType = {
+    [userID: UserIDType]: MessageType[]
+}
+export type DialogsPageType = {
+    users: UserType[]
+    dialogs: DialogType
+    activeDialogID: UserIDType | null
+}
 
 const initialState: DialogsPageType = {
     users,
@@ -13,12 +28,13 @@ const initialState: DialogsPageType = {
             {authorName: "Vasya", messageText: "How are you?"},
             {authorName: "Vasya", messageText: "When we go to drink?"}
         ]
-    }
+    },
+    activeDialogID: null
 }
 
 const dialogsPageReducer = (state = initialState, action: DialogsPageActionsType): DialogsPageType => {
     switch (action.type) {
-        case "ADD-MESSAGE": {
+        case "ADD-MESSAGE":
             const newMessage: MessageType = {
                 authorName: "JS Developer",
                 messageText: action.messageText
@@ -34,15 +50,23 @@ const dialogsPageReducer = (state = initialState, action: DialogsPageActionsType
                     ]
                 }
             }
-        }
-        default: {
+        case "SET-ACTIVE-DIALOG":
+            return {
+                ...state,
+                activeDialogID: action.userID
+            }
+        default:
             return state
-        }
     }
 }
 
 export const addMessageAC = (userID: UserIDType, messageText: string) => ({
     type: "ADD-MESSAGE", messageText, userID
+}) as const
+
+export const setActiveDialogAC = (userID: UserIDType) => ({
+    type: "SET-ACTIVE-DIALOG",
+    userID
 }) as const
 
 export default dialogsPageReducer

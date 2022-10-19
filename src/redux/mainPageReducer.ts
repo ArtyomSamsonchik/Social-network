@@ -1,11 +1,25 @@
-import {MainPageType, PostType} from "./store";
 import userImageURL from "../images/Portrait_Placeholder.png";
 import {users} from "./data";   //TODO: doesn't work with path ./store
 
 type AddPostAT = ReturnType<typeof addPostAC>
-
 export type MainPageActionsType = AddPostAT
 
+export type UserIDType = number
+export type UserType = {
+    id: UserIDType,
+    name: string
+    imageSrc: string
+}
+export type PostType = {
+    user: UserType
+    postText: string
+    date: string
+    likesCount: number
+}
+
+export type MainPageType = {
+    posts: PostType[]
+}
 
 const initialState: MainPageType = {
     posts: [
@@ -50,7 +64,7 @@ const initialState: MainPageType = {
 
 const mainPageReducer = (state = initialState, action: MainPageActionsType): MainPageType => {
     switch (action.type) {
-        case "ADD-POST": {
+        case "ADD-POST":
             const user = {id: 2, name: "Artyom", imageSrc: userImageURL}    //TODO: fix in future
             const date = new Date().toLocaleString("ru-RU")
             const newPost: PostType = {
@@ -64,10 +78,8 @@ const mainPageReducer = (state = initialState, action: MainPageActionsType): Mai
                 ...state,
                 posts: [newPost, ...state.posts]
             }
-        }
-        default: {
+        default:
             return state
-        }
     }
 }
 

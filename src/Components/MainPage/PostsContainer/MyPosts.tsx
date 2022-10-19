@@ -1,18 +1,16 @@
-import React, {useContext} from "react";
+import React from "react";
 import s from "./MyPostsContainer.module.css";
 import {Post} from "./Post/Post";
 import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
-import {GlobalStoreStateContext} from "../../../context/context";
+import {PostType} from "../../../redux/mainPageReducer";
 
 type MyPostsProps = {
-    // posts: PostType[]
+    posts: PostType[]
     addPost: (test: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsProps> = (props) => {
-    const posts = useContext(GlobalStoreStateContext).mainPageData.posts
-
-    const postItems = posts.map((post, i) => {
+    const postItems = props.posts.map((post, i) => {
         return (
             <Post key={"post " + i}
                   userName={post.user.name}

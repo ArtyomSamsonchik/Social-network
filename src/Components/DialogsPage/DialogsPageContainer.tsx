@@ -1,30 +1,29 @@
-import React, {useContext, useState} from 'react';
-import {UserIDType} from "../../redux/store";
-import {addMessageAC} from "../../redux/dialogsPageReducer";
+import {addMessageAC, DialogsPageActionsType, setActiveDialogAC} from "../../redux/dialogsPageReducer";
 import {DialogsPage} from "./DialogsPage";
-import {GlobalStoreDispatchContext} from "../../context/context";
+import {UserIDType} from "../../redux/mainPageReducer";
+import {AppStateType} from "../../redux/redux-store";
+import {MapToPropsType} from "../../helpers/typeHelpers";
+import {Dispatch} from "redux";
+import {connect} from "react-redux";
 
-// type DialogsPageContainerProps = {
-//     store: AppStoreType
-// }
+const mapStateToProps = (state: AppStateType): MapToPropsType<typeof DialogsPage, "dialogsPageData"> => ({
+    dialogsPageData: state.dialogsPageData
+})
 
-export const DialogsPageContainer = () => {
-    // const state = useContext(GlobalStoreStateContext)
-    // const state = props.store.getState()
-    const dispatch = useContext(GlobalStoreDispatchContext)
-    const [activeDialogID, setActiveDialogID] = useState<UserIDType | null>(null);
-
-    const addMessageToDialog = (messageText: string) => {
+const mapDispatchToProps = (
+    dispatch: Dispatch<DialogsPageActionsType>
+): MapToPropsType<typeof DialogsPage, "addMessageToDialog" | "openNewDialog"> => ({
+    addMessageToDialog: (messageText, activeDialogID: UserIDType | null) => {
         if (activeDialogID) {
             dispatch(addMessageAC(activeDialogID, messageText))
         }
+    },
+    openNewDialog: (userID) => {
+        dispatch(setActiveDialogAC(userID))
     }
+})
 
-    return (
-        <DialogsPage activeDialogID={activeDialogID}
-                     // dialogsPageData={state.dialogsPageData}
-                     openNewDialog={setActiveDialogID}
-                     addMessageToDialog={addMessageToDialog}
-        />
-    );
-};
+const DialogsPageContainer =
+    connect(mapStateToProps, mapDispatchToProps)(DialogsPage)
+
+export default DialogsPageContainer

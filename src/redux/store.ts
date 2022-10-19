@@ -3,41 +3,35 @@ import mainPageReducer, {MainPageActionsType} from "./mainPageReducer";
 import dialogsPageReducer, {DialogsPageActionsType} from "./dialogsPageReducer";
 
 //  Types
-export type UserIDType = number
-
-export type UserType = {
+type UserIDType = number
+type UserType = {
     id: UserIDType,
     name: string
     imageSrc: string
 }
-
-export type MessageType = {
+type MessageType = {
     //add time type
     authorName: string    //replace to UserType in future
     messageText: string
 }
-
-export type DialogType = {
+type DialogType = {
     [userID: UserIDType]: MessageType[]
 }
-
-export type PostType = {
+type PostType = {
     user: UserType
     postText: string
     date: string
     likesCount: number
 }
-
-export type DialogsPageType = {
+type DialogsPageType = {
     users: UserType[]
     dialogs: DialogType
+    activeDialogID: UserIDType | null
 }
-
-export type MainPageType = {
+type MainPageType = {
     posts: PostType[]
 }
-
-export type SidebarPageType = {
+type SidebarPageType = {
     users: UserType[]
 }
 
@@ -63,7 +57,7 @@ export type StoreType = {
 }
 
 //  DATA
-export const users: UserType[] = [
+const users: UserType[] = [
     {id: 1, name: "Sanya", imageSrc: userImageURL},
     {id: 2, name: "Artyom", imageSrc: userImageURL},
     {id: 3, name: "Ilya", imageSrc: userImageURL},
@@ -121,7 +115,8 @@ const state: StateType = {
                 {authorName: "Vasya", messageText: "How are you?"},
                 {authorName: "Vasya", messageText: "When we go to drink?"}
             ]
-        }
+        },
+        activeDialogID: null
     },
     sidebarPageData: {users}
 }

@@ -1,36 +1,38 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "./Dialogs/Dialogs";
 import {MessagesList} from "./MessagesArea/MessagesList";
-import {UserIDType} from "../../redux/store";
 import {AddItemArea} from "../common/AddItemArea/AddItemArea";
-import {GlobalStoreStateContext} from "../../context/context";
+import {DialogsPageType} from "../../redux/dialogsPageReducer";
+import {UserIDType} from "../../redux/mainPageReducer";
 
 type DialogsPageProps = {
-    activeDialogID: UserIDType | null
-    // dialogsPageData: DialogsPageType
-    openNewDialog:  (userID: number) => void
-    addMessageToDialog:  (text: string) => void
+    dialogsPageData: DialogsPageType
+    openNewDialog: (userID: UserIDType) => void
+    addMessageToDialog: (text: string, userID: UserIDType | null) => void
 }
 
 export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
-    const {dialogsPageData} = useContext(GlobalStoreStateContext)
+    const activeDialogID = props.dialogsPageData.activeDialogID
 
-    const activeDialogID = props.activeDialogID
-    const dialogIsExisting = activeDialogID && dialogsPageData.dialogs[activeDialogID]
-    const messages = dialogIsExisting ? dialogsPageData.dialogs[activeDialogID] : []
+    const dialogIsExisting = activeDialogID && props.dialogsPageData.dialogs[activeDialogID]
+    const messages = dialogIsExisting ? props.dialogsPageData.dialogs[activeDialogID] : []
+
+    const addMessage = (messageText: string) => {
+        props.addMessageToDialog(messageText, activeDialogID)
+    }
 
     return (
         <div className={s.dialogs_content}>
-            <Dialogs users={dialogsPageData.users}
-                     activeDialogID={props.activeDialogID}
+            <Dialogs users={props.dialogsPageData.users}
+                     activeDialogID={activeDialogID}
                      openNewDialog={props.openNewDialog}
             />
             <MessagesList messages={messages}/>
             <AddItemArea className={s.add_message}
                          placeholder={"Write new message..."}
-                         addItem={props.addMessageToDialog}
+                         addItem={addMessage}
             />
         </div>
-    );
-};
+    )
+}

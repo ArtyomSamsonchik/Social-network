@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import s from "./Friends.module.css";
 import {GlobalStoreStateContext} from "../../../context/context";
+import UserImage from "../../common/UserImage/UserImage";
 
 // type FriendsProps = {
 //     users: UserType[]
@@ -12,9 +13,7 @@ export const Friends = () => {
     const mappedUsers = users.map(user => {
         return (
             <div key={user.id} className={s.friendItem}>
-                <div className={s.image_container}>
-                    <img src={user.imageSrc} alt="user"/>
-                </div>
+                <UserImage imageSrc={user.imageSrc} imageAlt={"user"}/>
                 <span>{user.name}</span>
             </div>
         );

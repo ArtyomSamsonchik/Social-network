@@ -9,9 +9,9 @@ import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
 import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
-import {DialogsPageContainer} from "./Components/DialogsPage/DialogsPageContainer";
+import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import store from "./redux/redux-store";
-import StoreProvider from "./context/StoreProvider";
+import {Provider} from "react-redux";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -33,7 +33,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <StoreProvider store={store}>
+            <Provider store={store}>
                 <div className={s.app}>
                     <Header/>
                     <Navbar/>
@@ -51,7 +51,7 @@ function App() {
                     </div>
                     <Footer/>
                 </div>
-            </StoreProvider>
+            </Provider>
         </BrowserRouter>
     )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
-import {UserType} from "../../../../redux/store"
 import s from "./DialogItem.module.css"
+import {UserType} from "../../../../redux/mainPageReducer";
 
 type DialogProps = {
     isActive: boolean
