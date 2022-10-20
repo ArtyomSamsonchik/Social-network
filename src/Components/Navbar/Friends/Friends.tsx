@@ -3,10 +3,6 @@ import s from "./Friends.module.css";
 import {GlobalStoreStateContext} from "../../../context/context";
 import UserImage from "../../common/UserImage/UserImage";
 
-// type FriendsProps = {
-//     users: UserType[]
-// }
-
 export const Friends = () => {
     const users = useContext(GlobalStoreStateContext).sidebarPageData.users
 

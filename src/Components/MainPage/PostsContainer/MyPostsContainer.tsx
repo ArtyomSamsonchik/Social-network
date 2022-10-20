@@ -5,11 +5,15 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {MapToPropsType} from "../../../helpers/typeHelpers";
 
-const mapStateToProps = (state: AppStateType): MapToPropsType<typeof MyPosts, "posts"> => ({
-    posts: state.mainPageData.posts
+type MapStateReturnType = MapToPropsType<typeof MyPosts, "posts">
+type MapDispatchReturnType = MapToPropsType<typeof MyPosts, "addPost">
+
+const mapStateToProps = (state: AppStateType): MapStateReturnType => ({
+    posts: state.mainPageData.posts,
+
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<MainPageActionsType>): MapToPropsType<typeof MyPosts, "addPost"> => ({
+const mapDispatchToProps = (dispatch: Dispatch<MainPageActionsType>): MapDispatchReturnType => ({
     addPost: (text) => {
         dispatch(addPostAC(text))
     }

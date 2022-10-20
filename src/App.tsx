@@ -7,7 +7,7 @@ import {Footer} from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
 import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
-import {FriendsPage} from "./Components/FriendsPage/FriendsPage";
+import {UsersPage} from "./Components/UsersPage/UsersPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import store from "./redux/redux-store";
@@ -46,7 +46,7 @@ function App() {
                         />
                         <Route path={PATH.MUSIC} render={MusicPage}/>
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
-                        <Route path={PATH.FRIENDS} render={FriendsPage}/>
+                        <Route path={PATH.FRIENDS} render={UsersPage}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
                     </div>
                     <Footer/>

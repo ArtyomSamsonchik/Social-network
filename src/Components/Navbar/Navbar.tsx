@@ -26,7 +26,7 @@ export const Navbar = () => {
                         <NavLink activeClassName={s.selected} to={PATH.PHOTOS}>Photos</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={s.selected} to={PATH.FRIENDS}>Friends</NavLink>
+                        <NavLink activeClassName={s.selected} to={PATH.FRIENDS}>Users</NavLink>
                     </li>
                     <li>
                         <NavLink activeClassName={s.selected} to={PATH.SETTINGS}>Settings</NavLink>
