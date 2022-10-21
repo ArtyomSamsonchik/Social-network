@@ -30,12 +30,8 @@ function App() {
                     <Header/>
                     <Navbar/>
                     <div className={s.main_content}>
-                        <Route path={PATH.MAIN_PAGE}
-                               render={() => <MainPage/>}
-                        />
-                        <Route path={PATH.DIALOGS}
-                               render={() => <DialogsPageContainer/>}
-                        />
+                        <Route path={PATH.MAIN_PAGE} render={() => <MainPage/>}/>
+                        <Route path={PATH.DIALOGS} render={() => <DialogsPageContainer/>}/>
                         <Route path={PATH.MUSIC} render={MusicPage}/>
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
                         <Route path={PATH.FRIENDS} render={() => <UsersPageContainer/>}/>
