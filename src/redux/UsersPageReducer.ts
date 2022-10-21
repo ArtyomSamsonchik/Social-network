@@ -11,25 +11,42 @@ export type UserType = {
     followed: boolean
 }
 
+type UsersPageType = {
+    users: UserType[]
+}
+
 type FollowUserAT = ReturnType<typeof followUserAC>
 type UnFollowUserAT = ReturnType<typeof unfollowUserAC>
-type UsersPageActionsType = FollowUserAT | UnFollowUserAT
+type setUsersAT = ReturnType<typeof setUsersAC>
+export type UsersPageActionsType = FollowUserAT | UnFollowUserAT | setUsersAT
 
-const initialState: UserType[] = []
+const initialState: UsersPageType = {
+    users: []
+}
 
-
-const usersReducer = (state: UserType[] = initialState, action: UsersPageActionsType) => {
+const usersReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {
     switch(action.type) {
         case "FOLLOW":
-            return state.map(user => user.id !== action.userId
-                ? user
-                : {...user, followed: true}
-            )
+            return {
+                ...state,
+                users: state.users.map(user => user.id !== action.userId
+                    ? user
+                    : {...user, followed: true}
+                )
+            }
         case "UNFOLLOW":
-            return state.map(user => user.id !== action.userId
-                ? user
-                : {...user, followed: false}
-            )
+            return {
+                ...state,
+                users: state.users.map(user => user.id !== action.userId
+                    ? user
+                    : {...user, followed: false}
+                )
+            }
+        case "SET-USERS":
+            return {
+                ...state,
+                users: action.users
+            }
         default:
             return state
     }
@@ -44,6 +61,11 @@ export const followUserAC = (userId: number) => ({
 export const unfollowUserAC = (userId: number) => ({
     type: "UNFOLLOW",
     userId
+}) as const
+
+export const setUsersAC = (users: UserType[]) => ({
+    type: "SET-USERS",
+    users
 }) as const
 
 export default usersReducer

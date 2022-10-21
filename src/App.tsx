@@ -7,11 +7,11 @@ import {Footer} from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
 import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
-import {UsersPage} from "./Components/UsersPage/UsersPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import store from "./redux/redux-store";
 import {Provider} from "react-redux";
+import UsersPageContainer from "./Components/UsersPage/UsersPageContainer";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -23,14 +23,6 @@ export const PATH = {
 };
 
 function App() {
-    // const [localState, setLocalState] = useState(store.getState());
-    //
-    // useEffect(() => {
-    //     return store.subscribe(() => {
-    //         setLocalState(store.getState())
-    //     })
-    // }, [])
-
     return (
         <BrowserRouter>
             <Provider store={store}>
@@ -46,7 +38,7 @@ function App() {
                         />
                         <Route path={PATH.MUSIC} render={MusicPage}/>
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
-                        <Route path={PATH.FRIENDS} render={UsersPage}/>
+                        <Route path={PATH.FRIENDS} render={() => <UsersPageContainer/>}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
                     </div>
                     <Footer/>
