@@ -1,5 +1,5 @@
-import instance from "./index";
 import {UserType} from "../redux/UsersPageReducer";
+import instance from "./instance";
 
 type UsersResponseType = {
     items: UserType[]
@@ -7,4 +7,5 @@ type UsersResponseType = {
     error: string
 }
 
-export const getUsers = () => instance.get<UsersResponseType>("/users")
+export const getUsers = (usersCount: number = 10, page: number = 1) =>
+    instance.get<UsersResponseType>(`/users?count=${usersCount}&page=${page}`)

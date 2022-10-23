@@ -9,7 +9,7 @@ type UserProps = {
 
 class User extends React.Component<UserProps> {
     render() {
-        console.log("User is rendering")
+        console.log("User rendering")
         const {user, onClick} = this.props
         const buttonName = user.followed ? "Unfollow" : "Follow"
         const userStatus = user.status

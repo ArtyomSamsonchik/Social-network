@@ -1,0 +1,13 @@
+.pagination_bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination_bar > * {
+    cursor: pointer;
+}
+
+.selected_page {
+    font-weight: bold;
+}
