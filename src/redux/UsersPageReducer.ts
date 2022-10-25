@@ -15,7 +15,7 @@ export type UsersPageType = {
     users: UserType[]
     currentPage: number
     totalUsersCount: number
-    pagination: number
+    pageSize: number
 }
 
 type FollowUserAT = ReturnType<typeof followUserAC>
@@ -23,6 +23,7 @@ type UnFollowUserAT = ReturnType<typeof unfollowUserAC>
 type setUsersAT = ReturnType<typeof setUsersAC>
 type setUsersCountAT = ReturnType<typeof setUsersCountAC>
 type setCurrentPageAT = ReturnType<typeof setCurrentPageAC>
+
 export type UsersPageActionsType = FollowUserAT
     | UnFollowUserAT
     | setUsersAT
@@ -33,7 +34,7 @@ const initialState: UsersPageType = {
     users: [],
     currentPage: 1,
     totalUsersCount: 0,
-    pagination: 10
+    pageSize: 10
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {

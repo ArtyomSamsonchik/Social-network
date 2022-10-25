@@ -1,33 +1,51 @@
-import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
-import {
-    followUserAC, setCurrentPageAC,
-    setUsersAC,
-    setUsersCountAC,
-    unfollowUserAC,
-    UsersPageActionsType
-} from "../../redux/UsersPageReducer";
-import {connect} from "react-redux";
+import {UsersPageType, UserType} from "../../redux/UsersPageReducer";
+import {Component} from "react";
+import * as API from "../../API"
 import UsersPage from "./UsersPage";
-import {MapToPropsType} from "../../helpers/typeHelpers";
 
-const mapStateToProps = (state: AppStateType): MapToPropsType<UsersPage, "usersPageData"> => ({
-    usersPageData: state.usersPageData
-})
+type UsersPageContainerProps = {
+    usersPageData: UsersPageType
+    setUsers: (users: UserType[]) => void
+    setUsersCount: (usersCount: number) => void
+    setCurrentPage: (currentPage: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<UsersPageActionsType>
-): MapToPropsType<UsersPage, "follow" | "unfollow" | "setUsers" | "setUsersCount" | "setCurrentPage"> => ({
-    follow: (userId) => dispatch(followUserAC(userId)),
-    unfollow: (userId) => dispatch(unfollowUserAC(userId)),
-    setUsers: (users) => dispatch(setUsersAC(users)),
-    setUsersCount: (usersCount) => dispatch(setUsersCountAC(usersCount)),
-    setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage))
-})
+class UsersPageContainer extends Component<UsersPageContainerProps> {
+    constructor(props: Readonly<UsersPageContainerProps>) {
+        super(props)
+        this.onUserClick = this.onUserClick.bind(this)
+        this.onSetCurrentPageClick = this.onSetCurrentPageClick.bind(this)
+    }
 
-const UsersPageContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UsersPage)
+    componentDidMount() {
+        //TODO: 2 dispatch - 2 renders. Think about optimization
+        API.getUsers().then(({data}) => {
+            this.props.setUsers(data.items)
+            this.props.setUsersCount(data.totalCount)
+        })
+    }
 
-export default UsersPageContainer;
+    onUserClick(isFollowed: boolean, userId: number) {
+        const {follow, unfollow} = this.props
+        isFollowed ? unfollow(userId) : follow(userId)
+    }
+
+    onSetCurrentPageClick(page: number) {
+        const {pageSize} = this.props.usersPageData
+        API.getUsers(pageSize, page).then(({data}) => {
+            this.props.setUsers(data.items)
+            this.props.setCurrentPage(page)
+        })
+    }
+
+    render() {
+        return <UsersPage usersPageData={this.props.usersPageData}
+                          onUserClick={this.onUserClick}
+                          onSetCurrentPageClick={this.onSetCurrentPageClick}
+        />
+    }
+}
+
+export default UsersPageContainer

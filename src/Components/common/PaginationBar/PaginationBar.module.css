@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+.pagination_bar > *:hover {
+    text-decoration: underline;
+}
+
 .selected_page {
     font-weight: bold;
 }

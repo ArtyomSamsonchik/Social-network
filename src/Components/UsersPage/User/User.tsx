@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import {Component, memo} from "react";
 import UserImage from "../../common/UserImage/UserImage";
 import {UserType} from "../../../redux/UsersPageReducer";
 
@@ -7,9 +7,8 @@ type UserProps = {
     onClick: (isFollowed: boolean, userId: number) => void
 }
 
-class User extends React.Component<UserProps> {
+class User extends Component<UserProps> {
     render() {
-        console.log("User rendering")
         const {user, onClick} = this.props
         const buttonName = user.followed ? "Unfollow" : "Follow"
         const userStatus = user.status
@@ -35,5 +34,4 @@ class User extends React.Component<UserProps> {
     }
 }
 
-export default User
 export const MemoUser = memo(User)
