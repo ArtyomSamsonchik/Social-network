@@ -1,4 +1,4 @@
-import userImageURL from "../images/Portrait_Placeholder.png";
+import userImageURL from "../assets/images/Portrait_Placeholder.png";
 import {UserType} from "./mainPageReducer";
 
 export const users: UserType[] = [

@@ -2,12 +2,14 @@ import {UsersPageType, UserType} from "../../redux/UsersPageReducer";
 import {Component} from "react";
 import * as API from "../../API"
 import UsersPage from "./UsersPage";
+import {batch} from "react-redux";
 
 type UsersPageContainerProps = {
     usersPageData: UsersPageType
     setUsers: (users: UserType[]) => void
     setUsersCount: (usersCount: number) => void
     setCurrentPage: (currentPage: number) => void
+    setIsFetchingUsers: (isFetching: boolean) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
 }
@@ -15,34 +17,46 @@ type UsersPageContainerProps = {
 class UsersPageContainer extends Component<UsersPageContainerProps> {
     constructor(props: Readonly<UsersPageContainerProps>) {
         super(props)
-        this.onUserClick = this.onUserClick.bind(this)
+        this.onSetFollowUserClick = this.onSetFollowUserClick.bind(this)
         this.onSetCurrentPageClick = this.onSetCurrentPageClick.bind(this)
     }
 
     componentDidMount() {
-        //TODO: 2 dispatch - 2 renders. Think about optimization
+        const {setUsers, setUsersCount, setIsFetchingUsers} = this.props
+
+        setIsFetchingUsers(true)
         API.getUsers().then(({data}) => {
-            this.props.setUsers(data.items)
-            this.props.setUsersCount(data.totalCount)
+            batch(() => {
+                setUsers(data.items)
+                setUsersCount(data.totalCount)
+                setIsFetchingUsers(false)
+            })
         })
     }
 
-    onUserClick(isFollowed: boolean, userId: number) {
+    onSetFollowUserClick(isFollowed: boolean, userId: number) {
         const {follow, unfollow} = this.props
         isFollowed ? unfollow(userId) : follow(userId)
     }
 
     onSetCurrentPageClick(page: number) {
-        const {pageSize} = this.props.usersPageData
-        API.getUsers(pageSize, page).then(({data}) => {
-            this.props.setUsers(data.items)
-            this.props.setCurrentPage(page)
+        //TODO: performance issue - add logic to kill previous fetch of users when clicking another page.
+        // Use abortController?
+        const {usersPageData, setIsFetchingUsers, setUsers, setCurrentPage} = this.props
+
+        setIsFetchingUsers(true)
+        API.getUsers(usersPageData.pageSize, page).then(({data}) => {
+            batch(() => {
+                setUsers(data.items)
+                setCurrentPage(page)
+                setIsFetchingUsers(false)
+            })
         })
     }
 
     render() {
         return <UsersPage usersPageData={this.props.usersPageData}
-                          onUserClick={this.onUserClick}
+                          onSetFollowUserClick={this.onSetFollowUserClick}
                           onSetCurrentPageClick={this.onSetCurrentPageClick}
         />
     }

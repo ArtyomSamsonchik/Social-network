@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-import userImage from "../../../images/Portrait_Placeholder.png";
+import userImage from "../../../assets/images/Portrait_Placeholder.png";
 
 export const ProfileInfo = () => {
     return (

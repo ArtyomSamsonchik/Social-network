@@ -1,4 +1,4 @@
-import userImageURL from "../images/Portrait_Placeholder.png";
+import userImageURL from "../assets/images/Portrait_Placeholder.png";
 import {users} from "./data";   //TODO: doesn't work with path ./store
 
 type AddPostAT = ReturnType<typeof addPostAC>

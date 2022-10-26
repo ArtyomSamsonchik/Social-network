@@ -11,7 +11,7 @@ import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import store from "./redux/redux-store";
 import {Provider} from "react-redux";
-import ConnectedUsersPage from "./Components/UsersPage/ConnectedUsersPage";
+import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 
 export const PATH = {
     MAIN_PAGE: "/main-page",
@@ -34,7 +34,7 @@ function App() {
                         <Route path={PATH.DIALOGS} render={() => <DialogsPageContainer/>}/>
                         <Route path={PATH.MUSIC} render={MusicPage}/>
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
-                        <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPage/>}/>
+                        <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPageContainer/>}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
                     </div>
                     <Footer/>

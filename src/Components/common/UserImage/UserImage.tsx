@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./UserImage.module.css"
-import defaultImageSrc from "../../../images/Portrait_Placeholder.png"
+import defaultImageSrc from "../../../assets/images/Portrait_Placeholder.png"
 
 type UserImageProps = {
     className?: string

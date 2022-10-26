@@ -1,0 +1,7 @@
+.user_page_container {
+    position: relative;
+    height: 100%;
+}
+
+/*TODO: Stop page jerking when loading new pack of users.
+   Maybe fix block height?*/
