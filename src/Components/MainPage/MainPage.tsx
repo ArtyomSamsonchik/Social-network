@@ -1,13 +1,13 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./PostsContainer/MyPostsContainer";
+import ConnectedMyPosts from "./PostsContainer/ConnectedMyPosts";
 
 export const MainPage = () => {
     return (
         <div>
             Main content
             <ProfileInfo/>
-            <MyPostsContainer/>
+            <ConnectedMyPosts/>
         </div>
     );
 };

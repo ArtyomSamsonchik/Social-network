@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "./Dialogs/Dialogs";
 import {MessagesList} from "./MessagesArea/MessagesList";
@@ -12,7 +12,7 @@ type DialogsPageProps = {
     addMessageToDialog: (text: string, userID: UserIDType | null) => void
 }
 
-export const DialogsPage: React.FC<DialogsPageProps> = (props) => {
+export const DialogsPage: FC<DialogsPageProps> = (props) => {
     const activeDialogID = props.dialogsPageData.activeDialogID
 
     const dialogIsExisting = activeDialogID && props.dialogsPageData.dialogs[activeDialogID]

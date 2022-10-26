@@ -10,8 +10,8 @@ type UsersPageContainerProps = {
     setUsersCount: (usersCount: number) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetchingUsers: (isFetching: boolean) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
 }
 
 class UsersPageContainer extends Component<UsersPageContainerProps> {
@@ -35,8 +35,8 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
     }
 
     onSetFollowUserClick(isFollowed: boolean, userId: number) {
-        const {follow, unfollow} = this.props
-        isFollowed ? unfollow(userId) : follow(userId)
+        const {followUser, unfollowUser} = this.props
+        isFollowed ? unfollowUser(userId) : followUser(userId)
     }
 
     onSetCurrentPageClick(page: number) {

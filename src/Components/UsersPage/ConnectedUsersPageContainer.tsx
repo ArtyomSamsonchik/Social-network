@@ -1,41 +1,37 @@
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
-    followUserAC, setCurrentPageAC, setIsFetchingUsersAC,
-    setUsersAC,
-    setUsersCountAC,
-    unfollowUserAC,
+    followUser, setCurrentPage, setIsFetchingUsers,
+    setUsers,
+    setUsersCount,
+    unfollowUser,
     UsersPageActionsType
 } from "../../redux/UsersPageReducer";
 import {connect} from "react-redux";
-import {MapToPropsType} from "../../helpers/typeHelpers";
+import {MapActionCreators, MapToPropsReturnType} from "../../helpers/typeHelpers";
 import UsersPageContainer from "./UsersPageContainer";
 
-type mapDispatchKeys = "follow"
-    | "unfollow"
+type mapDispatchKeys = "followUser"
+    | "unfollowUser"
     | "setUsers"
     | "setUsersCount"
     | "setCurrentPage"
     | "setIsFetchingUsers"
 
-const mapStateToProps = (state: AppStateType): MapToPropsType<UsersPageContainer, "usersPageData"> => ({
+type MapStateRT = MapToPropsReturnType<UsersPageContainer, "usersPageData">
+type MapAC = MapActionCreators<UsersPageContainer, mapDispatchKeys, UsersPageActionsType>
+
+const mapStateToProps = (state: AppStateType): MapStateRT => ({
     usersPageData: state.usersPageData
 })
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<UsersPageActionsType>
-): MapToPropsType<UsersPageContainer, mapDispatchKeys> => ({
-    follow: (userId) => dispatch(followUserAC(userId)),
-    unfollow: (userId) => dispatch(unfollowUserAC(userId)),
-    setUsers: (users) => dispatch(setUsersAC(users)),
-    setUsersCount: (usersCount) => dispatch(setUsersCountAC(usersCount)),
-    setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
-    setIsFetchingUsers: (isFetching) => dispatch(setIsFetchingUsersAC(isFetching))
-})
-
-const ConnectedUsersPageContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UsersPageContainer)
+const ConnectedUsersPageContainer = connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setUsersCount,
+    setCurrentPage,
+    setIsFetchingUsers
+} as MapAC)
+(UsersPageContainer)
 
 export default ConnectedUsersPageContainer;

@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {MusicPage} from "./Components/MusicPage/MusicPage";
 import {PhotosPage} from "./Components/PhotosPage/PhotosPage";
 import {SettingsPage} from "./Components/SettingsPage/SettingsPage";
-import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
+import ConnectedDialogsPage from "./Components/DialogsPage/ConnectedDialogsPage";
 import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
@@ -31,7 +31,7 @@ function App() {
                     <Navbar/>
                     <div className={s.main_content}>
                         <Route path={PATH.MAIN_PAGE} render={() => <MainPage/>}/>
-                        <Route path={PATH.DIALOGS} render={() => <DialogsPageContainer/>}/>
+                        <Route path={PATH.DIALOGS} render={() => <ConnectedDialogsPage/>}/>
                         <Route path={PATH.MUSIC} render={MusicPage}/>
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
                         <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPageContainer/>}/>

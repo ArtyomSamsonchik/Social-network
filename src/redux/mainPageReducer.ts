@@ -1,7 +1,7 @@
 import userImageURL from "../assets/images/Portrait_Placeholder.png";
 import {users} from "./data";   //TODO: doesn't work with path ./store
 
-type AddPostAT = ReturnType<typeof addPostAC>
+type AddPostAT = ReturnType<typeof addPost>
 export type MainPageActionsType = AddPostAT
 
 export type UserIDType = number
@@ -83,7 +83,7 @@ const mainPageReducer = (state = initialState, action: MainPageActionsType): Mai
     }
 }
 
-export const addPostAC = (postText: string) => ({
+export const addPost = (postText: string) => ({
     type: "ADD-POST", postText
 }) as const
 

@@ -1,8 +1,8 @@
 import {users} from "./data";
 import {UserIDType, UserType} from "./mainPageReducer";
 
-type AddMessageAT = ReturnType<typeof addMessageAC>
-type SetActiveDialogAT = ReturnType<typeof setActiveDialogAC>
+type AddMessageAT = ReturnType<typeof addMessageToDialog>
+type SetActiveDialogAT = ReturnType<typeof openNewDialog>
 export type DialogsPageActionsType = AddMessageAT | SetActiveDialogAT
 
 export type MessageType = {
@@ -60,11 +60,11 @@ const dialogsPageReducer = (state = initialState, action: DialogsPageActionsType
     }
 }
 
-export const addMessageAC = (userID: UserIDType, messageText: string) => ({
+export const addMessageToDialog = (userID: UserIDType, messageText: string) => ({
     type: "ADD-MESSAGE", messageText, userID
 }) as const
 
-export const setActiveDialogAC = (userID: UserIDType) => ({
+export const openNewDialog = (userID: UserIDType) => ({
     type: "SET-ACTIVE-DIALOG",
     userID
 }) as const
