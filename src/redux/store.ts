@@ -23,12 +23,35 @@ type PostType = {
     date: string
     likesCount: number
 }
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+type PhotosType = {
+    small?: string
+    large?: string
+}
+type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
 type DialogsPageType = {
     users: UserType[]
     dialogs: DialogType
     activeDialogID: UserIDType | null
 }
 type MainPageType = {
+    profile: ProfileType | null
     posts: PostType[]
 }
 type SidebarPageType = {
@@ -67,6 +90,7 @@ const users: UserType[] = [
 
 const state: StateType = {
     mainPageData: {
+        profile: null,
         posts: [
             {
                 user: users[4],

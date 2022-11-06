@@ -15,8 +15,8 @@ const UsersPage: FC<UsersPageProps> = (props) => {
     const {users, currentPage, totalUsersCount, pageSize, isFetchingUsers} = props.usersPageData
     const totalPagesCount = Math.ceil(totalUsersCount / pageSize)
 
-    const mappedUsers = users.map(user => {
-        return <MemoUser key={"user " + user.id} user={user} onClick={props.onSetFollowUserClick}/>
+    const renderedUsers = users.map(user => {
+        return <MemoUser user={user} onClick={props.onSetFollowUserClick}/>
     })
 
     return (
@@ -25,11 +25,9 @@ const UsersPage: FC<UsersPageProps> = (props) => {
                                currentPage={currentPage}
                                setCurrentPage={props.onSetCurrentPageClick}
             />
-            {
-                isFetchingUsers
-                    ? <Preloader/>
-                    : <ul>{mappedUsers}</ul>
-            }
+            <ul className={s.users_list}>
+                {isFetchingUsers ? <Preloader/> : renderedUsers}
+            </ul>
         </div>
     )
 }

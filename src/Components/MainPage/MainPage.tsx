@@ -1,13 +1,21 @@
-import React from "react";
+import React, {FC} from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import ConnectedMyPosts from "./PostsContainer/ConnectedMyPosts";
+import {ProfileType} from "../../redux/mainPageReducer";
+import Preloader from "../common/Preloader/Preloader";
 
-export const MainPage = () => {
+type MainPageProps = {
+    profile: ProfileType
+}
+
+export const MainPage: FC<MainPageProps> = (props) => {
     return (
-        <div>
-            Main content
-            <ProfileInfo/>
+        <>
+            {props.profile
+                ? <ProfileInfo profile={props.profile}/>
+                : <Preloader/>
+            }
             <ConnectedMyPosts/>
-        </div>
+        </>
     );
 };

@@ -3,5 +3,13 @@
     height: 100%;
 }
 
+.users_list {
+    padding: 15px;
+}
+
+.users_list > li {
+    margin-bottom: 15px;
+}
+
 /*TODO: Stop page jerking when loading new pack of users.
    Maybe fix block height?*/

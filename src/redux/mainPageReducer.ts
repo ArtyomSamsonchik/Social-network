@@ -2,7 +2,8 @@ import userImageURL from "../assets/images/Portrait_Placeholder.png";
 import {users} from "./data";   //TODO: doesn't work with path ./store
 
 type AddPostAT = ReturnType<typeof addPost>
-export type MainPageActionsType = AddPostAT
+type setUserProfileAT = ReturnType<typeof setUserProfile>
+export type MainPageActionsType = AddPostAT | setUserProfileAT
 
 export type UserIDType = number
 export type UserType = {
@@ -10,6 +11,7 @@ export type UserType = {
     name: string
     imageSrc: string
 }
+
 export type PostType = {
     user: UserType
     postText: string
@@ -17,11 +19,38 @@ export type PostType = {
     likesCount: number
 }
 
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type PhotosType = {
+    small?: string
+    large?: string
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+} | null
+
 export type MainPageType = {
+    profile: ProfileType
     posts: PostType[]
 }
 
 const initialState: MainPageType = {
+    profile: null,
     posts: [
         {
             user: users[4],
@@ -78,6 +107,11 @@ const mainPageReducer = (state = initialState, action: MainPageActionsType): Mai
                 ...state,
                 posts: [newPost, ...state.posts]
             }
+        case "SET-USER-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state
     }
@@ -85,6 +119,11 @@ const mainPageReducer = (state = initialState, action: MainPageActionsType): Mai
 
 export const addPost = (postText: string) => ({
     type: "ADD-POST", postText
+}) as const
+
+export const setUserProfile = (profile: ProfileType) => ({
+    type: "SET-USER-PROFILE",
+    profile
 }) as const
 
 export default mainPageReducer

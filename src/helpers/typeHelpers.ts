@@ -10,5 +10,5 @@ export type MapToPropsReturnType<C extends AnyComponent<any>, K extends PropsKey
     = Pick<PropsType<C>, K>
 
 export type MapActionCreators<C extends AnyComponent<any>, K extends PropsKeysType<C>, A extends Action = AnyAction> = {
-    [P in K]: (...args: any) => A
+    [P in K]: (...args: Parameters<PropsType<C>[P]>) => A
 }

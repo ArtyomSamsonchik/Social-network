@@ -9,13 +9,13 @@ type UserImageProps = {
 }
 
 const UserImage: React.FC<UserImageProps> = (props) => {
-    const finalClassName = s.image_container + (props.className ? props.className : "")
+    const finalClassName = `${s.image_container} ${props.className ? props.className : ""}`
     const imageSrc = props.imageSrc ? props.imageSrc : defaultImageSrc
 
     return (
-        <div className={finalClassName}>
+        <span className={finalClassName}>
             <img src={imageSrc} alt={props.imageAlt}/>
-        </div>
+        </span>
     )
 }
 

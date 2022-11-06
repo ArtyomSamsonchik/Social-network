@@ -1,6 +1,9 @@
 import {Component, memo} from "react";
 import UserImage from "../../common/UserImage/UserImage";
 import {UserType} from "../../../redux/UsersPageReducer";
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../../App";
+import s from "./User.module.css"
 
 type UserProps = {
     user: UserType
@@ -11,25 +14,27 @@ class User extends Component<UserProps> {
     render() {
         const {user, onClick} = this.props
         const buttonName = user.followed ? "Unfollow" : "Follow"
-        const userStatus = user.status
 
         const onClickHandler = () => {
             onClick(user.followed, user.id)
         }
 
         return (
-            <div>
-                <div>
-                    <UserImage imageAlt={"user"} imageSrc={user.photos.small}/>
-                    <button onClick={onClickHandler}>
-                        {buttonName}
-                    </button>
+            <li className={s.user}>
+                <NavLink to={`${PATH.MAIN_PAGE}/${user.id}`}>
+                    <UserImage className={s.user_item_image}
+                               imageAlt={"user"}
+                               imageSrc={user.photos.small}
+                    />
+                </NavLink>
+                <div className={s.user_item_info}>
+                    <NavLink to={`${PATH.MAIN_PAGE}/${user.id}`}>
+                        {user.name}
+                    </NavLink>
+                    <button onClick={onClickHandler}>{buttonName}</button>
+                    {user.status && <div>{user.status}</div>}
                 </div>
-                <div>
-                    <div>{user.name}</div>
-                    {userStatus && <div>{userStatus}</div>}
-                </div>
-            </div>
+            </li>
         )
     }
 }

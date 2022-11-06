@@ -1,0 +1,24 @@
+.user {
+    display: flex;
+}
+
+.user_item_image {
+    width: 100px;
+    height: 100px;
+}
+
+.user_item_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 20px;
+    font-size: 1.2em;
+}
+
+.user_item_info > div {
+    margin-bottom: 10px;
+}
+
+.user_item_info > button {
+    padding: 5px 10px;
+}
