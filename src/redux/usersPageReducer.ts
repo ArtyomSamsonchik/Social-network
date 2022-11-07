@@ -41,7 +41,7 @@ const initialState: UsersPageType = {
     isFetchingUsers: false
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {
+const usersPageReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {
     switch (action.type) {
         case "FOLLOW":
             return {
@@ -115,4 +115,4 @@ export const setIsFetchingUsers = (isFetching: boolean) => ({
     isFetching
 }) as const
 
-export default usersReducer
+export default usersPageReducer

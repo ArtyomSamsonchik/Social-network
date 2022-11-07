@@ -1,4 +1,4 @@
-import {UserType} from "../redux/UsersPageReducer";
+import {UserType} from "../redux/usersPageReducer";
 import instance from "./Instance";
 
 type UsersResponseType = {
@@ -6,8 +6,25 @@ type UsersResponseType = {
     totalCount: number
     error: string
 }
-// TODO: move paremeters. Set page as first parameter, usersCount - as second.
-//  UsersCount is almost unnecessary
-export const getUsers = (usersCount: number = 10, page: number = 1) => (
-    instance.get<UsersResponseType>(`users?count=${usersCount}&page=${page}`)
-)
+
+type RequestParameters = {
+    page?: number
+    count?: number
+    friend?: boolean
+    term?: string
+}
+
+const initParameters: RequestParameters = {
+    page: 1,
+    count: 10,
+    friend: false
+}
+
+export const getUsers = (parameters: RequestParameters = initParameters) => {
+    const requestParams = Object.entries(parameters)
+        .filter(([, value]) => value !== undefined)
+        .map(([key, value]) => `${key}=${value}`)
+        .join("&")
+
+    return instance.get<UsersResponseType>(`users?${requestParams}`)
+}

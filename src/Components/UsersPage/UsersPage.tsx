@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {MemoUser} from "./User/User";
 import {MemoPaginationBar} from "../common/PaginationBar/PaginationBar";
-import {UsersPageType} from "../../redux/UsersPageReducer";
+import {UsersPageType} from "../../redux/usersPageReducer";
 import Preloader from "../common/Preloader/Preloader";
 import s from "./UsersPage.module.css"
 

@@ -5,7 +5,7 @@ import {
     setUsersCount,
     unfollowUser,
     UsersPageActionsType
-} from "../../redux/UsersPageReducer";
+} from "../../redux/usersPageReducer";
 import {connect} from "react-redux";
 import {MapActionCreators, MapToPropsReturnType} from "../../helpers/typeHelpers";
 import UsersPageContainer from "./UsersPageContainer";

@@ -1,4 +1,4 @@
-import {UsersPageType, UserType} from "../../redux/UsersPageReducer";
+import {UsersPageType, UserType} from "../../redux/usersPageReducer";
 import {Component} from "react";
 import * as API from "../../API"
 import UsersPage from "./UsersPage";
@@ -53,7 +53,7 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
         const {usersPageData, setIsFetchingUsers, setUsers, setCurrentPage} = this.props
 
         setIsFetchingUsers(true)
-        API.getUsers(usersPageData.pageSize, page).then(({data}) => {
+        API.getUsers({page, count: usersPageData.pageSize}).then(({data}) => {
             batch(() => {
                 setUsers(data.items)
                 setCurrentPage(page)

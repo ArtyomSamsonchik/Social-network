@@ -1,6 +1,6 @@
 import {Component, memo} from "react";
 import UserImage from "../../common/UserImage/UserImage";
-import {UserType} from "../../../redux/UsersPageReducer";
+import {UserType} from "../../../redux/usersPageReducer";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../../App";
 import s from "./User.module.css"

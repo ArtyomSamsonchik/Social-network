@@ -2,7 +2,7 @@ import {combineReducers, createStore} from "redux";
 import mainPageReducer from "./mainPageReducer";
 import dialogsPageReducer from "./dialogsPageReducer";
 import sidebarPageReducer from "./sidebarPageReducer";
-import usersPageReducer from "./UsersPageReducer";
+import usersPageReducer from "./usersPageReducer";
 import authReducer from "./authReducer";
 
 
