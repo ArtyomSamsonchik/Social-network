@@ -21,57 +21,58 @@ const PaginationBar: FC<PaginationBarProps> = (props) => {
         startBarPage = Math.max(endBarPage - BAR_LENGTH, FIRST_PAGE)
     }
 
-    const mappedPages: JSX.Element[] = []
+    const renderedPages: JSX.Element[] = []
 
     for (let i = startBarPage; i <= endBarPage; i++) {
         const onSetPageClickHandler = () => {
             if (currentPage !== i) setCurrentPage(i)
         }
 
-        mappedPages.push(
+        renderedPages.push(
             <div key={"page" + i}
                  className={i === currentPage ? s.selected_page : ""}
-                 onClick={onSetPageClickHandler}>
-                {i}
-            </div>
+                 onClick={onSetPageClickHandler}
+            >{i}</div>
         )
     }
 
     const firstPageIsReached = currentPage === FIRST_PAGE
     const lastPageIsReached = currentPage === LAST_PAGE
 
-    const onBoundaryPageClickHandler = (page: number) => {
-        const reopeningFirstPage = currentPage === FIRST_PAGE && page === FIRST_PAGE
-        const reopeningLastPage = currentPage === LAST_PAGE && page === LAST_PAGE
+    const getOnBoundaryPageClickHandler = (page: number) => {
+        const reopeningFirstPage = firstPageIsReached && page === FIRST_PAGE
+        const reopeningLastPage = lastPageIsReached && page === LAST_PAGE
 
-        if (reopeningFirstPage || reopeningLastPage) return
-
-        return () => setCurrentPage(page)
+        return () => {
+            if (reopeningFirstPage || reopeningLastPage) return
+            setCurrentPage(page)
+        }
     }
 
-    const onSiblingPageClickHandler = (direction: "next" | "prev") => {
+    const getOnSiblingPageClickHandler = (direction: "nextTen" | "prevTen") => {
         let nextPage: number | null = null
 
-        if (direction === "next" && !lastPageIsReached) {
+        if (direction === "nextTen" && !lastPageIsReached) {
             nextPage = Math.min(LAST_PAGE, currentPage + 10)
         }
-        if (direction === "prev" && !firstPageIsReached) {
+        if (direction === "prevTen" && !firstPageIsReached) {
             nextPage = Math.max(FIRST_PAGE, currentPage - 10)
         }
 
-        if (nextPage) return () => setCurrentPage(nextPage as number)
+        return () => {
+            if (nextPage) setCurrentPage(nextPage)
+        }
     }
 
     return (
         <div className={s.pagination_bar}>
-            <div onClick={onBoundaryPageClickHandler(FIRST_PAGE)}>{"<< To start"}</div>
-            <div onClick={onSiblingPageClickHandler("prev")}>{"<"}</div>
-            {mappedPages}
-            <div onClick={onSiblingPageClickHandler("next")}>{">"}</div>
-            <div onClick={onBoundaryPageClickHandler(LAST_PAGE)}>{"To end >>"}</div>
+            <div onClick={getOnBoundaryPageClickHandler(FIRST_PAGE)}>{"<< To start"}</div>
+            <div onClick={getOnSiblingPageClickHandler("prevTen")}>{"<"}</div>
+            {renderedPages}
+            <div onClick={getOnSiblingPageClickHandler("nextTen")}>{">"}</div>
+            <div onClick={getOnBoundaryPageClickHandler(LAST_PAGE)}>{"To end >>"}</div>
         </div>
     )
 }
 
 export const MemoPaginationBar = memo(PaginationBar)
-export default PaginationBar

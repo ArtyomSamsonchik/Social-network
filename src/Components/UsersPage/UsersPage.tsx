@@ -16,7 +16,7 @@ const UsersPage: FC<UsersPageProps> = (props) => {
     const totalPagesCount = Math.ceil(totalUsersCount / pageSize)
 
     const renderedUsers = users.map(user => {
-        return <MemoUser user={user} onClick={props.onSetFollowUserClick}/>
+        return <MemoUser key={"user" + user.id} user={user} onClick={props.onSetFollowUserClick}/>
     })
 
     return (

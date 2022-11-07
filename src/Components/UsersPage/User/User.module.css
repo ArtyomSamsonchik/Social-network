@@ -20,5 +20,6 @@
 }
 
 .user_item_info > button {
+    width: min-content;
     padding: 5px 10px;
 }

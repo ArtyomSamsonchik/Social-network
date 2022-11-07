@@ -30,9 +30,7 @@ export const ProfileInfo: FC<ProfileInfoProps> = (props) => {
                            imageAlt={"user"}
                 />
                 <div className={s.user_info}>
-                    <div className={s.user_name}>
-                        {fullName || "User wasn't loaded"}
-                    </div>
+                    <div className={s.user_name}>{fullName || "User wasn't loaded"}</div>
                     <div>{userCaption}</div>
                 </div>
             </div>

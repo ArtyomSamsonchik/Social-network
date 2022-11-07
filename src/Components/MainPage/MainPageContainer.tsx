@@ -19,6 +19,7 @@ class MainPageContainer extends Component<MainPageContainerProps> {
         API.getProfile(userId).then(({data}) => {
             setUserProfile(data)
         })
+        window.scrollTo({top: 0})
     }
 
     render() {
