@@ -9,4 +9,4 @@ type UsersResponseType = {
 // TODO: move paremeters. Set page as first parameter, usersCount - as second.
 //  UsersCount is almost unnecessary
 export const getUsers = (usersCount: number = 10, page: number = 1) =>
-    instance.get<UsersResponseType>(`/users?count=${usersCount}&page=${page}`)
+    instance.get<UsersResponseType>(`users?count=${usersCount}&page=${page}/`)

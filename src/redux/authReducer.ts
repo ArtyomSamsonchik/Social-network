@@ -1,24 +1,27 @@
-type loginUserAT = ReturnType<typeof loginUser>
-type ActionsType = loginUserAT
+type loginUserAT = ReturnType<typeof setUserAuthData>
+export type AuthActionsType = loginUserAT
 
 export type AuthDataType = {
     userId: number | null
     email: string | null
     login: string | null
+    loggedIn: boolean
 }
 
 const initialState: AuthDataType = {
     userId: null,
     email: null,
-    login: null
+    login: null,
+    loggedIn: false
 }
 
-const authReducer = (state: AuthDataType = initialState, action: ActionsType) => {
+const authReducer = (state: AuthDataType = initialState, action: AuthActionsType): AuthDataType => {
     switch (action.type) {
-        case "LOGIN-USER":
+        case "SET-USER-AUTH-DATA":
             return {
                 ...state,
-                ...action.loginData
+                ...action.loginData,
+                loggedIn: true
             }
         default:
             return state
@@ -27,7 +30,7 @@ const authReducer = (state: AuthDataType = initialState, action: ActionsType) =>
 
 export default authReducer
 
-const loginUser = (loginData: AuthDataType) => ({
-    type: "LOGIN-USER",
+export const setUserAuthData = (loginData: Omit<AuthDataType, "loggedIn">) => ({
+    type: "SET-USER-AUTH-DATA",
     loginData
 }) as const

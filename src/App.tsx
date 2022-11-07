@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './App.module.css';
-import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Footer} from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
@@ -12,6 +11,7 @@ import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 import ConnectedMainPageContainer from "./Components/MainPage/ConnectedMainPageContainer";
+import {ConnectedHeader} from "./Components/Header/ConnectedHeader";
 
 export const URL_PARAMETERS = {
     USER_ID: "/:userId?"
@@ -33,7 +33,7 @@ function App() {
         <BrowserRouter>
             <Provider store={store}>
                 <div className={s.app}>
-                    <Header/>
+                    <ConnectedHeader/>
                     <Navbar/>
                     {/*TODO:Maybe change div tag to main in future*/}
                     <div className={s.main_content}>
