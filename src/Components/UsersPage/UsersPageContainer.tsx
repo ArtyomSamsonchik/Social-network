@@ -18,6 +18,7 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
     constructor(props: Readonly<UsersPageContainerProps>) {
         super(props)
         this.onSetFollowUserClick = this.onSetFollowUserClick.bind(this)
+        this.onSetUnfollowUserClick = this.onSetUnfollowUserClick.bind(this)
         this.onSetCurrentPageClick = this.onSetCurrentPageClick.bind(this)
     }
 
@@ -34,9 +35,16 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
         })
     }
 
-    onSetFollowUserClick(isFollowed: boolean, userId: number) {
-        const {followUser, unfollowUser} = this.props
-        isFollowed ? unfollowUser(userId) : followUser(userId)
+    onSetFollowUserClick(userId: number) {
+        API.follow(userId).then(({data}) => {
+            if (data.resultCode === 0) this.props.followUser(userId)
+        })
+    }
+
+    onSetUnfollowUserClick(userId: number) {
+        API.unfollow(userId).then(({data}) => {
+            if (data.resultCode === 0) this.props.unfollowUser(userId)
+        })
     }
 
     onSetCurrentPageClick(page: number) {
@@ -57,6 +65,7 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
     render() {
         return <UsersPage usersPageData={this.props.usersPageData}
                           onSetFollowUserClick={this.onSetFollowUserClick}
+                          onSetUnfollowUserClick={this.onSetUnfollowUserClick}
                           onSetCurrentPageClick={this.onSetCurrentPageClick}
         />
     }

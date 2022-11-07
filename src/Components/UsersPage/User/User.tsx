@@ -7,16 +7,17 @@ import s from "./User.module.css"
 
 type UserProps = {
     user: UserType
-    onClick: (isFollowed: boolean, userId: number) => void
+    onSetFollowUserClick: (userId: number) => void
+    onSetUnfollowUserClick: (userId: number) => void
 }
 
 class User extends Component<UserProps> {
     render() {
-        const {user, onClick} = this.props
+        const {user, onSetFollowUserClick, onSetUnfollowUserClick} = this.props
         const buttonName = user.followed ? "Unfollow" : "Follow"
 
         const onClickHandler = () => {
-            onClick(user.followed, user.id)
+            user.followed ? onSetUnfollowUserClick(user.id) : onSetFollowUserClick(user.id)
         }
 
         return (

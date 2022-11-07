@@ -7,7 +7,8 @@ import s from "./UsersPage.module.css"
 
 type UsersPageProps = {
     usersPageData: UsersPageType
-    onSetFollowUserClick: (isFollowed: boolean, userId: number) => void
+    onSetFollowUserClick: (userId: number) => void
+    onSetUnfollowUserClick: (userId: number) => void
     onSetCurrentPageClick: (page: number) => void
 }
 
@@ -16,7 +17,10 @@ const UsersPage: FC<UsersPageProps> = (props) => {
     const totalPagesCount = Math.ceil(totalUsersCount / pageSize)
 
     const renderedUsers = users.map(user => {
-        return <MemoUser key={"user" + user.id} user={user} onClick={props.onSetFollowUserClick}/>
+        return <MemoUser key={"user" + user.id} user={user}
+                         onSetFollowUserClick={props.onSetFollowUserClick}
+                         onSetUnfollowUserClick={props.onSetUnfollowUserClick}
+        />
     })
 
     return (
