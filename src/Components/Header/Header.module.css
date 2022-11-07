@@ -1,7 +1,19 @@
 .header {
+    display: grid;
+    grid-template-columns: inherit;
     grid-column: 1 / -1;
     grid-row: header;
-    /*grid-row: 1;*/
     background-color: limegreen;
     text-align: center;
+}
+
+.header .grid_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2 / -2;
+}
+
+.header .grid_item > h2 {
+    margin: 0 auto;
 }

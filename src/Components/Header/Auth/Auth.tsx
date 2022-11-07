@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
+import s from "./Auth.module.css"
 
-const Auth = () => {
+type AuthProps = {
+    userId: number | null
+}
+
+const Auth: FC<AuthProps> = (props) => {
     return (
-        <div>
-
+        <div className={s.auth}>
+            {props.userId ? "Logged in" : "Login"}
         </div>
     )
 }
