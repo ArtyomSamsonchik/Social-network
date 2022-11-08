@@ -45,7 +45,7 @@ button {
             [header-start] var(--header-height) [header-end
             main-start] minmax(350px, 1fr) [main-end
             footer-start] var(--footer-height) [footer-end];
-    grid-template-columns: minmax(20px, 1fr) 250px minmax(auto, 800px) minmax(20px, 1fr);
+    grid-template-columns: minmax(20px, 1fr) 300px minmax(auto, 800px) minmax(20px, 1fr);
     min-height: 100vh;
 }
 

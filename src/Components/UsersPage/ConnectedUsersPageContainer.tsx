@@ -3,12 +3,12 @@ import {
     followUser, setCurrentPage, setIsFetchingUsers,
     setUsers,
     setUsersCount,
-    unfollowUser,
-    UsersPageActionsType
+    unfollowUser
 } from "../../redux/usersPageReducer";
 import {connect} from "react-redux";
 import {MapActionCreators, MapToPropsReturnType} from "../../helpers/typeHelpers";
 import UsersPageContainer from "./UsersPageContainer";
+import {setIsFetchingFollowedUsers} from "../../redux/sidebarPageReducer";
 
 type mapDispatchKeys = "followUser"
     | "unfollowUser"
@@ -16,9 +16,10 @@ type mapDispatchKeys = "followUser"
     | "setUsersCount"
     | "setCurrentPage"
     | "setIsFetchingUsers"
+    | "setIsFetchingFollowedUsers"
 
 type MapStateRT = MapToPropsReturnType<UsersPageContainer, "usersPageData">
-type MapAC = MapActionCreators<UsersPageContainer, mapDispatchKeys, UsersPageActionsType>
+type MapAC = MapActionCreators<UsersPageContainer, mapDispatchKeys>
 
 const mapStateToProps = (state: AppStateType): MapStateRT => ({
     usersPageData: state.usersPageData
@@ -30,7 +31,8 @@ const ConnectedUsersPageContainer = connect(mapStateToProps, {
     setUsers,
     setUsersCount,
     setCurrentPage,
-    setIsFetchingUsers
+    setIsFetchingUsers,
+    setIsFetchingFollowedUsers
 } as MapAC)
 (UsersPageContainer)
 

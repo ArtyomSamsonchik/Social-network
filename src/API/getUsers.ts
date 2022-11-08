@@ -16,8 +16,7 @@ type RequestParameters = {
 
 const initParameters: RequestParameters = {
     page: 1,
-    count: 10,
-    friend: false
+    count: 10
 }
 
 export const getUsers = (parameters: RequestParameters = initParameters) => {

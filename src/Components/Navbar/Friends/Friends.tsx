@@ -1,25 +1,24 @@
-import React, {useContext} from 'react';
+import React, {FC} from 'react';
 import s from "./Friends.module.css";
-import {GlobalStoreStateContext} from "../../../context/context";
-import UserImage from "../../common/UserImage/UserImage";
 import {UserType} from "../../../redux/usersPageReducer";
+import UserImage from "../../common/UserImage/UserImage";
 
 type FriendsProps = {
     users: UserType[]
 }
 
-export const Friends = () => {
-    const users = useContext(GlobalStoreStateContext).sidebarPageData.followedUsers
-
+//TODO: add preloader here
+export const Friends: FC<FriendsProps> = ({users}) => {
     const mappedUsers = users.map(user => {
         return (
             <div key={user.id} className={s.friendItem}>
-                {/*<UserImage imageSrc={user.imageSrc} imageAlt={"user"}/>*/}
-                <span>{user.name}</span>
+                <UserImage imageSrc={user.photos.small} imageAlt={"user"}/>
+                <span className={s.userName}>{user.name}</span>
             </div>
         );
     });
 
+    console.log("Friends")
     return (
         <div className={s.friends}>
             <h4 className={s.header}>Friends</h4>

@@ -10,6 +10,7 @@ type UsersPageContainerProps = {
     setUsersCount: (usersCount: number) => void
     setCurrentPage: (currentPage: number) => void
     setIsFetchingUsers: (isFetching: boolean) => void
+    setIsFetchingFollowedUsers: (isFetching: boolean) => void
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
 }
@@ -37,13 +38,23 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
 
     onSetFollowUserClick(userId: number) {
         API.follow(userId).then(({data}) => {
-            if (data.resultCode === 0) this.props.followUser(userId)
+            if (data.resultCode === 0) {
+                batch(() => {
+                    this.props.followUser(userId)
+                    this.props.setIsFetchingFollowedUsers(true)
+                })
+            }
         })
     }
 
     onSetUnfollowUserClick(userId: number) {
         API.unfollow(userId).then(({data}) => {
-            if (data.resultCode === 0) this.props.unfollowUser(userId)
+            if (data.resultCode === 0) {
+                batch(() => {
+                    this.props.unfollowUser(userId)
+                    this.props.setIsFetchingFollowedUsers(true)
+                })
+            }
         })
     }
 

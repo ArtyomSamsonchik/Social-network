@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
-    align-items: center;
+    align-items: start;
     gap: 10px;
     padding: 10px;
 }
@@ -12,7 +12,12 @@
     grid-column: 1 / -1;
 }
 .friendItem {
-    max-width: 65px;
-    max-height: 80px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friendItem > .userName {
+    word-break: break-all;
+    font-size: 13px;
 }

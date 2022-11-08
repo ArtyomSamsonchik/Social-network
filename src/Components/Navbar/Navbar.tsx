@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../App";
-import {Friends} from "./Friends/Friends";
+import {ConnectedFriendsContainer} from "./Friends/ConnectedFriends";
 
 // type NavbarProps = {
 //     users: UserType[]
@@ -33,7 +33,7 @@ export const Navbar = () => {
                     </li>
                 </ul>
             </nav>
-            <Friends/>
+            <ConnectedFriendsContainer/>
         </aside>
     );
 };
