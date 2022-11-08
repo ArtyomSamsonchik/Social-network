@@ -4,12 +4,11 @@ import {AppStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
 import {setFollowedUsers, setIsFetchingFollowedUsers} from "../../../redux/sidebarPageReducer";
 
-type MappedState = MapToPropsReturnType<FriendsContainer, "followedUsers" | "isFetchingFollowedUsers">
+type MappedState = MapToPropsReturnType<FriendsContainer, "sidebarPageData">
 type MappedAC = MapActionCreators<FriendsContainer, "setFollowedUsers" | "setIsFetchingFollowedUsers">
 
 const mapStateToProps = (state: AppStateType): MappedState => ({
-    followedUsers: state.sidebarPageData.followedUsers,
-    isFetchingFollowedUsers: state.sidebarPageData.isFetchingFollowedUsers
+    sidebarPageData: state.sidebarPageData
 })
 
 export const ConnectedFriendsContainer = connect(mapStateToProps, {

@@ -18,6 +18,7 @@
 }
 
 .friendItem > .userName {
-    word-break: break-all;
+    overflow: hidden;
+    text-align: center;
     font-size: 13px;
 }

@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {UserType} from "../../../redux/usersPageReducer";
 import {Friends} from "./Friends";
 import * as API from "../../../API"
+import {batch} from "react-redux";
+import {SidebarPageType} from "../../../redux/sidebarPageReducer";
 
 type FriendsContainerProps = {
-    followedUsers: UserType[]
-    isFetchingFollowedUsers: boolean
+    sidebarPageData: SidebarPageType
     setFollowedUsers: (followedUsers: UserType[]) => void
     setIsFetchingFollowedUsers: (isFetching: boolean) => void
 }
@@ -18,16 +19,20 @@ class FriendsContainer extends Component<FriendsContainerProps> {
     }
 
     componentDidUpdate() {
-        if (!this.props.isFetchingFollowedUsers) return
+        const {sidebarPageData, setFollowedUsers, setIsFetchingFollowedUsers} = this.props
+
+        if (!sidebarPageData.isFetchingFollowedUsers) return
 
         API.getUsers({friend: true}).then(({data}) => {
-            this.props.setFollowedUsers(data.items)
-            this.props.setIsFetchingFollowedUsers(false)
+            batch(() => {
+                setFollowedUsers(data.items)
+                setIsFetchingFollowedUsers(false)
+            })
         })
     }
 
     render() {
-        return <Friends users={this.props.followedUsers}/>
+        return <Friends users={this.props.sidebarPageData.followedUsers}/>
     }
 }
 
