@@ -9,11 +9,12 @@ type UserProps = {
     user: UserType
     onSetFollowUserClick: (userId: number) => void
     onSetUnfollowUserClick: (userId: number) => void
+    followIsDisabled: boolean
 }
 
 class User extends Component<UserProps> {
     render() {
-        const {user, onSetFollowUserClick, onSetUnfollowUserClick} = this.props
+        const {user, onSetFollowUserClick, onSetUnfollowUserClick, followIsDisabled} = this.props
         const buttonName = user.followed ? "Unfollow" : "Follow"
 
         const onClickHandler = () => {
@@ -32,7 +33,7 @@ class User extends Component<UserProps> {
                     <NavLink to={`${PATH.MAIN_PAGE}/${user.id}`}>
                         {user.name}
                     </NavLink>
-                    <button onClick={onClickHandler}>{buttonName}</button>
+                    <button onClick={onClickHandler} disabled={followIsDisabled}>{buttonName}</button>
                     {user.status && <div>{user.status}</div>}
                 </div>
             </li>

@@ -13,11 +13,16 @@ type UsersPageProps = {
 }
 
 const UsersPage: FC<UsersPageProps> = (props) => {
-    const {users, currentPage, totalUsersCount, pageSize, isFetchingUsers} = props.usersPageData
+    const {
+        users, currentPage, totalUsersCount, pageSize, isFetchingUsers, followingInProgress
+    } = props.usersPageData
+
     const totalPagesCount = Math.ceil(totalUsersCount / pageSize)
 
     const renderedUsers = users.map(user => {
-        return <MemoUser key={"user" + user.id} user={user}
+        return <MemoUser key={"user" + user.id}
+                         user={user}
+                         followIsDisabled={followingInProgress[user.id]}
                          onSetFollowUserClick={props.onSetFollowUserClick}
                          onSetUnfollowUserClick={props.onSetUnfollowUserClick}
         />

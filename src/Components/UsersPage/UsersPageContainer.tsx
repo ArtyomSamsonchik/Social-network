@@ -11,6 +11,7 @@ type UsersPageContainerProps = {
     setCurrentPage: (currentPage: number) => void
     setIsFetchingUsers: (isFetching: boolean) => void
     setIsFetchingFollowedUsers: (isFetching: boolean) => void
+    setUpFollowing: (userId: number, settingUpFollowing: boolean) => void
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
 }
@@ -37,10 +38,13 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
     }
 
     onSetFollowUserClick(userId: number) {
+        this.props.setUpFollowing(userId, true)
+
         API.follow(userId).then(({data}) => {
             if (data.resultCode === 0) {
                 batch(() => {
                     this.props.followUser(userId)
+                    this.props.setUpFollowing(userId, false)
                     this.props.setIsFetchingFollowedUsers(true)
                 })
             }
@@ -48,10 +52,13 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
     }
 
     onSetUnfollowUserClick(userId: number) {
+        this.props.setUpFollowing(userId, true)
+
         API.unfollow(userId).then(({data}) => {
             if (data.resultCode === 0) {
                 batch(() => {
                     this.props.unfollowUser(userId)
+                    this.props.setUpFollowing(userId, false)
                     this.props.setIsFetchingFollowedUsers(true)
                 })
             }

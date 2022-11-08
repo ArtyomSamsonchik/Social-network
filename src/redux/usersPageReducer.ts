@@ -11,12 +11,17 @@ export type UserType = {
     followed: boolean
 }
 
+export type FollowingInProgressType = {
+    [userId: string]: boolean
+}
+
 export type UsersPageType = {
     users: UserType[]
     currentPage: number
     totalUsersCount: number
     pageSize: number
     isFetchingUsers: boolean
+    followingInProgress: FollowingInProgressType
 }
 
 type FollowUserAT = ReturnType<typeof followUser>
@@ -25,6 +30,7 @@ type setUsersAT = ReturnType<typeof setUsers>
 type setUsersCountAT = ReturnType<typeof setUsersCount>
 type setCurrentPageAT = ReturnType<typeof setCurrentPage>
 type setIsFetchingUsersAT = ReturnType<typeof setIsFetchingUsers>
+type setUpFollowingAT = ReturnType<typeof setUpFollowing>
 
 export type UsersPageActionsType = FollowUserAT
     | UnFollowUserAT
@@ -32,13 +38,15 @@ export type UsersPageActionsType = FollowUserAT
     | setUsersCountAT
     | setCurrentPageAT
     | setIsFetchingUsersAT
+    | setUpFollowingAT
 
 const initialState: UsersPageType = {
     users: [],
     currentPage: 1,
     totalUsersCount: 0,
     pageSize: 10,
-    isFetchingUsers: false
+    isFetchingUsers: false,
+    followingInProgress: {}
 }
 
 const usersPageReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {
@@ -62,7 +70,8 @@ const usersPageReducer = (state: UsersPageType = initialState, action: UsersPage
         case "SET-USERS":
             return {
                 ...state,
-                users: action.users
+                users: action.users,
+                followingInProgress: {}
             }
         case "SET-TOTAL-USERS-COUNT":
             return {
@@ -78,6 +87,13 @@ const usersPageReducer = (state: UsersPageType = initialState, action: UsersPage
             return {
                 ...state,
                 isFetchingUsers: action.isFetching
+            }
+        case "SET-UP-FOLLOWING":
+            return {
+                ...state,
+                followingInProgress: action.settingUpFollowing
+                    ? {...state.followingInProgress, [action.userId]: true}
+                    : {...state.followingInProgress, [action.userId]: false}
             }
         default:
             return state
@@ -113,6 +129,12 @@ export const setCurrentPage = (currentPage: number) => ({
 export const setIsFetchingUsers = (isFetching: boolean) => ({
     type: "SET-IS-FETCHING-USERS",
     isFetching
+}) as const
+
+export const setUpFollowing = (userId: number, settingUpFollowing: boolean) => ({
+    type: "SET-UP-FOLLOWING",
+    userId,
+    settingUpFollowing
 }) as const
 
 export default usersPageReducer
