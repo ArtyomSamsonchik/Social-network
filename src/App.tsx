@@ -12,6 +12,7 @@ import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 import ConnectedMainPageContainer from "./Components/MainPage/ConnectedMainPageContainer";
 import {ConnectedHeader} from "./Components/Header/ConnectedHeader";
+import Login from "./Components/Login/Login";
 
 export const URL_PARAMETERS = {
     USER_ID: "/:userId?"
@@ -23,7 +24,8 @@ export const PATH = {
     MUSIC: "/music",
     PHOTOS: "/photos",
     FRIENDS: "/friends",
-    SETTINGS: "/settings"
+    SETTINGS: "/settings",
+    LOGIN: "/login"
 } as const;
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
                         <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPageContainer/>}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
+                        <Route path={PATH.LOGIN} render={Login}/>
                     </div>
                     <Footer/>
                 </div>

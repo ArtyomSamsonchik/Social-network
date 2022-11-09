@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {MapActionCreators, MapToPropsReturnType} from "../../helpers/typeHelpers";
 import UsersPageContainer from "./UsersPageContainer";
 
-type MapStateRT = MapToPropsReturnType<UsersPageContainer, "usersPageData">
-type MapAC = MapActionCreators<UsersPageContainer, "getUsers" | "follow" | "unfollow">
+type MapStateRT = MapToPropsReturnType<typeof UsersPageContainer, "usersPageData">
+type MapAC = MapActionCreators<typeof UsersPageContainer, "getUsers" | "follow" | "unfollow">
 
 const mapStateToProps = (state: AppStateType): MapStateRT => ({
     usersPageData: state.usersPageData

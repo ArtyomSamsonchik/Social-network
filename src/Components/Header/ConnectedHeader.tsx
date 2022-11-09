@@ -4,8 +4,8 @@ import {AuthActionsType, authorize} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import HeaderContainer from "./HeaderContainer";
 
-type MappedState = MapToPropsReturnType<HeaderContainer, "authData">
-type MappedAC = MapActionCreators<HeaderContainer, "authorize", AuthActionsType>
+type MappedState = MapToPropsReturnType<typeof HeaderContainer, "authData">
+type MappedAC = MapActionCreators<typeof HeaderContainer, "authorize", AuthActionsType>
 
 const mapStataToProps = (state: AppStateType): MappedState => ({
     authData: state.authData
