@@ -1,6 +1,6 @@
 .friends {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-items: center;
     align-items: start;
     gap: 10px;
@@ -20,5 +20,6 @@
 .friendItem > .userName {
     overflow: hidden;
     text-align: center;
+    word-break: break-word;
     font-size: 13px;
 }

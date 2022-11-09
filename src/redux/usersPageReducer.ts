@@ -1,3 +1,8 @@
+import * as API from "../API";
+import {batch} from "react-redux";
+import {AppThunk} from "./redux-store";
+import {setIsFetchingFollowedUsers} from "./sidebarPageReducer";
+
 export type UserPhotosType = {
     small: string
     large: string
@@ -136,5 +141,46 @@ export const setUpFollowing = (userId: number, settingUpFollowing: boolean) => (
     userId,
     settingUpFollowing
 }) as const
+
+export const getUsers = (page: number, usersCount: number): AppThunk => (dispatch) => {
+    dispatch(setIsFetchingUsers(true))
+
+    API.getUsers({page, count: usersCount}).then(({data}) => {
+        batch(() => {
+            dispatch(setUsers(data.items))
+            dispatch(setUsersCount(data.totalCount))
+            dispatch(setCurrentPage(page))
+            dispatch(setIsFetchingUsers(false))
+        })
+    })
+}
+
+export const follow = (userId: number): AppThunk => (dispatch) => {
+    dispatch(setUpFollowing(userId, true))
+
+    API.follow(userId).then(({data}) => {
+        if (data.resultCode === 0) {
+            batch(() => {
+                dispatch(followUser(userId))
+                dispatch(setUpFollowing(userId, false))
+                dispatch(setIsFetchingFollowedUsers(true))
+            })
+        }
+    })
+}
+
+export const unfollow = (userId: number): AppThunk => (dispatch) => {
+    dispatch(setUpFollowing(userId, true))
+
+    API.unfollow(userId).then(({data}) => {
+        if (data.resultCode === 0) {
+            batch(() => {
+                dispatch(unfollowUser(userId))
+                dispatch(setUpFollowing(userId, false))
+                dispatch(setIsFetchingFollowedUsers(true))
+            })
+        }
+    })
+}
 
 export default usersPageReducer

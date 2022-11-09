@@ -41,4 +41,8 @@ export const setIsFetchingFollowedUsers = (isFetching: boolean) => ({
     isFetching
 }) as const
 
+export const getFriends = () => {
+
+}
+
 export default sidebarPageReducer

@@ -1,5 +1,7 @@
 import userImageURL from "../assets/images/Portrait_Placeholder.png";
-import {users} from "./data";   //TODO: doesn't work with path ./store
+import {users} from "./data";       //TODO: doesn't work with path ./store
+import * as API from "../API";
+import {AppThunk} from "./redux-store";
 
 type AddPostAT = ReturnType<typeof addPost>
 type setUserProfileAT = ReturnType<typeof setUserProfile>
@@ -125,5 +127,14 @@ export const setUserProfile = (profile: ProfileType) => ({
     type: "SET-USER-PROFILE",
     profile
 }) as const
+
+export const getUserProfile = (newUserId: number, currentUserId: number): AppThunk => (dispatch) => {
+    if (newUserId === currentUserId) return
+
+    API.getProfile(newUserId).then(({data}) => {
+        dispatch(setUserProfile(data))
+    })
+    window.scrollTo({top: 0})
+}
 
 export default mainPageReducer
