@@ -10,12 +10,11 @@ type MainPageProps = {
 
 export const MainPage: FC<MainPageProps> = (props) => {
     return (
-        <>
-            {props.profile
-                ? <ProfileInfo profile={props.profile}/>
-                : <Preloader/>
-            }
-            <ConnectedMyPosts/>
-        </>
-    );
+        props.profile
+            ? <>
+                <ProfileInfo profile={props.profile}/>
+                <ConnectedMyPosts/>
+            </>
+            : <Preloader/>
+    )
 };
