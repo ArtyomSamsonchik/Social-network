@@ -4,7 +4,6 @@ import {Header} from "./Header";
 
 type HeaderContainerProps = {
     authData: AuthDataType
-    setUserAuthData: (loginData: Omit<AuthDataType, "loggedIn">) => void
     authorize: () => void
 }
 
