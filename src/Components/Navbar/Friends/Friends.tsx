@@ -7,7 +7,7 @@ type FriendsProps = {
     users: UserType[]
 }
 
-//TODO: add preloader here
+//TODO: add preloader here. Memo Friends to avoid useless rerender.
 export const Friends: FC<FriendsProps> = ({users}) => {
     const mappedUsers = users.map(user => {
         return (

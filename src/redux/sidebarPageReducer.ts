@@ -1,4 +1,7 @@
 import {UserType} from "./usersPageReducer"
+import API from "../API";
+import {batch} from "react-redux";
+import {AppThunk} from "./redux-store";
 
 type setFollowedUsersAT = ReturnType<typeof setFollowedUsers>
 type setIsFetchingFollowedUsersAT = ReturnType<typeof setIsFetchingFollowedUsers>
@@ -11,7 +14,7 @@ export type SidebarPageType = {
 
 const initialState: SidebarPageType = {
     followedUsers: [],
-    isFetchingFollowedUsers: false
+    isFetchingFollowedUsers: true
 }
 
 const sidebarPageReducer = (state: SidebarPageType = initialState, action: SidebarPageActionsType): SidebarPageType => {
@@ -41,8 +44,15 @@ export const setIsFetchingFollowedUsers = (isFetching: boolean) => ({
     isFetching
 }) as const
 
-export const getFriends = () => {
+export const getFollowedUsers = (isFetching: boolean): AppThunk => (dispatch) => {
+    if (!isFetching) return
 
+    API.getUsers({friend: true}).then(({data}) => {
+        batch(() => {
+            dispatch(setFollowedUsers(data.items))
+            dispatch(setIsFetchingFollowedUsers(false))
+        })
+    })
 }
 
 export default sidebarPageReducer

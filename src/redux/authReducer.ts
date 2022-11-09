@@ -1,5 +1,8 @@
-type loginUserAT = ReturnType<typeof setUserAuthData>
-export type AuthActionsType = loginUserAT
+import {AppThunk} from "./redux-store";
+import API from "../API";
+
+type LoginUserAT = ReturnType<typeof setUserAuthData>
+export type AuthActionsType = LoginUserAT
 
 export type AuthDataType = {
     userId: number | null
@@ -34,3 +37,13 @@ export const setUserAuthData = (loginData: Omit<AuthDataType, "loggedIn">) => ({
     type: "SET-USER-AUTH-DATA",
     loginData
 }) as const
+
+export const authorize = (): AppThunk => (dispatch) => {
+    API.getUserAuthData().then(({data}) => {
+        const {id: userId, login, email} = data.data
+
+        if (data.resultCode === 0) {
+            dispatch(setUserAuthData({userId, login, email}))
+        }
+    })
+}

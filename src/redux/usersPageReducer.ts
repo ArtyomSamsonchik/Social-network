@@ -1,4 +1,4 @@
-import * as API from "../API";
+import API from "../API";
 import {batch} from "react-redux";
 import {AppThunk} from "./redux-store";
 import {setIsFetchingFollowedUsers} from "./sidebarPageReducer";

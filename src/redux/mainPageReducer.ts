@@ -1,6 +1,6 @@
 import userImageURL from "../assets/images/Portrait_Placeholder.png";
 import {users} from "./data";       //TODO: doesn't work with path ./store
-import * as API from "../API";
+import API from "../API";
 import {AppThunk} from "./redux-store";
 
 type AddPostAT = ReturnType<typeof addPost>
