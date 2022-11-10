@@ -10,8 +10,8 @@ type MainPageContainerProps = {
 
 class MainPageContainer extends Component<MainPageContainerProps> {
     componentDidMount() {
-        const userId = Number(this.props.match.params.userId) || 2
-        const {getUserProfile, profile} = this.props
+        const {getUserProfile, profile, match: {params}} = this.props
+        const userId = Number(params.userId) || profile?.userId || 2
 
         getUserProfile(userId, Number(profile?.userId))
     }
