@@ -18,7 +18,6 @@ export const Friends: FC<FriendsProps> = ({users}) => {
         );
     });
 
-    console.log("Friends")
     return (
         <div className={s.friends}>
             <h4 className={s.header}>Friends</h4>
