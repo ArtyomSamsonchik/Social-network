@@ -1,4 +1,4 @@
-import API from "../API";
+import {followAPI, usersAPI} from "../API";
 import {batch} from "react-redux";
 import {AppThunk} from "./redux-store";
 import {setIsFetchingFollowedUsers} from "./sidebarPageReducer";
@@ -145,7 +145,7 @@ export const setUpFollowing = (userId: number, settingUpFollowing: boolean) => (
 export const getUsers = (page: number, usersCount: number): AppThunk => (dispatch) => {
     dispatch(setIsFetchingUsers(true))
 
-    API.getUsers({page, count: usersCount}).then(({data}) => {
+    usersAPI.getUsers({page, count: usersCount}).then(({data}) => {
         batch(() => {
             dispatch(setUsers(data.items))
             dispatch(setUsersCount(data.totalCount))
@@ -158,7 +158,7 @@ export const getUsers = (page: number, usersCount: number): AppThunk => (dispatc
 export const follow = (userId: number): AppThunk => (dispatch) => {
     dispatch(setUpFollowing(userId, true))
 
-    API.follow(userId).then(({data}) => {
+    followAPI.follow(userId).then(({data}) => {
         if (data.resultCode === 0) {
             batch(() => {
                 dispatch(followUser(userId))
@@ -172,7 +172,7 @@ export const follow = (userId: number): AppThunk => (dispatch) => {
 export const unfollow = (userId: number): AppThunk => (dispatch) => {
     dispatch(setUpFollowing(userId, true))
 
-    API.unfollow(userId).then(({data}) => {
+    followAPI.unfollow(userId).then(({data}) => {
         if (data.resultCode === 0) {
             batch(() => {
                 dispatch(unfollowUser(userId))

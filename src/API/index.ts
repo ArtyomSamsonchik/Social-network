@@ -1,21 +1,64 @@
-// export {getUsers} from "./getUsers";
-// export {getProfile} from "./getProfile";
-// export {getUserAuthData} from "./getUserAuthData";
-// export {follow} from "./follow";
-// export {unfollow} from "./unfollow";
+import instance from "./Instance";
+import {UserType} from "../redux/usersPageReducer";
+import {ProfileType} from "../redux/mainPageReducer";
 
-import {getUserAuthData} from "./getUserAuthData";
-import {getProfile} from "./getProfile";
-import {getUsers} from "./getUsers";
-import {follow} from "./follow";
-import {unfollow} from "./unfollow";
 
-const API = {
-    getUsers,
-    getProfile,
-    getUserAuthData,
-    follow,
-    unfollow
+type ApiResponseType<T = {}> = {
+    resultCode: number
+    messages: string[]
+    data: T
 }
 
-export default API
+type UsersResponseType = {
+    items: UserType[]
+    totalCount: number
+    error: string
+}
+
+type AuthMeType = {
+    id: number
+    email: string
+    login: string
+}
+
+type RequestParamsType = {
+    page?: number
+    count?: number
+    friend?: boolean
+    term?: string
+}
+
+export const usersAPI = {
+    getUsers(parameters: RequestParamsType = {page: 1, count: 10}) {
+        const requestParams = Object.entries(parameters)
+            .filter(([, value]) => value !== undefined)
+            .map(([key, value]) => `${key}=${value}`)
+            .join("&")
+
+        return instance.get<UsersResponseType>(`users?${requestParams}`)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get<ProfileType>(`profile/${userId}/`)
+    }
+}
+
+export const followAPI = {
+    follow(userId: number) {
+        return instance.post<ApiResponseType>(`follow/${userId}/`)
+
+    },
+    unfollow(userId: number) {
+        return instance.delete<ApiResponseType>(`follow/${userId}/`)
+    }
+}
+
+export const authAPI = {
+    me() {
+        return instance.get<ApiResponseType<AuthMeType>>('auth/me/')
+    }
+}
+
+// export default usersAPI

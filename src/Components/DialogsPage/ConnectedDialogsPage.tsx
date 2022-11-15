@@ -3,18 +3,16 @@ import {DialogsPage} from "./DialogsPage";
 import {UserIDType} from "../../redux/mainPageReducer";
 import {AppStateType} from "../../redux/redux-store";
 import {MapToPropsReturnType} from "../../helpers/typeHelpers";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
 import withRedirect from "../../helpers/withRedirect";
+import {ComponentType} from "react";
 
-type MapStateKeys = "dialogsPageData" | "isAuthenticated" | "authInProgress"
-type MapStateRT = MapToPropsReturnType<typeof DialogsPageWithRedirect, MapStateKeys>
+type MapStateRT = MapToPropsReturnType<typeof DialogsPage, "dialogsPageData">
 type MapDispatchRT = MapToPropsReturnType<typeof DialogsPage, "addMessageToDialog" | "openNewDialog">
 
 const mapStateToProps = (state: AppStateType): MapStateRT => ({
-    dialogsPageData: state.dialogsPageData,
-    isAuthenticated: state.authData.loggedIn,
-    authInProgress: state.authData.authInProgress
+    dialogsPageData: state.dialogsPageData
 })
 
 // TODO: Too complex dispatch logic. Think about simplification, that allows to use short AC notation.
@@ -29,11 +27,16 @@ const mapDispatchToProps = (dispatch: Dispatch<DialogsPageActionsType>): MapDisp
     }
 })
 
-const DialogsPageWithRedirect = withRedirect(DialogsPage)
+// const DialogsPageWithRedirect = withRedirect(DialogsPage)
 
-const ConnectedDialogsPage = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DialogsPageWithRedirect)
+const ConnectedDialogsPage = compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRedirect,
+)(DialogsPage)
+
+// const ConnectedDialogsPage = connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(DialogsPageWithRedirect)
 
 export default ConnectedDialogsPage

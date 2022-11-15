@@ -1,5 +1,5 @@
 import {UserType} from "./usersPageReducer"
-import API from "../API";
+import {usersAPI} from "../API";
 import {batch} from "react-redux";
 import {AppThunk} from "./redux-store";
 
@@ -47,7 +47,7 @@ export const setIsFetchingFollowedUsers = (isFetching: boolean) => ({
 export const getFollowedUsers = (isFetching: boolean): AppThunk => (dispatch) => {
     if (!isFetching) return
 
-    API.getUsers({friend: true}).then(({data}) => {
+    usersAPI.getUsers({friend: true}).then(({data}) => {
         batch(() => {
             dispatch(setFollowedUsers(data.items))
             dispatch(setIsFetchingFollowedUsers(false))

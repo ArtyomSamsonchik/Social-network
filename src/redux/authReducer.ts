@@ -1,5 +1,5 @@
 import {AppThunk} from "./redux-store";
-import API from "../API";
+import {authAPI} from "../API";
 import {batch} from "react-redux";
 
 type LoginUserAT = ReturnType<typeof setUserAuthData>
@@ -53,7 +53,7 @@ export const setAuthProgress = (authInProgress: boolean) => ({
 }) as const
 
 export const authorize = (): AppThunk => (dispatch) => {
-    API.getUserAuthData().then(({data}) => {
+    authAPI.me().then(({data}) => {
         const {id: userId, login, email} = data.data
 
         if (data.resultCode === 0) {
