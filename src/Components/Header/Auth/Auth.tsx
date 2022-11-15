@@ -7,9 +7,9 @@ type AuthProps = {
 }
 
 const Auth: FC<AuthProps> = (props) => {
-    const {loggedIn, login} = props.authData
+    const {authProgress, login} = props.authData
 
-    return <div className={s.auth}>{!loggedIn ? "Login" : `Hello, ${login}`}</div>
+    return <div className={s.auth}>{authProgress === "success" ? `Hello, ${login}` : "Login"}</div>
 }
 
 export default Auth

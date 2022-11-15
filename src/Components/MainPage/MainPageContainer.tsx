@@ -5,15 +5,20 @@ import {RouteComponentProps} from "react-router-dom";
 
 type MainPageContainerProps = {
     profile: ProfileType
-    getUserProfile: (newUserId: number, currentUserId: number) => void
+    authUserId: number | null
+    getUserProfile: (newUserId: number) => void
 } & RouteComponentProps<{ userId?: string }>
 
 class MainPageContainer extends Component<MainPageContainerProps> {
     componentDidMount() {
-        const {getUserProfile, profile, match: {params}} = this.props
-        const userId = Number(params.userId) || profile?.userId || 2
+        const {getUserProfile, profile, match: {params}, authUserId} = this.props
 
-        getUserProfile(userId, Number(profile?.userId))
+        //set userId = 2 (Dimych profile) to test profile info with amount of data
+        const userId = Number(params.userId) || Number(authUserId)
+
+        if (userId !== profile?.userId) {
+            getUserProfile(userId)
+        }
     }
 
     render() {

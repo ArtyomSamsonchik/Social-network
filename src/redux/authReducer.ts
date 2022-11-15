@@ -1,17 +1,19 @@
 import {AppThunk} from "./redux-store";
 import {authAPI} from "../API";
 import {batch} from "react-redux";
+import {getUserProfile} from "./mainPageReducer";
 
 type LoginUserAT = ReturnType<typeof setUserAuthData>
 type setLoggingProgressAT = ReturnType<typeof setAuthProgress>
 export type AuthActionsType = LoginUserAT | setLoggingProgressAT
 
+export type AuthProgressType = "pending" | "success" | "failure"
+
 export type AuthDataType = {
     userId: number | null
     email: string | null
     login: string | null
-    loggedIn: boolean
-    authInProgress: boolean
+    authProgress: AuthProgressType
 }
 
 
@@ -19,8 +21,7 @@ const initialState: AuthDataType = {
     userId: null,
     email: null,
     login: null,
-    loggedIn: false,
-    authInProgress: true
+    authProgress: "pending"
 }
 
 const authReducer = (state: AuthDataType = initialState, action: AuthActionsType): AuthDataType => {
@@ -29,12 +30,11 @@ const authReducer = (state: AuthDataType = initialState, action: AuthActionsType
             return {
                 ...state,
                 ...action.loginData,
-                loggedIn: true
             }
         case "SET-AUTH-PROGRESS":
             return {
                 ...state,
-                authInProgress: action.authInProgress
+                authProgress: action.authInProgress
             }
         default:
             return state
@@ -47,7 +47,7 @@ export const setUserAuthData = (loginData: { userId: number, email: string, logi
     loginData
 }) as const
 
-export const setAuthProgress = (authInProgress: boolean) => ({
+export const setAuthProgress = (authInProgress: AuthProgressType) => ({
     type: "SET-AUTH-PROGRESS",
     authInProgress
 }) as const
@@ -57,10 +57,14 @@ export const authorize = (): AppThunk => (dispatch) => {
         const {id: userId, login, email} = data.data
 
         if (data.resultCode === 0) {
+            // debugger
             batch(() => {
                 dispatch(setUserAuthData({userId, login, email}))
-                dispatch(setAuthProgress(false))
+                dispatch(setAuthProgress("success"))
+                dispatch(getUserProfile(data.data.id))
             })
+        } else {
+            dispatch(setAuthProgress("failure"))
         }
     })
 }

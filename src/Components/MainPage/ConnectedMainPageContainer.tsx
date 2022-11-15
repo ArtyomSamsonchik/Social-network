@@ -8,11 +8,12 @@ import withRedirect from "../../helpers/withRedirect";
 import {ComponentType} from "react";
 import {compose} from "redux";
 
-type MappedState = MapToPropsReturnType<typeof MainPageContainer, "profile">
+type MappedState = MapToPropsReturnType<typeof MainPageContainer, "profile" | "authUserId">
 type MappedAC = MapActionCreators<typeof MainPageContainer, "getUserProfile">
 
 const mapStateToProps = (state: AppStateType): MappedState => ({
-    profile: state.mainPageData.profile
+    profile: state.mainPageData.profile,
+    authUserId: state.authData.userId
 })
 
 const ConnectedMainPageContainer = compose<ComponentType>(

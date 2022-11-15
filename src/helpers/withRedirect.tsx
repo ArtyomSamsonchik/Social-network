@@ -3,22 +3,21 @@ import {Redirect} from "react-router-dom";
 import Preloader from "../Components/common/Preloader/Preloader";
 import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
+import {AuthProgressType} from "../redux/authReducer";
 
 type WithRedirectProps = {
-    isAuthenticated: boolean
-    authInProgress: boolean
+    authProgress: AuthProgressType
 }
 
 const mapStateToProps = (state: AppStateType): WithRedirectProps => ({
-    isAuthenticated: state.authData.loggedIn,
-    authInProgress: state.authData.authInProgress
+    authProgress: state.authData.authProgress
 })
 
 function withRedirect<P>(WrappedComponent: ComponentType<P>) {
     const ComponentWithRedirect: FC<WithRedirectProps> = (props) => {
-        const {isAuthenticated, authInProgress, ...restProps} = props
+        const {authProgress, ...restProps} = props
 
-        if (authInProgress) {
+        if (authProgress === "pending") {
             return (
                 <>
                     <h1>Wait for the login process to complete, please</h1>
@@ -27,7 +26,7 @@ function withRedirect<P>(WrappedComponent: ComponentType<P>) {
             )
         }
 
-        return isAuthenticated
+        return authProgress === "success"
             ? <WrappedComponent {...restProps as P}/>
             : <Redirect to={"/login"}/>
     }

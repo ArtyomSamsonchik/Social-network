@@ -128,9 +128,7 @@ export const setUserProfile = (profile: ProfileType) => ({
     profile
 }) as const
 
-export const getUserProfile = (newUserId: number, currentUserId: number): AppThunk => (dispatch) => {
-    if (newUserId === currentUserId) return
-
+export const getUserProfile = (newUserId: number): AppThunk => (dispatch) => {
     dispatch(setUserProfile(null))
     profileAPI.getProfile(newUserId).then(({data}) => {
         dispatch(setUserProfile(data))
