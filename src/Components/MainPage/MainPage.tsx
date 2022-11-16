@@ -6,15 +6,19 @@ import Preloader from "../common/Preloader/Preloader";
 
 type MainPageProps = {
     profile: ProfileType
+    status: string | null
+    updateStatus: (status: string) => void
 }
 
 export const MainPage: FC<MainPageProps> = (props) => {
+    const {profile, status, updateStatus} = props
+
     return (
         props.profile
             ? <>
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
                 <ConnectedMyPosts/>
             </>
             : <Preloader/>
     )
-};
+}

@@ -42,6 +42,12 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}/`)
+    },
+    getStatus(userId: number) {
+        return instance.get<string>(`profile/status/${userId}/`)
+    },
+    updateStatus(status: string) {
+        return instance.put<ApiResponseType>(`profile/status/`, {status})
     }
 }
 
@@ -60,5 +66,3 @@ export const authAPI = {
         return instance.get<ApiResponseType<AuthMeType>>('auth/me/')
     }
 }
-
-// export default usersAPI

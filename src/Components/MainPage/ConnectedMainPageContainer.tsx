@@ -1,33 +1,29 @@
 import MainPageContainer from "./MainPageContainer";
 import {MapActionCreators, MapToPropsReturnType} from "../../helpers/typeHelpers";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfile} from "../../redux/mainPageReducer";
+import {getStatus, getUserProfile, updateStatus} from "../../redux/mainPageReducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import withRedirect from "../../helpers/withRedirect";
 import {ComponentType} from "react";
 import {compose} from "redux";
 
-type MappedState = MapToPropsReturnType<typeof MainPageContainer, "profile" | "authUserId">
-type MappedAC = MapActionCreators<typeof MainPageContainer, "getUserProfile">
+type MappedState = MapToPropsReturnType<typeof MainPageContainer, "profile" | "authUserId" | "status">
+type MappedAC = MapActionCreators<typeof MainPageContainer, "getUserProfile" | "getStatus" | "updateStatus">
 
 const mapStateToProps = (state: AppStateType): MappedState => ({
     profile: state.mainPageData.profile,
-    authUserId: state.authData.userId
+    authUserId: state.authData.userId,
+    status: state.mainPageData.status
 })
 
 const ConnectedMainPageContainer = compose<ComponentType>(
     withRedirect,
-    connect(mapStateToProps, {getUserProfile} as MappedAC),
+    connect(
+        mapStateToProps,
+        {getUserProfile, getStatus, updateStatus} as MappedAC
+    ),
     withRouter
 )(MainPageContainer)
-
-// const WrappedMainPageContainer = withRedirect(withRouter(MainPageContainer))
-
-// const ConnectedMainPageContainer = connect(mapStateToProps, {
-//     getUserProfile
-// } as MappedAC)
-// (WrappedMainPageContainer)
-
 
 export default ConnectedMainPageContainer

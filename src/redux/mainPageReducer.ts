@@ -5,7 +5,8 @@ import {AppThunk} from "./redux-store";
 
 type AddPostAT = ReturnType<typeof addPost>
 type setUserProfileAT = ReturnType<typeof setUserProfile>
-export type MainPageActionsType = AddPostAT | setUserProfileAT
+type setUserStatusAT = ReturnType<typeof setUserStatus>
+export type MainPageActionsType = AddPostAT | setUserProfileAT | setUserStatusAT
 
 export type UserIDType = number
 export type UserType = {
@@ -48,11 +49,13 @@ export type ProfileType = {
 
 export type MainPageType = {
     profile: ProfileType
+    status: string | null
     posts: PostType[]
 }
 
 const initialState: MainPageType = {
     profile: null,
+    status: null,
     posts: [
         {
             user: users[4],
@@ -114,6 +117,11 @@ const mainPageReducer = (state = initialState, action: MainPageActionsType): Mai
                 ...state,
                 profile: action.profile
             }
+        case "SET-USER-STATUS":
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state
     }
@@ -128,12 +136,33 @@ export const setUserProfile = (profile: ProfileType) => ({
     profile
 }) as const
 
+export const setUserStatus = (status: string) => ({
+    type: "SET-USER-STATUS",
+    status
+}) as const
+
 export const getUserProfile = (newUserId: number): AppThunk => (dispatch) => {
     dispatch(setUserProfile(null))
     profileAPI.getProfile(newUserId).then(({data}) => {
         dispatch(setUserProfile(data))
     })
     window.scrollTo({top: 0})
+}
+
+export const getStatus = (userId: number): AppThunk => (dispatch) => {
+    profileAPI.getStatus(userId).then(({data}) => {
+        dispatch(setUserStatus(data))
+    })
+}
+
+export const updateStatus = (newStatus: string): AppThunk => (dispatch, getState) => {
+    const {profile, status: oldStatus} = getState().mainPageData
+
+    if (oldStatus === newStatus) return
+
+    profileAPI.updateStatus(newStatus)
+        .then(() => profileAPI.getStatus(profile!.userId))
+        .then(({data}) => dispatch(setUserStatus(data)))
 }
 
 export default mainPageReducer

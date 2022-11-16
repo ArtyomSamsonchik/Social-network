@@ -1,7 +1,6 @@
 import {AppThunk} from "./redux-store";
 import {authAPI} from "../API";
 import {batch} from "react-redux";
-import {getUserProfile} from "./mainPageReducer";
 
 type LoginUserAT = ReturnType<typeof setUserAuthData>
 type setLoggingProgressAT = ReturnType<typeof setAuthProgress>
@@ -57,11 +56,9 @@ export const authorize = (): AppThunk => (dispatch) => {
         const {id: userId, login, email} = data.data
 
         if (data.resultCode === 0) {
-            // debugger
             batch(() => {
                 dispatch(setUserAuthData({userId, login, email}))
                 dispatch(setAuthProgress("success"))
-                dispatch(getUserProfile(data.data.id))
             })
         } else {
             dispatch(setAuthProgress("failure"))
