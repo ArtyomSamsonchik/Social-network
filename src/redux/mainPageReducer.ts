@@ -149,7 +149,7 @@ export const getUserProfile = (newUserId: number): AppThunk => (dispatch) => {
     window.scrollTo({top: 0})
 }
 
-export const getStatus = (userId: number): AppThunk => (dispatch) => {
+export const getUserStatus = (userId: number): AppThunk => (dispatch) => {
     profileAPI.getStatus(userId).then(({data}) => {
         dispatch(setUserStatus(data))
     })

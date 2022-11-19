@@ -1,4 +1,4 @@
-import instance from "./Instance";
+import axios from "axios";
 import {UserType} from "../redux/usersPageReducer";
 import {ProfileType} from "../redux/mainPageReducer";
 
@@ -27,6 +27,24 @@ type RequestParamsType = {
     friend?: boolean
     term?: string
 }
+
+export type LoginRequestDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+
+
+const ADMIN_API_KEY = "3a0fd058-a035-41ce-a05e-8b1d5cd36226"
+
+const instance = axios.create({
+    baseURL: "https://social-network.samuraijs.com/api/1.0",
+    withCredentials: true,
+    headers: {
+        "API-KEY": ADMIN_API_KEY
+    }
+})
 
 export const usersAPI = {
     getUsers(parameters: RequestParamsType = {page: 1, count: 10}) {
@@ -64,5 +82,8 @@ export const followAPI = {
 export const authAPI = {
     me() {
         return instance.get<ApiResponseType<AuthMeType>>('auth/me/')
+    },
+    login(config: LoginRequestDataType) {
+        return instance.post<ApiResponseType<{userId: number}>>('auth/login', config)
     }
 }

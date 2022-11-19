@@ -54,7 +54,7 @@ const initialState: UsersPageType = {
     followingInProgress: {}
 }
 
-const usersPageReducer = (state: UsersPageType = initialState, action: UsersPageActionsType) => {
+const usersPageReducer = (state: UsersPageType = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW":
             return {

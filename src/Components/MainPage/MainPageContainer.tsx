@@ -8,26 +8,25 @@ type MainPageContainerProps = {
     status: string | null
     authUserId: number | null
     getUserProfile: (newUserId: number) => void
-    getStatus: (userId: number) => void
+    getUserStatus: (userId: number) => void
     updateStatus: (status: string) => void
 } & RouteComponentProps<{ userId?: string }>
 
 class MainPageContainer extends Component<MainPageContainerProps> {
     componentDidMount() {
-        const {getUserProfile, getStatus, profile, match: {params}, authUserId} = this.props
+        const {getUserProfile, getUserStatus, profile, match: {params}, authUserId} = this.props
 
         //set userId = 2 (Dimych profile) to test profile info with amount of data
         const userId = Number(params.userId) || Number(authUserId)
 
         if (userId !== profile?.userId) {
             getUserProfile(userId)
-            getStatus(userId)
+            getUserStatus(userId)
         }
     }
 
     render() {
         const {profile, status, updateStatus} = this.props
-
         return (
             <MainPage profile={profile} status={status} updateStatus={updateStatus}/>
         )

@@ -1,0 +1,32 @@
+.login_form form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 350px;
+    font-size: 1.1em;
+    padding: 15px;
+}
+
+.login_form .label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.login_form .label input {
+    width: 180px;
+}
+
+.login_form .checkbox_label  input {
+    margin-right: 15px;
+}
+
+.login_form .label input[type="text"] {
+    width: 50px;
+}
+
+.login_form .button {
+    display: block;
+}

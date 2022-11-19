@@ -1,5 +1,5 @@
 import {AppThunk} from "./redux-store";
-import {authAPI} from "../API";
+import {authAPI, LoginRequestDataType} from "../API";
 import {batch} from "react-redux";
 
 type LoginUserAT = ReturnType<typeof setUserAuthData>
@@ -23,7 +23,7 @@ const initialState: AuthDataType = {
     authProgress: "pending"
 }
 
-const authReducer = (state: AuthDataType = initialState, action: AuthActionsType): AuthDataType => {
+const authReducer = (state = initialState, action: AuthActionsType): AuthDataType => {
     switch (action.type) {
         case "SET-USER-AUTH-DATA":
             return {
@@ -46,9 +46,9 @@ export const setUserAuthData = (loginData: { userId: number, email: string, logi
     loginData
 }) as const
 
-export const setAuthProgress = (authInProgress: AuthProgressType) => ({
+export const setAuthProgress = (authProgress: AuthProgressType) => ({
     type: "SET-AUTH-PROGRESS",
-    authInProgress
+    authInProgress: authProgress
 }) as const
 
 export const authorize = (): AppThunk => (dispatch) => {
@@ -64,6 +64,22 @@ export const authorize = (): AppThunk => (dispatch) => {
             dispatch(setAuthProgress("failure"))
         }
     })
+}
+
+export const login = (config: LoginRequestDataType, resolve: (value?: any) => void): AppThunk => dispatch => {
+    authAPI.login(config)
+        .then(({data}) => {
+            if (data.resultCode === 0) console.log("Login success")
+            return authAPI.me()
+        })
+        .then(({data}) => {
+            const {id: userId, email, login} = data.data
+            batch(() => {
+                dispatch(setUserAuthData({userId, login, email}))
+                dispatch(setAuthProgress("success"))
+            })
+            resolve()
+        })
 }
 
 export default authReducer

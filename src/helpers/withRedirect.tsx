@@ -16,7 +16,6 @@ const mapStateToProps = (state: AppStateType): WithRedirectProps => ({
 function withRedirect<P>(WrappedComponent: ComponentType<P>) {
     const ComponentWithRedirect: FC<WithRedirectProps> = (props) => {
         const {authProgress, ...restProps} = props
-
         if (authProgress === "pending") {
             return (
                 <>
