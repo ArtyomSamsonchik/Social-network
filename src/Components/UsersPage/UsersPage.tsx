@@ -4,9 +4,11 @@ import {MemoPaginationBar} from "../common/PaginationBar/PaginationBar";
 import {UsersPageType} from "../../redux/usersPageReducer";
 import Preloader from "../common/Preloader/Preloader";
 import s from "./UsersPage.module.css"
+import {AuthProgressType} from "../../redux/authReducer";
 
 type UsersPageProps = {
     usersPageData: UsersPageType
+    authProgress: AuthProgressType
     onSetFollowUserClick: (userId: number) => void
     onSetUnfollowUserClick: (userId: number) => void
     onSetCurrentPageClick: (page: number) => void
@@ -20,9 +22,11 @@ const UsersPage: FC<UsersPageProps> = (props) => {
     const totalPagesCount = Math.ceil(totalUsersCount / pageSize)
 
     const renderedUsers = users.map(user => {
+        const followIsDisabled = props.authProgress !== "loggedIn" || followingInProgress[user.id]
+
         return <MemoUser key={"user" + user.id}
                          user={user}
-                         followIsDisabled={followingInProgress[user.id]}
+                         followIsDisabled={followIsDisabled}
                          onSetFollowUserClick={props.onSetFollowUserClick}
                          onSetUnfollowUserClick={props.onSetUnfollowUserClick}
         />

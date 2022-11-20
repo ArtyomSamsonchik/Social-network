@@ -1,9 +1,11 @@
 import {UsersPageType} from "../../redux/usersPageReducer";
 import {Component} from "react";
 import UsersPage from "./UsersPage";
+import {AuthProgressType} from "../../redux/authReducer";
 
 type UsersPageContainerProps = {
     usersPageData: UsersPageType
+    authProgress: AuthProgressType
     getUsers: (page: number, usersCount: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -40,6 +42,7 @@ class UsersPageContainer extends Component<UsersPageContainerProps> {
 
     render() {
         return <UsersPage usersPageData={this.props.usersPageData}
+                          authProgress={this.props.authProgress}
                           onSetFollowUserClick={this.onSetFollowUserClick}
                           onSetUnfollowUserClick={this.onSetUnfollowUserClick}
                           onSetCurrentPageClick={this.onSetCurrentPageClick}
