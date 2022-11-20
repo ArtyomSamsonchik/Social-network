@@ -1,12 +1,11 @@
 import {AppThunk} from "./redux-store";
 import {authAPI, LoginRequestDataType} from "../API";
-import {batch} from "react-redux";
 
 type LoginUserAT = ReturnType<typeof setUserAuthData>
-type setLoggingProgressAT = ReturnType<typeof setAuthProgress>
-export type AuthActionsType = LoginUserAT | setLoggingProgressAT
+export type AuthActionsType = LoginUserAT
 
-export type AuthProgressType = "pending" | "success" | "failure"
+//TODO: Add more statuses to handle app behavior, e.g. "login_error"
+export type AuthProgressType = "pending" | "loggedIn" | "loggedOut" | "loginFailure"
 
 export type AuthDataType = {
     userId: number | null
@@ -25,15 +24,10 @@ const initialState: AuthDataType = {
 
 const authReducer = (state = initialState, action: AuthActionsType): AuthDataType => {
     switch (action.type) {
-        case "SET-USER-AUTH-DATA":
+        case "SET-AUTH-DATA":
             return {
                 ...state,
                 ...action.loginData,
-            }
-        case "SET-AUTH-PROGRESS":
-            return {
-                ...state,
-                authProgress: action.authInProgress
             }
         default:
             return state
@@ -41,14 +35,9 @@ const authReducer = (state = initialState, action: AuthActionsType): AuthDataTyp
 }
 
 
-export const setUserAuthData = (loginData: { userId: number, email: string, login: string }) => ({
-    type: "SET-USER-AUTH-DATA",
+export const setUserAuthData = (loginData: AuthDataType) => ({
+    type: "SET-AUTH-DATA",
     loginData
-}) as const
-
-export const setAuthProgress = (authProgress: AuthProgressType) => ({
-    type: "SET-AUTH-PROGRESS",
-    authInProgress: authProgress
 }) as const
 
 export const authorize = (): AppThunk => (dispatch) => {
@@ -56,31 +45,31 @@ export const authorize = (): AppThunk => (dispatch) => {
         const {id: userId, login, email} = data.data
 
         if (data.resultCode === 0) {
-            batch(() => {
-                dispatch(setUserAuthData({userId, login, email}))
-                dispatch(setAuthProgress("success"))
-            })
+            dispatch(setUserAuthData({userId, login, email, authProgress: "loggedIn"}))
         } else {
-            dispatch(setAuthProgress("failure"))
+            dispatch(setUserAuthData({userId, login, email, authProgress: "loginFailure"}))
         }
     })
 }
 
 //TODO: Maybe request profile instead of .me() request?
 export const login = (config: LoginRequestDataType, resolve: (value?: any) => void): AppThunk => dispatch => {
-    authAPI.login(config)
-        .then(({data}) => {
-            if (data.resultCode === 0) console.log("Login success")
-            return authAPI.me()
-        })
-        .then(({data}) => {
-            const {id: userId, email, login} = data.data
-            batch(() => {
-                dispatch(setUserAuthData({userId, login, email}))
-                dispatch(setAuthProgress("success"))
-            })
-            resolve()
-        })
+    authAPI.login(config).then(({data}) => {
+        if (data.resultCode === 0) dispatch(authorize())
+    })
+}
+
+export const logout = (): AppThunk => dispatch => {
+    authAPI.logout().then(({data}) => {
+        if (data.resultCode === 0) {
+            dispatch(setUserAuthData({
+                userId: null,
+                login: null,
+                email: null,
+                authProgress: "loggedOut"
+            }))
+        }
+    })
 }
 
 export default authReducer

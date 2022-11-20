@@ -18,13 +18,13 @@ const RenderField: FC<RenderFieldProps> = (props) => {
     const {input, meta: {touched, error}, ...restProps} = props
 
     return (
-        <>
+        <div>
             <label className={s.label}>
                 <span>Email:</span>
                 <input className={error ? s.error: ""} {...input} {...restProps}/>
             </label>
             {touched && error && <div className={s.error_message}>{error}</div>}
-        </>
+        </div>
     )
 }
 

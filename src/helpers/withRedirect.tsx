@@ -16,6 +16,7 @@ const mapStateToProps = (state: AppStateType): WithRedirectProps => ({
 function withRedirect<P>(WrappedComponent: ComponentType<P>) {
     const ComponentWithRedirect: FC<WithRedirectProps> = (props) => {
         const {authProgress, ...restProps} = props
+        // console.log(authProgress)
         if (authProgress === "pending") {
             return (
                 <>
@@ -25,7 +26,7 @@ function withRedirect<P>(WrappedComponent: ComponentType<P>) {
             )
         }
 
-        return authProgress === "success"
+        return authProgress === "loggedIn"
             ? <WrappedComponent {...restProps as P}/>
             : <Redirect to={"/login"}/>
     }
