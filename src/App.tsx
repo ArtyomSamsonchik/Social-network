@@ -11,10 +11,10 @@ import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 import ConnectedMainPageContainer from "./Components/MainPage/ConnectedMainPageContainer";
-import {ConnectedHeader} from "./Components/Header/ConnectedHeader";
 import LoginForm, {LoginFormData} from "./Components/common/LoginForm/LoginForm";
 import {FormSubmitHandler} from "redux-form/lib/reduxForm";
 import {login} from "./redux/authReducer";
+import {Header} from "./Components/Header/Header";
 
 export const URL_PARAMETERS = {
     USER_ID: "/:userId?"
@@ -43,7 +43,7 @@ function App() {
         <BrowserRouter>
             <Provider store={store}>
                 <div className={s.app}>
-                    <ConnectedHeader/>
+                    <Header/>
                     <Navbar/>
                     {/*TODO:Maybe change div tag to main in future*/}
                     <div className={s.main_content}>

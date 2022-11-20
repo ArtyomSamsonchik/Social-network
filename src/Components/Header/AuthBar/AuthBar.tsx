@@ -1,21 +1,25 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import s from "./AuthBar.module.css"
 import {AuthDataType} from "../../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 
 type AuthProps = {
     authData: AuthDataType
+    authorize: () => void
     logout: () => void
 }
 
 const AuthBar: FC<AuthProps> = (props) => {
-    const {authProgress, login} = props.authData
+    const {authData: {authProgress, login}, authorize} = props
 
     let message
     if (authProgress === "pending") message = "Logging in..."
     else if (authProgress === "loggedIn") message = `Hello, ${login}`
     else message = "Unauthorized"
 
+    useEffect(() => {
+        authorize()
+    }, [authorize])
 
     return (
         <div className={s.auth_bar}>
