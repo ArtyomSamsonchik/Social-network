@@ -11,10 +11,8 @@ import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 import ConnectedMainPageContainer from "./Components/MainPage/ConnectedMainPageContainer";
-import LoginForm, {LoginFormData} from "./Components/common/LoginForm/LoginForm";
-import {FormSubmitHandler} from "redux-form/lib/reduxForm";
-import {login} from "./redux/authReducer";
 import {Header} from "./Components/Header/Header";
+import ConnectedLoginPage from "./Components/LoginPage/LoginPage";
 
 export const URL_PARAMETERS = {
     USER_ID: "/:userId?"
@@ -33,12 +31,6 @@ export const PATH = {
 function App() {
     const mainPageURL = PATH.MAIN_PAGE + URL_PARAMETERS.USER_ID
 
-    const onSubmitHandler: FormSubmitHandler<LoginFormData> = (values, dispatch) => {
-        return new Promise(res => {
-            dispatch(login(values, res))
-        })
-    }
-
     return (
         <BrowserRouter>
             <Provider store={store}>
@@ -53,7 +45,7 @@ function App() {
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
                         <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPageContainer/>}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
-                        <Route path={PATH.LOGIN} render={() => <LoginForm onSubmit={onSubmitHandler}/>}/>
+                        <Route path={PATH.LOGIN} render={() => <ConnectedLoginPage/>}/>
                     </div>
                     <Footer/>
                 </div>
