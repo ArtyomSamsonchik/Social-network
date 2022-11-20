@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import s from "./AuthBar.module.css"
 import {AuthDataType} from "../../../redux/authReducer";
-import {Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 type AuthProps = {
     authData: AuthDataType
@@ -26,7 +26,7 @@ const AuthBar: FC<AuthProps> = (props) => {
             <span className={s.auth_message}>{message}</span>
             {authProgress === "loggedIn"
                 ? <button onClick={() => props.logout()}>Logout</button>
-                : <Redirect to="/login"/>
+                : <NavLink className={s.link} to="/login">Login</NavLink>
             }
         </div>
     )

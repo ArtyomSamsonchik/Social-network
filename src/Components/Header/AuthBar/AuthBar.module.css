@@ -5,3 +5,8 @@
 .auth_message {
     padding: 0 10px;
 }
+
+.auth_bar a.link {
+    color: #1547fb;
+    text-decoration: underline;
+}
