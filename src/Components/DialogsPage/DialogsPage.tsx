@@ -2,9 +2,10 @@ import React, {FC} from 'react';
 import s from "./DialogsPage.module.css";
 import {Dialogs} from "./Dialogs/Dialogs";
 import {MessagesList} from "./MessagesArea/MessagesList";
-import {AddItemArea} from "../common/AddItemArea/AddItemArea";
 import {DialogsPageType} from "../../redux/dialogsPageReducer";
 import {UserIDType} from "../../redux/mainPageReducer";
+import AddItemForm, {AddItemFormData} from "../common/AddItemForm/AddItemForm";
+import {FormSubmitHandler} from "redux-form/lib/reduxForm";
 
 type DialogsPageProps = {
     dialogsPageData: DialogsPageType
@@ -18,8 +19,15 @@ export const DialogsPage: FC<DialogsPageProps> = (props) => {
     const dialogIsExisting = activeDialogID && props.dialogsPageData.dialogs[activeDialogID]
     const messages = dialogIsExisting ? props.dialogsPageData.dialogs[activeDialogID] : []
 
-    const addMessage = (messageText: string) => {
-        props.addMessageToDialog(messageText, activeDialogID)
+    const addMessage: FormSubmitHandler<AddItemFormData> = (
+        values,
+        dispatch,
+        formProps
+    ) => {
+        const clear = formProps.clearFields
+        props.addMessageToDialog(values.addItem, activeDialogID)
+
+        if (clear) clear(false, false, "addItem")
     }
 
     return (
@@ -29,9 +37,9 @@ export const DialogsPage: FC<DialogsPageProps> = (props) => {
                      openNewDialog={props.openNewDialog}
             />
             <MessagesList messages={messages}/>
-            <AddItemArea className={s.add_message}
+            <AddItemForm className={s.add_message}
                          placeholder={"Write new message..."}
-                         addItem={addMessage}
+                         onSubmit={addMessage}
             />
         </div>
     )

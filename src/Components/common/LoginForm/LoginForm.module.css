@@ -17,14 +17,22 @@
 
 .login_form .label input {
     width: 180px;
+    outline: none;
+}
+
+.login_form input.error {
+    border: 2px solid red;
 }
 
 .login_form .checkbox_label  input {
     margin-right: 15px;
 }
 
-.login_form .label input[type="text"] {
-    width: 50px;
+.login_form .error_message {
+    width: 100%;
+    color: red;
+    text-align: center;
+    font-size: 1rem;
 }
 
 .login_form .button {

@@ -66,6 +66,7 @@ export const authorize = (): AppThunk => (dispatch) => {
     })
 }
 
+//TODO: Maybe request profile instead of .me() request?
 export const login = (config: LoginRequestDataType, resolve: (value?: any) => void): AppThunk => dispatch => {
     authAPI.login(config)
         .then(({data}) => {

@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./MyPostsContainer.module.css";
 import {Post} from "./Post/Post";
-import {AddItemArea} from "../../common/AddItemArea/AddItemArea";
 import {PostType} from "../../../redux/mainPageReducer";
+import AddItemForm, {AddItemFormData} from "../../common/AddItemForm/AddItemForm";
+import {FormSubmitHandler} from "redux-form/lib/reduxForm";
 
 type MyPostsProps = {
     posts: PostType[]
@@ -22,12 +23,21 @@ export const MyPosts: React.FC<MyPostsProps> = (props) => {
         )
     })
 
+    const addPostCallback: FormSubmitHandler<AddItemFormData> = (
+        values,
+        dispatch,
+        formProps
+    ) => {
+        const clear = formProps.clearFields
+        props.addPost(values.addItem)
+
+        if (clear) clear(false, false, "addItem")
+    }
+
     return (
         <div className={s.posts_container}>
             <div>Add new post:</div>
-            <AddItemArea placeholder={"Add new post..."}
-                         addItem={props.addPost}
-            />
+            <AddItemForm onSubmit={addPostCallback}/>
             {postItems}
         </div>
     )

@@ -1,4 +1,4 @@
-.add_post {
+.add_item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -10,7 +10,7 @@
     width: 100px;
 }
 
-.add_post textarea {
+.add_item textarea {
     height: 85px;
     border-width: 2px;
 }
