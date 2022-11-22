@@ -24,9 +24,9 @@ const AuthBar: FC<AuthProps> = (props) => {
     return (
         <div className={s.auth_bar}>
             <span className={s.auth_message}>{message}</span>
-            {authProgress === "loggedIn"
+            {authProgress === "pending" || (authProgress === "loggedIn"
                 ? <button onClick={() => props.logout()}>Logout</button>
-                : <NavLink className={s.link} to="/login">Login</NavLink>
+                : <NavLink className={s.link} to="/login">Login</NavLink>)
             }
         </div>
     )

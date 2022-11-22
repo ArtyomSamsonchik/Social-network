@@ -12,7 +12,8 @@ import {Provider} from "react-redux";
 import ConnectedUsersPageContainer from "./Components/UsersPage/ConnectedUsersPageContainer";
 import ConnectedMainPageContainer from "./Components/MainPage/ConnectedMainPageContainer";
 import {Header} from "./Components/Header/Header";
-import ConnectedLoginPage from "./Components/LoginPage/LoginPage";
+import ConnectedLoginPage, {LocationState} from "./Components/LoginPage/LoginPage";
+import {RouteComponentProps} from "react-router";
 
 export const URL_PARAMETERS = {
     USER_ID: "/:userId?"
@@ -31,6 +32,10 @@ export const PATH = {
 function App() {
     const mainPageURL = PATH.MAIN_PAGE + URL_PARAMETERS.USER_ID
 
+    const loginPageRouteRender = ({location, history}: RouteComponentProps) => (
+        <ConnectedLoginPage history={history} location={location as LocationState}/>
+    )
+
     return (
         <BrowserRouter>
             <Provider store={store}>
@@ -45,7 +50,7 @@ function App() {
                         <Route path={PATH.PHOTOS} render={PhotosPage}/>
                         <Route path={PATH.FRIENDS} render={() => <ConnectedUsersPageContainer/>}/>
                         <Route path={PATH.SETTINGS} render={SettingsPage}/>
-                        <Route path={PATH.LOGIN} render={() => <ConnectedLoginPage/>}/>
+                        <Route path={PATH.LOGIN} render={loginPageRouteRender}/>
                     </div>
                     <Footer/>
                 </div>

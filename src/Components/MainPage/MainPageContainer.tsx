@@ -26,6 +26,7 @@ class MainPageContainer extends Component<MainPageContainerProps> {
     }
 
     render() {
+        console.log(this.props)
         const {profile, status, updateStatus} = this.props
         return (
             <MainPage profile={profile} status={status} updateStatus={updateStatus}/>

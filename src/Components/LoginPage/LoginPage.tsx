@@ -2,28 +2,34 @@ import React, {FC} from 'react';
 import {AuthProgressType, login} from "../../redux/authReducer";
 import LoginForm, {LoginFormData} from "../common/LoginForm/LoginForm";
 import {FormSubmitHandler} from "redux-form/lib/reduxForm";
-import {Redirect} from "react-router-dom";
+import {History, Location} from 'history'
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 
-type LoginPageProps = {
-    authProgress: AuthProgressType
+export type LocationState = Location<{ from: string }>
+type OwnProps = {
+    history: History
+    location: Location<{ from: string | undefined }>
 }
 
-const mapStateToProps = (state: AppStateType): LoginPageProps => ({
+type MappedStateProps = { authProgress: AuthProgressType }
+type LoginPageProps = OwnProps & MappedStateProps
+
+const mapStateToProps = (state: AppStateType): MappedStateProps => ({
     authProgress: state.authData.authProgress
 })
 
 const LoginPage: FC<LoginPageProps> = (props) => {
+    const {history, location} = props
+
     const onSubmitHandler: FormSubmitHandler<LoginFormData> = (values, dispatch) => {
-        return new Promise(res => {
-            dispatch(login(values, res))
-        })
+        dispatch(login(values))
+
+        if (location.state?.from) history.replace(location.state?.from)
+        else history.goBack()
     }
 
-    return props.authProgress === "loggedIn"
-        ? <Redirect to="/main-page"/>
-        : <LoginForm onSubmit={onSubmitHandler}/>
+    return <LoginForm onSubmit={onSubmitHandler}/>
 
 }
 
